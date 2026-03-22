@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "horrorcooked9:item/crystal_tomato_sliced"
+  }
+}
