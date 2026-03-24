@@ -7,6 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.qiuyu.horrorcooked9.items.ChopResult;
 import net.qiuyu.horrorcooked9.network.ChopResultPacket;
 import net.qiuyu.horrorcooked9.network.ModNetworking;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,7 +32,7 @@ public class ChopMinigameScreen extends Screen {
 
     // 光标状态
     private float cursorPos = 0.0f; // 0~1
-    private float cursorSpeed = 0.015f;
+    private final float cursorSpeed = 0.015f;
     private int cursorDirection = 1; // 1=向右, -1=向左
     private boolean stopped = false;
 
@@ -107,7 +108,7 @@ public class ChopMinigameScreen extends Screen {
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+    public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         // 不绘制背景暗化
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 

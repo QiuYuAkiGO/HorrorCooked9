@@ -5,6 +5,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.qiuyu.horrorcooked9.commands.RandomValueCommand;
 
 @Mod.EventBusSubscriber
 public class ModCommands {
@@ -12,6 +13,6 @@ public class ModCommands {
     public static void registerCommand(RegisterCommandsEvent event) {
         CommandDispatcher<CommandSourceStack> dispatcher = event.getDispatcher();
 
-//        xpchargeCommand.register(dispatcher);
+        RandomValueCommand.register(dispatcher);
     }
 }

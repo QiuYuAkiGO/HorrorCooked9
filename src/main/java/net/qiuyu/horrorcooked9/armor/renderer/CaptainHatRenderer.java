@@ -38,7 +38,7 @@ public class CaptainHatRenderer<T extends LivingEntity, M extends HumanoidModel<
     }
 
     @Override
-    public void render(PoseStack poseStack, MultiBufferSource buffer, int packedLight,
+    public void render(@NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer, int packedLight,
                        T entity, float limbSwing, float limbSwingAmount,
                        float partialTick, float ageInTicks, float netHeadYaw, float headPitch) {
         ItemStack helmet = entity.getItemBySlot(EquipmentSlot.HEAD);

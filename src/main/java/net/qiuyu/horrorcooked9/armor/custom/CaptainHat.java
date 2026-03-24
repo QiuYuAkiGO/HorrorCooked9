@@ -34,12 +34,12 @@ public class CaptainHat extends ArmorItem {
 
     public static final ArmorMaterial MATERIAL = new ArmorMaterial() {
         @Override
-        public int getDurabilityForType(Type pType) {
+        public int getDurabilityForType(@NotNull Type pType) {
             return 368;
         }
 
         @Override
-        public int getDefenseForType(Type pType) {
+        public int getDefenseForType(@NotNull Type pType) {
             return 1;
         }
 
@@ -49,18 +49,18 @@ public class CaptainHat extends ArmorItem {
         }
 
         @Override
-        public SoundEvent getEquipSound() {
+        public @NotNull SoundEvent getEquipSound() {
             return SoundEvents.ARMOR_EQUIP_LEATHER;
         }
 
         @Override
-        public Ingredient getRepairIngredient() {
+        public @NotNull Ingredient getRepairIngredient() {
             // use leather to repair
             return Ingredient.of(Items.LEATHER);
         }
 
         @Override
-        public String getName() {
+        public @NotNull String getName() {
             return "horrorcooked9:captain_hat";
         }
 

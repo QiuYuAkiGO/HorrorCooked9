@@ -5,7 +5,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
-import net.qiuyu.horrorcooked9.register.ModCreativeModeTabs;
 import net.qiuyu.horrorcooked9.register.ModEffects;
 import net.qiuyu.horrorcooked9.register.ModItems;
 
