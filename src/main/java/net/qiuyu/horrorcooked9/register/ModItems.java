@@ -7,8 +7,10 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.registries.RegistryObject;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
+import net.qiuyu.horrorcooked9.armor.custom.CaptainHat;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
 import net.qiuyu.horrorcooked9.items.custom.CrystalTomato;
 
@@ -27,6 +29,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> CRYSTAL_TOMATO_SLICED = ITEMS.register("crystal_tomato_sliced",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(0.5f).build())));
+
+    public static final RegistryObject<Item> CAPTAIN_HAT = ITEMS.register("captain_hat",
+            () -> new CaptainHat(CaptainHat.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
