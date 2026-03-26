@@ -6,8 +6,10 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.network.chat.Component;
 
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static net.minecraft.commands.Commands.argument;
@@ -15,7 +17,7 @@ import static net.minecraft.commands.Commands.literal;
 
 public class RandomValueCommand {
     private static final SimpleCommandExceptionType INVALID_RANGE = new SimpleCommandExceptionType(
-            Component.literal("Invalid range format. Use 7, 5..10, ..10 or 5..")
+            Component.literal("Invalid range format. Use 7, 5..10, ..10, 5.. or <min> <max>")
     );
     private static final SimpleCommandExceptionType INVALID_BOUNDS = new SimpleCommandExceptionType(
             Component.literal("Invalid range bounds. min must be <= max")
@@ -28,7 +30,11 @@ public class RandomValueCommand {
         dispatcher.register(
                 literal("random")
                         .then(literal("value")
-                                .then(argument("range", StringArgumentType.word())
+                                .then(argument("range", StringArgumentType.greedyString())
+                                        .suggests((context, builder) -> SharedSuggestionProvider.suggest(
+                                                List.of("7", "5..10", "..10", "5..", "-3..3"),
+                                                builder
+                                        ))
                                         .executes(context -> randomValueInRange(context, StringArgumentType.getString(context, "range")))
                                 )
                         )
@@ -46,21 +52,45 @@ public class RandomValueCommand {
     }
 
     private static int[] parseRange(String rangeText) throws CommandSyntaxException {
-        int separator = rangeText.indexOf("..");
+        String trimmedRangeText = rangeText.trim();
+        if (trimmedRangeText.isEmpty()) {
+            throw INVALID_RANGE.create();
+        }
+
+        String[] parts = trimmedRangeText.split("\\s+");
+        if (parts.length == 2) {
+            int min;
+            int max;
+            try {
+                min = Integer.parseInt(parts[0]);
+                max = Integer.parseInt(parts[1]);
+            } catch (NumberFormatException ex) {
+                throw INVALID_RANGE.create();
+            }
+
+            if (min > max) {
+                throw INVALID_BOUNDS.create();
+            }
+            return new int[]{min, max};
+        } else if (parts.length > 2) {
+            throw INVALID_RANGE.create();
+        }
+
+        int separator = trimmedRangeText.indexOf("..");
         int min;
         int max;
 
         if (separator < 0) {
             // Single value form: "7"
             try {
-                min = Integer.parseInt(rangeText);
+                min = Integer.parseInt(trimmedRangeText);
             } catch (NumberFormatException ex) {
                 throw INVALID_RANGE.create();
             }
             max = min;
         } else {
-            String minText = rangeText.substring(0, separator);
-            String maxText = rangeText.substring(separator + 2);
+            String minText = trimmedRangeText.substring(0, separator);
+            String maxText = trimmedRangeText.substring(separator + 2);
 
             if (minText.isEmpty() && maxText.isEmpty()) {
                 throw INVALID_RANGE.create();

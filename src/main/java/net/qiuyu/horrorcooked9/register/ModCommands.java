@@ -5,6 +5,7 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.qiuyu.horrorcooked9.commands.IdentityCommand;
 import net.qiuyu.horrorcooked9.commands.RandomValueCommand;
 import net.qiuyu.horrorcooked9.commands.UploadDataPackCommand;
 
@@ -16,5 +17,6 @@ public class ModCommands {
 
         RandomValueCommand.register(dispatcher);
         UploadDataPackCommand.register(dispatcher);
+        IdentityCommand.register(dispatcher);
     }
 }
