@@ -5,8 +5,8 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.qiuyu.horrorcooked9.items.ChopResult;
-import net.qiuyu.horrorcooked9.network.ChopResultPacket;
-import net.qiuyu.horrorcooked9.network.ModNetworking;
+import net.qiuyu.horrorcooked9.network.gameplay.ChopResultPacket;
+import net.qiuyu.horrorcooked9.register.ModNetworking;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

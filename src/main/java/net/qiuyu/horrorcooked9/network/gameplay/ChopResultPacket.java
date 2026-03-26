@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.network;
+package net.qiuyu.horrorcooked9.network.gameplay;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
