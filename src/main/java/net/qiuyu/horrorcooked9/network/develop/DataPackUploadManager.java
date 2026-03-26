@@ -23,7 +23,8 @@ import java.util.zip.ZipInputStream;
 
 public final class DataPackUploadManager {
 
-    private static final int MAX_CHUNK_SIZE = 32 * 1024;
+    // Must match client chunk strategy and stay below 32767-byte payload cap.
+    private static final int MAX_CHUNK_SIZE = 24 * 1024;
     private static final int MAX_EXTRACT_FILE_COUNT = 10_000;
     private static final long MAX_EXTRACT_TOTAL_SIZE = 256L * 1024L * 1024L;
 
@@ -256,7 +257,15 @@ public final class DataPackUploadManager {
         if (base.toLowerCase().endsWith(".zip")) {
             base = base.substring(0, base.length() - 4);
         }
-        base = base.replaceAll("[^a-zA-Z0-9._-]", "_");
+        // Keep Unicode names (e.g. Chinese), only replace illegal path/file characters.
+        base = base.replace('/', '_').replace('\\', '_');
+        base = base.replaceAll("[<>:\"|?*]", "_");
+        base = base.replaceAll("[\\x00-\\x1F\\x7F]", "_");
+        // Windows does not allow trailing spaces or dots in directory names.
+        base = base.replaceAll("[\\s.]+$", "");
+        if (".".equals(base) || "..".equals(base)) {
+            base = "_";
+        }
         return base.length() > 64 ? base.substring(0, 64) : base;
     }
 

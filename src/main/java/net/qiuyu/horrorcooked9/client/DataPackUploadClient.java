@@ -7,15 +7,14 @@ import net.qiuyu.horrorcooked9.network.develop.DataPackUploadChunkPacket;
 import net.qiuyu.horrorcooked9.network.develop.DataPackUploadFinishPacket;
 import net.qiuyu.horrorcooked9.network.develop.DataPackUploadStartPacket;
 import net.qiuyu.horrorcooked9.register.ModNetworking;
+import org.lwjgl.util.tinyfd.TinyFileDialogs;
 
-import javax.swing.JFileChooser;
-import javax.swing.SwingUtilities;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
@@ -26,7 +25,8 @@ import java.util.zip.ZipOutputStream;
 
 public final class DataPackUploadClient {
 
-    private static final int CHUNK_SIZE = 32 * 1024;
+    // Keep each custom payload packet safely below Minecraft's 32767-byte limit.
+    private static final int CHUNK_SIZE = 24 * 1024;
     private static final ExecutorService EXECUTOR = Executors.newSingleThreadExecutor(r -> {
         Thread t = new Thread(r, "horrorcooked9-datapack-upload");
         t.setDaemon(true);
@@ -45,6 +45,7 @@ public final class DataPackUploadClient {
         try {
             Path selectedPath = choosePath();
             if (selectedPath == null) {
+                notifyLocalPlayer("已取消选择，未上传数据包。");
                 ModNetworking.CHANNEL.sendToServer(new DataPackUploadCancelPacket(sessionId, "用户取消选择。"));
                 return;
             }
@@ -84,26 +85,35 @@ public final class DataPackUploadClient {
             ModNetworking.CHANNEL.sendToServer(new DataPackUploadFinishPacket(sessionId));
             notifyLocalPlayer("数据包上传请求已发送。");
         } catch (Exception ex) {
-            notifyLocalPlayer("上传失败：" + ex.getMessage());
-            ModNetworking.CHANNEL.sendToServer(new DataPackUploadCancelPacket(sessionId, ex.getMessage()));
+            String detail = readableError(ex);
+            notifyLocalPlayer("上传失败：" + detail);
+            ModNetworking.CHANNEL.sendToServer(new DataPackUploadCancelPacket(sessionId, detail));
         }
     }
 
     private static Path choosePath() throws Exception {
-        final Path[] selected = new Path[1];
-        SwingUtilities.invokeAndWait(() -> {
-            JFileChooser chooser = new JFileChooser();
-            chooser.setDialogTitle("选择数据包.zip或文件夹");
-            chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-            chooser.setAcceptAllFileFilterUsed(true);
-            chooser.setFileFilter(new FileNameExtensionFilter("Data Pack Zip (*.zip)", "zip"));
+        String zipPath = TinyFileDialogs.tinyfd_openFileDialog(
+                "选择数据包.zip（取消可改选文件夹）",
+                "",
+                null,
+                null,
+                false
+        );
+        if (zipPath != null && !zipPath.isBlank()) {
+            return Paths.get(zipPath);
+        }
 
-            int result = chooser.showOpenDialog(null);
-            if (result == JFileChooser.APPROVE_OPTION && chooser.getSelectedFile() != null) {
-                selected[0] = chooser.getSelectedFile().toPath();
-            }
-        });
-        return selected[0];
+        String folderPath;
+        try {
+            folderPath = TinyFileDialogs.tinyfd_selectFolderDialog("选择数据包文件夹", "");
+        } catch (NullPointerException ignored) {
+            // Some environments throw NPE in tinyfd when canceling dialog: treat as user cancel.
+            return null;
+        }
+        if (folderPath != null && !folderPath.isBlank()) {
+            return Paths.get(folderPath);
+        }
+        return null;
     }
 
     private static PreparedUpload prepareUpload(Path selectedPath) throws IOException {
@@ -172,6 +182,21 @@ public final class DataPackUploadClient {
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalStateException("Missing SHA-256", e);
         }
+    }
+
+    private static String readableError(Throwable throwable) {
+        if (throwable == null) {
+            return "未知错误";
+        }
+        String message = throwable.getMessage();
+        if (message != null && !message.isBlank()) {
+            return message;
+        }
+        Throwable cause = throwable.getCause();
+        if (cause != null && cause.getMessage() != null && !cause.getMessage().isBlank()) {
+            return cause.getMessage();
+        }
+        return throwable.getClass().getSimpleName();
     }
 
     private static void notifyLocalPlayer(String text) {
