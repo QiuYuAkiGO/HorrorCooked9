@@ -22,13 +22,14 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.qiuyu.horrorcooked9.client.ClientHelper;
-import net.qiuyu.horrorcooked9.gameplay.chopping.IChoppable;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperRecipeMatcher;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
+import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ChoppingBoard extends BaseEntityBlock {
+public class ChoppingBoardBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -41,7 +42,7 @@ public class ChoppingBoard extends BaseEntityBlock {
     private static final VoxelShape SHAPE_WEST  = Block.box(0, 0, 0, 16, 2.5, 16);
     private static final VoxelShape SHAPE_EAST  = Block.box(0, 0, 0, 16, 2.5, 16);
 
-    public ChoppingBoard(Properties pProperties) {
+    public ChoppingBoardBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
@@ -66,6 +67,9 @@ public class ChoppingBoard extends BaseEntityBlock {
         if (!(be instanceof ChoppingBoardBlockEntity boardEntity)) {
             return InteractionResult.PASS;
         }
+        if (!pLevel.getBlockState(pPos.below()).is(ModBlocks.FOODWORKS_TABLE.get())) {
+            return InteractionResult.PASS;
+        }
 
         ItemStack heldItem = pPlayer.getItemInHand(pHand);
 
@@ -73,7 +77,7 @@ public class ChoppingBoard extends BaseEntityBlock {
             // 手持菜刀右键：打开切割小游戏
             if (heldItem.getItem() instanceof Cleaver) {
                 ItemStack placedItem = boardEntity.getPlacedItem();
-                if (placedItem.getItem() instanceof IChoppable) {
+                if (ChopperRecipeMatcher.findByInput(placedItem, pLevel) != null) {
                     if (pLevel.isClientSide()) {
                         ClientHelper.openChopMinigame(pPos);
                     }
@@ -92,9 +96,9 @@ public class ChoppingBoard extends BaseEntityBlock {
         } else if (pLevel.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else if (heldItem.getItem() instanceof Cleaver) {
-            // 主手持菜刀时，优先将副手的IChoppable物品放入砧板
+            // 主手持菜刀时，优先将副手可放置物品放入砧板
             ItemStack offhandItem = pPlayer.getOffhandItem();
-            if (offhandItem.getItem() instanceof IChoppable && offhandItem.is(ModTags.Items.CHOPPER_PLACEABLE)) {
+            if (offhandItem.is(ModTags.Items.CHOPPER_PLACEABLE)) {
                 ItemStack toPlace = offhandItem.copy();
                 toPlace.setCount(1);
                 boardEntity.setPlacedItem(toPlace);

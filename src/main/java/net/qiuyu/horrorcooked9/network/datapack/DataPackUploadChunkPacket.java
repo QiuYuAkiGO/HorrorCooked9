@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.network.develop;
+package net.qiuyu.horrorcooked9.network.datapack;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
@@ -7,24 +7,28 @@ import net.minecraftforge.network.NetworkEvent;
 import java.util.UUID;
 import java.util.function.Supplier;
 
-public class DataPackUploadCancelPacket {
+public class DataPackUploadChunkPacket {
 
     private final UUID sessionId;
-    private final String reason;
+    private final int chunkIndex;
+    private final byte[] chunkData;
 
-    public DataPackUploadCancelPacket(UUID sessionId, String reason) {
+    public DataPackUploadChunkPacket(UUID sessionId, int chunkIndex, byte[] chunkData) {
         this.sessionId = sessionId;
-        this.reason = reason;
+        this.chunkIndex = chunkIndex;
+        this.chunkData = chunkData;
     }
 
-    public DataPackUploadCancelPacket(FriendlyByteBuf buf) {
+    public DataPackUploadChunkPacket(FriendlyByteBuf buf) {
         this.sessionId = buf.readUUID();
-        this.reason = buf.readUtf(256);
+        this.chunkIndex = buf.readInt();
+        this.chunkData = buf.readByteArray();
     }
 
     public void encode(FriendlyByteBuf buf) {
         buf.writeUUID(sessionId);
-        buf.writeUtf(reason == null ? "" : reason, 256);
+        buf.writeInt(chunkIndex);
+        buf.writeByteArray(chunkData);
     }
 
     public void handle(Supplier<NetworkEvent.Context> contextSupplier) {
@@ -32,7 +36,7 @@ public class DataPackUploadCancelPacket {
         ctx.enqueueWork(() -> {
             ServerPlayer player = ctx.getSender();
             if (player == null) return;
-            DataPackUploadManager.cancelUpload(player, sessionId, reason);
+            DataPackUploadManager.appendChunk(player, sessionId, chunkIndex, chunkData);
         });
         ctx.setPacketHandled(true);
     }

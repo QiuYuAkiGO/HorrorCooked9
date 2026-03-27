@@ -1,0 +1,26 @@
+{
+  "type": "horrorcooked9:chopper_minigame",
+  "input": {
+    "item": "horrorcooked9:pineapple"
+  },
+  "difficulty": {
+    "cursor_speed": 0.015,
+    "green_ratio": 0.1,
+    "yellow_ratio": 0.3,
+    "red_ratio": 0.6
+  },
+  "results": {
+    "green": {
+      "item": "horrorcooked9:pineapple_chunks",
+      "count": 6
+    },
+    "yellow": {
+      "item": "horrorcooked9:pineapple_chunks",
+      "count": 3
+    },
+    "red": {
+      "item": "horrorcooked9:pineapple_chunks",
+      "count": 1
+    }
+  }
+}

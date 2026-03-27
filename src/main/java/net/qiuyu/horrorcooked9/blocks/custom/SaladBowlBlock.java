@@ -20,6 +20,7 @@ import net.qiuyu.horrorcooked9.client.ClientHelper;
 import net.qiuyu.horrorcooked9.gameplay.salad.SaladBowlRecipe;
 import net.qiuyu.horrorcooked9.gameplay.salad.SaladRecipeMatcher;
 import net.qiuyu.horrorcooked9.gameplay.stir.StirToolBalanceConfig;
+import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,6 +52,9 @@ public class SaladBowlBlock extends BaseEntityBlock {
                                           @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (!(be instanceof SaladBowlBlockEntity bowlEntity)) {
+            return InteractionResult.PASS;
+        }
+        if (!pLevel.getBlockState(pPos.below()).is(ModBlocks.FOODWORKS_TABLE.get())) {
             return InteractionResult.PASS;
         }
 
@@ -99,6 +103,9 @@ public class SaladBowlBlock extends BaseEntityBlock {
         if (candidates.isEmpty()) {
             List<ItemStack> dropped = bowlEntity.dumpIngredientsAndReset();
             dropped.add(ingredientToAdd);
+            if (!pPlayer.getAbilities().instabuild) {
+                 heldItem.shrink(1);
+            }
             dropItems(pLevel, pPos, dropped);
             return InteractionResult.CONSUME;
         }

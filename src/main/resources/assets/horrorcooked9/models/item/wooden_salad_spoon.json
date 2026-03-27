@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/handheld",
   "textures": {
-    "layer0": "minecraft:item/stick"
+    "layer0": "horrorcooked9:item/wooden_salad_spoon"
   }
 }

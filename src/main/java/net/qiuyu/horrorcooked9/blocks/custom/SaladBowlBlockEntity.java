@@ -28,6 +28,7 @@ public class SaladBowlBlockEntity extends BlockEntity {
     private boolean completed;
     private ItemStack resultStack = ItemStack.EMPTY;
     private int remainingServings;
+    private int initialServings;
 
     public SaladBowlBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.SALAD_BOWL_BE.get(), pPos, pBlockState);
@@ -70,11 +71,16 @@ public class SaladBowlBlockEntity extends BlockEntity {
         return remainingServings;
     }
 
+    public int getInitialServings() {
+        return initialServings;
+    }
+
     public void completeWith(SaladBowlRecipe recipe) {
         this.completed = true;
         this.currentRecipeId = recipe.getId();
         this.resultStack = recipe.getResultStack();
         this.remainingServings = recipe.getServings();
+        this.initialServings = recipe.getServings();
         markAndSync();
     }
 
@@ -94,6 +100,9 @@ public class SaladBowlBlockEntity extends BlockEntity {
             return;
         }
         remainingServings += extra;
+        if (remainingServings > initialServings) {
+            initialServings = remainingServings;
+        }
         markAndSync();
     }
 
@@ -103,6 +112,7 @@ public class SaladBowlBlockEntity extends BlockEntity {
         completed = false;
         resultStack = ItemStack.EMPTY;
         remainingServings = 0;
+        initialServings = 0;
         markAndSync();
     }
 
@@ -157,6 +167,7 @@ public class SaladBowlBlockEntity extends BlockEntity {
         }
         pTag.putBoolean("Completed", completed);
         pTag.putInt("RemainingServings", remainingServings);
+        pTag.putInt("InitialServings", initialServings);
         if (!resultStack.isEmpty()) {
             pTag.put("ResultStack", resultStack.save(new CompoundTag()));
         }
@@ -179,6 +190,7 @@ public class SaladBowlBlockEntity extends BlockEntity {
                 : null;
         completed = pTag.getBoolean("Completed");
         remainingServings = pTag.getInt("RemainingServings");
+        initialServings = pTag.getInt("InitialServings");
         resultStack = pTag.contains("ResultStack")
                 ? ItemStack.of(pTag.getCompound("ResultStack"))
                 : ItemStack.EMPTY;

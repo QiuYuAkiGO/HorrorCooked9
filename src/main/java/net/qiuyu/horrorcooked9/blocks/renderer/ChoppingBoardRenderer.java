@@ -15,7 +15,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
-import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoard;
+import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoardBlock;
 import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoardBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +34,7 @@ public class ChoppingBoardRenderer implements BlockEntityRenderer<ChoppingBoardB
         Level level = pBlockEntity.getLevel();
         if (level == null) return;
 
-        Direction facing = pBlockEntity.getBlockState().getValue(ChoppingBoard.FACING);
+        Direction facing = pBlockEntity.getBlockState().getValue(ChoppingBoardBlock.FACING);
 
         pPoseStack.pushPose();
 

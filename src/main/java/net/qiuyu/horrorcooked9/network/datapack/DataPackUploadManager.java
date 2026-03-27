@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.network.develop;
+package net.qiuyu.horrorcooked9.network.datapack;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -13,8 +13,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -137,6 +139,49 @@ public final class DataPackUploadManager {
         }
     }
 
+    public static List<String> listDatapackNames(MinecraftServer server) {
+        Path datapacksDir = server.getWorldPath(LevelResource.DATAPACK_DIR);
+        List<String> candidates = new ArrayList<>();
+        try {
+            Files.createDirectories(datapacksDir);
+            try (var stream = Files.list(datapacksDir)) {
+                stream.filter(path -> Files.isDirectory(path) || Files.isRegularFile(path))
+                        .map(path -> path.getFileName().toString())
+                        .filter(DataPackUploadManager::isValidDatapackEntryName)
+                        .sorted(String::compareToIgnoreCase)
+                        .forEach(candidates::add);
+            }
+        } catch (IOException ignored) {
+            return List.of();
+        }
+        return candidates;
+    }
+
+    public static boolean deleteDatapack(MinecraftServer server, String packName) throws IOException {
+        String candidateName = packName == null ? "" : packName.trim();
+        if (!isValidDatapackEntryName(candidateName)) {
+            throw new IOException("数据包名称无效。");
+        }
+
+        Path datapacksDir = server.getWorldPath(LevelResource.DATAPACK_DIR).normalize();
+        Files.createDirectories(datapacksDir);
+
+        Path targetPath = datapacksDir.resolve(candidateName).normalize();
+        if (!targetPath.startsWith(datapacksDir)) {
+            throw new IOException("数据包名称无效。");
+        }
+        if (!Files.exists(targetPath)) {
+            return false;
+        }
+
+        if (Files.isDirectory(targetPath)) {
+            deleteDirectory(targetPath);
+        } else {
+            Files.delete(targetPath);
+        }
+        return true;
+    }
+
     private static boolean validateServerState(ServerPlayer player) {
         if (!ModServerConfig.isDatapackUploadEnabled()) {
             player.sendSystemMessage(Component.literal("数据包上传功能已禁用。"));
@@ -250,6 +295,25 @@ public final class DataPackUploadManager {
                 }
             });
         }
+    }
+
+    private static boolean isValidDatapackEntryName(String value) {
+        if (value == null || value.isBlank()) {
+            return false;
+        }
+        if (".".equals(value) || "..".equals(value)) {
+            return false;
+        }
+        if (value.contains("/") || value.contains("\\")) {
+            return false;
+        }
+        if (value.startsWith(".")) {
+            return false;
+        }
+        if (value.matches(".*[\\x00-\\x1F\\x7F].*")) {
+            return false;
+        }
+        return !value.matches(".*[<>:\"|?*].*");
     }
 
     private static String sanitizePackName(String packName) {

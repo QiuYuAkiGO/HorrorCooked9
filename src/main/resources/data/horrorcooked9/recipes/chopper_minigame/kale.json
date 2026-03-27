@@ -1,0 +1,26 @@
+{
+  "type": "horrorcooked9:chopper_minigame",
+  "input": {
+    "item": "horrorcooked9:kale"
+  },
+  "difficulty": {
+    "cursor_speed": 0.015,
+    "green_ratio": 0.1,
+    "yellow_ratio": 0.3,
+    "red_ratio": 0.6
+  },
+  "results": {
+    "green": {
+      "item": "horrorcooked9:kale_leaves",
+      "count": 2
+    },
+    "yellow": {
+      "item": "horrorcooked9:kale_leaves",
+      "count": 1
+    },
+    "red": {
+      "item": "horrorcooked9:kale_leaves",
+      "count": 0
+    }
+  }
+}

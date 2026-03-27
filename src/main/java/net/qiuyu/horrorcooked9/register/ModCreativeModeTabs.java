@@ -26,7 +26,17 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CRYSTAL_TOMATO.get());
                         output.accept(ModItems.CRYSTAL_TOMATO_SLICED.get());
                         output.accept(ModItems.CRYSTAL_SALAD.get());
+                        output.accept(ModItems.KALE.get());
+                        output.accept(ModItems.KALE_LEAVES.get());
+                        output.accept(ModItems.BRACKEN_FERN.get());
+                        output.accept(ModItems.PICKLED_BRACKEN_FERN.get());
+                        output.accept(ModItems.PINEAPPLE.get());
+                        output.accept(ModItems.PINEAPPLE_CHUNKS.get());
+                        output.accept(ModItems.PARASITIC_BEAN_SPROUTS.get());
+                        output.accept(ModItems.HAPPY_RICE.get());
+                        output.accept(ModItems.HAPPY_COOKED_RICE.get());
                         output.accept(ModItems.CAPTAIN_HAT.get());
+                        output.accept(ModItems.FOODWORKS_TABLE.get());
                     })
                     .build());
 
