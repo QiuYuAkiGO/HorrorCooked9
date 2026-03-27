@@ -1,0 +1,24 @@
+{
+  "type": "horrorcooked9:salad_bowl",
+  "ingredients_in_order": [
+    {
+      "item": "horrorcooked9:crystal_tomato_sliced"
+    },
+    {
+      "item": "minecraft:carrot"
+    }
+  ],
+  "mixing_tool": {
+    "tag": "horrorcooked9:salad_mixing_tools"
+  },
+  "serving_container": {
+    "tag": "horrorcooked9:salad_serving_containers"
+  },
+  "result": {
+    "item": "horrorcooked9:crystal_salad",
+    "count": 1
+  },
+  "stir_count": 3,
+  "servings": 2,
+  "mix_success_chance": 1.0
+}

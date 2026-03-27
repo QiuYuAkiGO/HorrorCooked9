@@ -6,8 +6,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.qiuyu.horrorcooked9.items.ChopResult;
-import net.qiuyu.horrorcooked9.items.IChoppable;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopResult;
+import net.qiuyu.horrorcooked9.gameplay.chopping.IChoppable;
 import net.qiuyu.horrorcooked9.register.ModItems;
 
 public class CrystalTomato extends Item implements IChoppable {

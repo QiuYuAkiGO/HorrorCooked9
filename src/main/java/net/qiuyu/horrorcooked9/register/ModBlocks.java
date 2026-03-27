@@ -9,6 +9,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoard;
+import net.qiuyu.horrorcooked9.blocks.custom.SaladBowlBlock;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS =
@@ -16,6 +17,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> CHOPPING_BOARD = BLOCKS.register("chopping_board",
             () -> new ChoppingBoard(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD).noOcclusion()));
+
+    public static final RegistryObject<Block> SALAD_BOWL = BLOCKS.register("salad_bowl",
+            () -> new SaladBowlBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(0.8F).noOcclusion()));
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);

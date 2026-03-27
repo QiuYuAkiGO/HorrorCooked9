@@ -22,7 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.qiuyu.horrorcooked9.client.ClientHelper;
-import net.qiuyu.horrorcooked9.items.IChoppable;
+import net.qiuyu.horrorcooked9.gameplay.chopping.IChoppable;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
 import net.qiuyu.horrorcooked9.register.ModTags;
 import org.jetbrains.annotations.NotNull;

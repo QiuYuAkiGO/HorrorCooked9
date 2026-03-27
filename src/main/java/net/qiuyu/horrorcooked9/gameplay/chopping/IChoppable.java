@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.items;
+package net.qiuyu.horrorcooked9.gameplay.chopping;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;

@@ -13,6 +13,7 @@ import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.armor.custom.CaptainHat;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
 import net.qiuyu.horrorcooked9.items.custom.CrystalTomato;
+import net.qiuyu.horrorcooked9.items.custom.SaladBowlItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -21,14 +22,26 @@ public class ModItems {
     public static final RegistryObject<Item> CHOPPING_BOARD = ITEMS.register("chopping_board",
             () -> new BlockItem(ModBlocks.CHOPPING_BOARD.get(), new Item.Properties()));
 
+    public static final RegistryObject<Item> SALAD_BOWL = ITEMS.register("salad_bowl",
+            () -> new SaladBowlItem(ModBlocks.SALAD_BOWL.get(), new Item.Properties().stacksTo(16)));
+
     public static final RegistryObject<Item> CLEAVER = ITEMS.register("cleaver",
             () -> new Cleaver(new Item.Properties().stacksTo(1).durability(512)));
+
+    public static final RegistryObject<Item> WOODEN_SALAD_SPOON = ITEMS.register("wooden_salad_spoon",
+            () -> new Item(new Item.Properties().stacksTo(1).durability(192)));
+
+    public static final RegistryObject<Item> SALAD_TONGS = ITEMS.register("salad_tongs",
+            () -> new Item(new Item.Properties().stacksTo(1).durability(384)));
 
     public static final RegistryObject<Item> CRYSTAL_TOMATO = ITEMS.register("crystal_tomato",
             () -> new CrystalTomato(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(0.5f).build())));
 
     public static final RegistryObject<Item> CRYSTAL_TOMATO_SLICED = ITEMS.register("crystal_tomato_sliced",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(0.5f).build())));
+
+    public static final RegistryObject<Item> CRYSTAL_SALAD = ITEMS.register("crystal_salad",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationMod(0.8f).build())));
 
     public static final RegistryObject<Item> CAPTAIN_HAT = ITEMS.register("captain_hat",
             () -> new CaptainHat(CaptainHat.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));

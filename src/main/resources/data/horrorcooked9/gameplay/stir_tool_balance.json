@@ -1,0 +1,24 @@
+{
+  "default": {
+    "success_chance_delta": 0.0,
+    "stir_count_delta": 0
+  },
+  "tools": {
+    "minecraft:stick": {
+      "success_chance_delta": 0.0,
+      "stir_count_delta": 0
+    },
+    "horrorcooked9:cleaver": {
+      "success_chance_delta": 0.05,
+      "stir_count_delta": -1
+    },
+    "horrorcooked9:wooden_salad_spoon": {
+      "success_chance_delta": 0.1,
+      "stir_count_delta": -1
+    },
+    "horrorcooked9:salad_tongs": {
+      "success_chance_delta": 0.2,
+      "stir_count_delta": -2
+    }
+  }
+}

@@ -20,6 +20,7 @@ import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModCreativeModeTabs;
 import net.qiuyu.horrorcooked9.register.ModEffects;
 import net.qiuyu.horrorcooked9.register.ModItems;
+import net.qiuyu.horrorcooked9.register.ModRecipes;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(HorrorCooked9.MODID)
@@ -41,6 +42,7 @@ public class HorrorCooked9
         ModBlockEntities.register(modEventBus);
         ModEffects.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

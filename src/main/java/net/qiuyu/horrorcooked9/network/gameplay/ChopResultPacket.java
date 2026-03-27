@@ -9,8 +9,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
 import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoardBlockEntity;
-import net.qiuyu.horrorcooked9.items.ChopResult;
-import net.qiuyu.horrorcooked9.items.IChoppable;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopResult;
+import net.qiuyu.horrorcooked9.gameplay.chopping.IChoppable;
 
 import java.util.function.Supplier;
 

@@ -7,6 +7,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.network.develop.*;
 import net.qiuyu.horrorcooked9.network.gameplay.ChopResultPacket;
+import net.qiuyu.horrorcooked9.network.gameplay.StirResultPacket;
 
 public class ModNetworking {
 
@@ -25,6 +26,11 @@ public class ModNetworking {
                 .encoder(ChopResultPacket::encode)
                 .decoder(ChopResultPacket::new)
                 .consumerMainThread(ChopResultPacket::handle)
+                .add();
+        CHANNEL.messageBuilder(StirResultPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(StirResultPacket::encode)
+                .decoder(StirResultPacket::new)
+                .consumerMainThread(StirResultPacket::handle)
                 .add();
         CHANNEL.messageBuilder(OpenDataPackPickerPacket.class, id++, NetworkDirection.PLAY_TO_CLIENT)
                 .encoder(OpenDataPackPickerPacket::encode)

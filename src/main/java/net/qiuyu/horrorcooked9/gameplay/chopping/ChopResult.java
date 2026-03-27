@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.items;
+package net.qiuyu.horrorcooked9.gameplay.chopping;
 
 /**
  * 切割小游戏的结果枚举。

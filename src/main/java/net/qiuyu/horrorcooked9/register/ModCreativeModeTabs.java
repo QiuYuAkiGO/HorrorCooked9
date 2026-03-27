@@ -19,9 +19,13 @@ public class ModCreativeModeTabs {
                     .title(Component.translatable("creativetab.horrorcooked9_tab"))
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.CHOPPING_BOARD.get());
+                        output.accept(ModItems.SALAD_BOWL.get());
                         output.accept(ModItems.CLEAVER.get());
+                        output.accept(ModItems.WOODEN_SALAD_SPOON.get());
+                        output.accept(ModItems.SALAD_TONGS.get());
                         output.accept(ModItems.CRYSTAL_TOMATO.get());
                         output.accept(ModItems.CRYSTAL_TOMATO_SLICED.get());
+                        output.accept(ModItems.CRYSTAL_SALAD.get());
                         output.accept(ModItems.CAPTAIN_HAT.get());
                     })
                     .build());
