@@ -27,6 +27,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CRYSTAL_TOMATO_SLICED.get());
                         output.accept(ModItems.CRYSTAL_SALAD.get());
                         output.accept(ModItems.CAPTAIN_HAT.get());
+                        output.accept(ModItems.FOODWORKS_TABLE.get());
                     })
                     .build());
 

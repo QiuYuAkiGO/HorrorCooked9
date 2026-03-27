@@ -22,7 +22,7 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.CRYSTAL_TOMATO.get(), "水晶番茄");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "水晶番茄片");
         add(ModItems.CAPTAIN_HAT.get(), "船长帽");
-
+        add(ModBlocks.FOODWORKS_TABLE.get(), "手工料理台");
 
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "船长的激励");
 

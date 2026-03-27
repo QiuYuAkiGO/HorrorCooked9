@@ -46,6 +46,9 @@ public class ModItems {
     public static final RegistryObject<Item> CAPTAIN_HAT = ITEMS.register("captain_hat",
             () -> new CaptainHat(CaptainHat.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
 
+ public static final RegistryObject<Item> FOODWORKS_TABLE = ITEMS.register("foodworks_table",
+            () -> new BlockItem(ModBlocks.FOODWORKS_TABLE.get(), new Item.Properties()));
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

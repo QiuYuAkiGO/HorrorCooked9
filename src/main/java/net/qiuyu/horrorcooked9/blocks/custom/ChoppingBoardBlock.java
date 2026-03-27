@@ -24,6 +24,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.qiuyu.horrorcooked9.client.ClientHelper;
 import net.qiuyu.horrorcooked9.gameplay.chopping.IChoppable;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
+import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -64,6 +65,9 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
                                           @NotNull Player pPlayer, @NotNull InteractionHand pHand, @NotNull BlockHitResult pHit) {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (!(be instanceof ChoppingBoardBlockEntity boardEntity)) {
+            return InteractionResult.PASS;
+        }
+        if (!pLevel.getBlockState(pPos.below()).is(ModBlocks.FOODWORKS_TABLE.get())) {
             return InteractionResult.PASS;
         }
 

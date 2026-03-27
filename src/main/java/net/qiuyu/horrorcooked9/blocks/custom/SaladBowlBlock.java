@@ -53,6 +53,9 @@ public class SaladBowlBlock extends BaseEntityBlock {
         if (!(be instanceof SaladBowlBlockEntity bowlEntity)) {
             return InteractionResult.PASS;
         }
+        if (!pLevel.getBlockState(pPos.below()).is(ModBlocks.FOODWORKS_TABLE.get())) {
+            return InteractionResult.PASS;
+        }
 
         ItemStack heldItem = pPlayer.getItemInHand(pHand);
         List<SaladBowlRecipe> recipes = pLevel.getRecipeManager().getAllRecipesFor(ModRecipes.SALAD_BOWL_TYPE.get());
@@ -99,6 +102,9 @@ public class SaladBowlBlock extends BaseEntityBlock {
         if (candidates.isEmpty()) {
             List<ItemStack> dropped = bowlEntity.dumpIngredientsAndReset();
             dropped.add(ingredientToAdd);
+            if (!pPlayer.getAbilities().instabuild) {
+                 heldItem.shrink(1);
+            }
             dropItems(pLevel, pPos, dropped);
             return InteractionResult.CONSUME;
         }

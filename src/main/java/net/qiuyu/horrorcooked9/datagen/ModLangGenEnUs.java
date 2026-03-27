@@ -20,6 +20,7 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "Crystal Tomato Sliced");
         add(ModItems.CAPTAIN_HAT.get(), "Captain Hat");
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "Captain's Inspiration");
+        add(ModBlocks.FOODWORKS_TABLE.get(), "Foodworks Table");
         add("creativetab.horrorcooked9_tab", "Horror Cooked");
     }
 }

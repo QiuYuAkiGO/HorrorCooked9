@@ -21,6 +21,9 @@ public class ModBlocks {
     public static final RegistryObject<Block> SALAD_BOWL = BLOCKS.register("salad_bowl",
             () -> new SaladBowlBlock(BlockBehaviour.Properties.copy(Blocks.OAK_PLANKS).strength(0.8F).noOcclusion()));
 
+public static final RegistryObject<Block> FOODWORKS_TABLE = BLOCKS.register("foodworks_table",
+            () -> new Block(BlockBehaviour.Properties.copy(Blocks.CRAFTING_TABLE).strength(2.5F)));
+
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
     }

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C",
+    "T"
+  ],
+  "key": {
+    "C": {
+      "tag": "minecraft:wool_carpets"
+    },
+    "T": {
+      "item": "minecraft:crafting_table"
+    }
+  },
+  "result": {
+    "item": "horrorcooked9:foodworks_table"
+  }
+}
