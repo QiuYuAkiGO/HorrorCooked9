@@ -20,6 +20,7 @@ import net.qiuyu.horrorcooked9.client.ClientHelper;
 import net.qiuyu.horrorcooked9.gameplay.salad.SaladBowlRecipe;
 import net.qiuyu.horrorcooked9.gameplay.salad.SaladRecipeMatcher;
 import net.qiuyu.horrorcooked9.gameplay.stir.StirToolBalanceConfig;
+import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
