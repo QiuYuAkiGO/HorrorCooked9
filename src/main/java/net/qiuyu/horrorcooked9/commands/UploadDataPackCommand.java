@@ -8,8 +8,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.PacketDistributor;
 import net.qiuyu.horrorcooked9.config.ModServerConfig;
-import net.qiuyu.horrorcooked9.register.ModNetworking;
-import net.qiuyu.horrorcooked9.network.develop.OpenDataPackPickerPacket;
+import net.qiuyu.horrorcooked9.network.ModNetworking;
+import net.qiuyu.horrorcooked9.network.datapack.OpenDataPackPickerPacket;
 
 import static net.minecraft.commands.Commands.literal;
 

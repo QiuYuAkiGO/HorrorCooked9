@@ -8,8 +8,8 @@ import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModEffects;
 import net.qiuyu.horrorcooked9.register.ModItems;
 
-public class ModLangGenCN extends LanguageProvider {
-    public ModLangGenCN(PackOutput output, String locale) {
+public class ModLangGenZhCn extends LanguageProvider {
+    public ModLangGenZhCn(PackOutput output, String locale) {
         super(output, HorrorCooked9.MODID, locale);
     }
 

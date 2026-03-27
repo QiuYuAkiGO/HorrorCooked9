@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.network.develop;
+package net.qiuyu.horrorcooked9.network.datapack;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;

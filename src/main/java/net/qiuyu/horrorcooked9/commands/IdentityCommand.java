@@ -52,8 +52,8 @@ public final class IdentityCommand {
                                         .then(argument("configJson", StringArgumentType.greedyString())
                                                 .suggests((context, builder) -> SharedSuggestionProvider.suggest(
                                                         List.of(
-                                                                "{\"identity_name\":{\"captain\":1,\"cook\":3},\"limit_num\":{\"captain\":\"..1\"}}",
-                                                                "{\"identity_name\":{\"captain\":2,\"cook\":2},\"limit_num\":{\"captain\":\"1..2\",\"cook\":\"1..\"}}"
+                                                                "{\"identity_name\":{\"captain\":1,\"chef\":3},\"limit_num\":{\"captain\":\"..1\"}}",
+                                                                "{\"identity_name\":{\"captain\":2,\"chef\":2},\"limit_num\":{\"captain\":\"1..2\",\"chef\":\"1..\"}}"
                                                         ),
                                                         builder
                                                 ))

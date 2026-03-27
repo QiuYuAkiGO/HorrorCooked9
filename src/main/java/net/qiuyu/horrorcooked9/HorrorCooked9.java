@@ -14,7 +14,7 @@ import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.qiuyu.horrorcooked9.armor.renderer.CaptainHatRenderer;
 import net.qiuyu.horrorcooked9.blocks.renderer.ChoppingBoardRenderer;
 import net.qiuyu.horrorcooked9.config.ModServerConfig;
-import net.qiuyu.horrorcooked9.register.ModNetworking;
+import net.qiuyu.horrorcooked9.network.ModNetworking;
 import net.qiuyu.horrorcooked9.register.ModBlockEntities;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModCreativeModeTabs;

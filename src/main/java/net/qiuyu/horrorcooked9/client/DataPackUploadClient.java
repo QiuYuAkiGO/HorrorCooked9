@@ -2,11 +2,11 @@ package net.qiuyu.horrorcooked9.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.qiuyu.horrorcooked9.network.develop.DataPackUploadCancelPacket;
-import net.qiuyu.horrorcooked9.network.develop.DataPackUploadChunkPacket;
-import net.qiuyu.horrorcooked9.network.develop.DataPackUploadFinishPacket;
-import net.qiuyu.horrorcooked9.network.develop.DataPackUploadStartPacket;
-import net.qiuyu.horrorcooked9.register.ModNetworking;
+import net.qiuyu.horrorcooked9.network.ModNetworking;
+import net.qiuyu.horrorcooked9.network.datapack.DataPackUploadCancelPacket;
+import net.qiuyu.horrorcooked9.network.datapack.DataPackUploadChunkPacket;
+import net.qiuyu.horrorcooked9.network.datapack.DataPackUploadFinishPacket;
+import net.qiuyu.horrorcooked9.network.datapack.DataPackUploadStartPacket;
 import org.lwjgl.util.tinyfd.TinyFileDialogs;
 
 import java.io.ByteArrayOutputStream;

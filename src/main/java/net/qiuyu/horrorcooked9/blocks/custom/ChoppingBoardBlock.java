@@ -28,7 +28,7 @@ import net.qiuyu.horrorcooked9.register.ModTags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ChoppingBoard extends BaseEntityBlock {
+public class ChoppingBoardBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
@@ -41,7 +41,7 @@ public class ChoppingBoard extends BaseEntityBlock {
     private static final VoxelShape SHAPE_WEST  = Block.box(0, 0, 0, 16, 2.5, 16);
     private static final VoxelShape SHAPE_EAST  = Block.box(0, 0, 0, 16, 2.5, 16);
 
-    public ChoppingBoard(Properties pProperties) {
+    public ChoppingBoardBlock(Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }

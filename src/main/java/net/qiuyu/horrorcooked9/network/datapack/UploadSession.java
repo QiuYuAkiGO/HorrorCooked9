@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.network.develop;
+package net.qiuyu.horrorcooked9.network.datapack;
 
 import java.util.Map;
 import java.util.UUID;

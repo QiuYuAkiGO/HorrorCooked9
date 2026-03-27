@@ -19,6 +19,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+/**
+ * 沙拉碗配方定义。
+ * <p>
+ * 该配方不参与传统工作台匹配，实际匹配由沙拉碗交互逻辑按 {@code ingredientsInOrder}
+ * 进行前缀/精确判断；此类主要承载配方数据并负责序列化。
+ */
 public class SaladBowlRecipe implements Recipe<Container> {
     private final ResourceLocation id;
     private final NonNullList<Ingredient> ingredientsInOrder;
@@ -111,6 +117,9 @@ public class SaladBowlRecipe implements Recipe<Container> {
         return copy;
     }
 
+    /**
+     * 沙拉碗配方的 JSON/网络序列化器。
+     */
     public static class Serializer implements RecipeSerializer<SaladBowlRecipe> {
         @Override
         public @NotNull SaladBowlRecipe fromJson(@NotNull ResourceLocation recipeId, @NotNull JsonObject json) {
