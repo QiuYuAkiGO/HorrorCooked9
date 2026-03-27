@@ -1,9 +1,12 @@
 package net.qiuyu.horrorcooked9.gameplay.chopping;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoardBlockEntity;
 import net.qiuyu.horrorcooked9.network.ModNetworking;
 import net.qiuyu.horrorcooked9.network.gameplay.ChopResultPacket;
 import org.jetbrains.annotations.NotNull;
@@ -18,8 +21,10 @@ import java.util.Random;
  * 位置随机排列，光标来回滑动，玩家点击左键停止光标并返回对应的 ChopResult。
  */
 public class ChopMinigameScreen extends Screen {
+    private static final float DEFAULT_CURSOR_SPEED = 0.015F;
 
     private final BlockPos boardPos;
+    private final boolean hasRecipeConfig;
 
     // 进度条尺寸
     private static final int BAR_WIDTH = 200;
@@ -31,28 +36,55 @@ public class ChopMinigameScreen extends Screen {
 
     // 光标状态
     private float cursorPos = 0.0f; // 0~1
-    private final float cursorSpeed = 0.015f;
+    private float cursorSpeed = DEFAULT_CURSOR_SPEED;
     private int cursorDirection = 1; // 1=向右, -1=向左
     private boolean stopped = false;
 
     public ChopMinigameScreen(BlockPos boardPos) {
         super(Component.literal("切割小游戏"));
         this.boardPos = boardPos;
+        this.segmentColors = new ArrayList<>();
+        this.segmentWidths = new ArrayList<>();
+        this.hasRecipeConfig = initConfigFromRecipe();
+    }
 
-        // 红:黄:绿 = 6:3:1
-        segmentColors = new ArrayList<>();
-        segmentWidths = new ArrayList<>();
-        segmentColors.add(ChopResult.RED);    segmentWidths.add(0.6f);
-        segmentColors.add(ChopResult.YELLOW); segmentWidths.add(0.3f);
-        segmentColors.add(ChopResult.GREEN);  segmentWidths.add(0.1f);
+    private boolean initConfigFromRecipe() {
+        segmentColors.clear();
+        segmentWidths.clear();
+        float redRatio = 0.6F;
+        float yellowRatio = 0.3F;
+        float greenRatio = 0.1F;
+        boolean foundRecipe = false;
 
-        // 随机排列位置（颜色和宽度一起打乱）
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.level != null) {
+            BlockEntity be = mc.level.getBlockEntity(boardPos);
+            if (be instanceof ChoppingBoardBlockEntity boardEntity && boardEntity.hasPlacedItem()) {
+                ChopperMinigameRecipe recipe = ChopperRecipeMatcher.findByInput(boardEntity.getPlacedItem(), mc.level);
+                if (recipe != null) {
+                    foundRecipe = true;
+                    cursorSpeed = recipe.getCursorSpeed();
+                    redRatio = recipe.getRedRatio();
+                    yellowRatio = recipe.getYellowRatio();
+                    greenRatio = recipe.getGreenRatio();
+                }
+            }
+        }
+
+        segmentColors.add(ChopResult.RED);
+        segmentWidths.add(redRatio);
+        segmentColors.add(ChopResult.YELLOW);
+        segmentWidths.add(yellowRatio);
+        segmentColors.add(ChopResult.GREEN);
+        segmentWidths.add(greenRatio);
+
         Random rng = new Random();
         for (int i = segmentColors.size() - 1; i > 0; i--) {
             int j = rng.nextInt(i + 1);
             Collections.swap(segmentColors, i, j);
             Collections.swap(segmentWidths, i, j);
         }
+        return foundRecipe;
     }
 
     @Override
@@ -78,6 +110,10 @@ public class ChopMinigameScreen extends Screen {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == 0 && !stopped) {
+            if (!hasRecipeConfig) {
+                this.onClose();
+                return true;
+            }
             stopped = true;
             ChopResult result = getResultFromCursor();
             // 发送结果到服务端
@@ -133,7 +169,9 @@ public class ChopMinigameScreen extends Screen {
         guiGraphics.fill(cursorX - 1, barTop - 4, cursorX + 1, barTop + BAR_HEIGHT + 4, 0xFFFFFFFF);
 
         // 绘制提示文字
-        Component hint = Component.literal("点击左键停止光标!");
+        Component hint = hasRecipeConfig
+                ? Component.literal("点击左键停止光标!")
+                : Component.literal("该食材暂无切菜配方");
         int textWidth = this.font.width(hint);
         guiGraphics.drawString(this.font, hint, centerX - textWidth / 2, barTop - 16, 0xFFFFFFFF);
     }

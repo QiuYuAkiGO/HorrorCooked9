@@ -22,7 +22,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.qiuyu.horrorcooked9.client.ClientHelper;
-import net.qiuyu.horrorcooked9.gameplay.chopping.IChoppable;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperRecipeMatcher;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModTags;
@@ -77,7 +77,7 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
             // 手持菜刀右键：打开切割小游戏
             if (heldItem.getItem() instanceof Cleaver) {
                 ItemStack placedItem = boardEntity.getPlacedItem();
-                if (placedItem.getItem() instanceof IChoppable) {
+                if (ChopperRecipeMatcher.findByInput(placedItem, pLevel) != null) {
                     if (pLevel.isClientSide()) {
                         ClientHelper.openChopMinigame(pPos);
                     }
@@ -96,9 +96,9 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
         } else if (pLevel.isClientSide()) {
             return InteractionResult.SUCCESS;
         } else if (heldItem.getItem() instanceof Cleaver) {
-            // 主手持菜刀时，优先将副手的IChoppable物品放入砧板
+            // 主手持菜刀时，优先将副手可放置物品放入砧板
             ItemStack offhandItem = pPlayer.getOffhandItem();
-            if (offhandItem.getItem() instanceof IChoppable && offhandItem.is(ModTags.Items.CHOPPER_PLACEABLE)) {
+            if (offhandItem.is(ModTags.Items.CHOPPER_PLACEABLE)) {
                 ItemStack toPlace = offhandItem.copy();
                 toPlace.setCount(1);
                 boardEntity.setPlacedItem(toPlace);

@@ -25,6 +25,15 @@ public class ModItemModelGen extends ItemModelProvider {
         itemHandheldModel(ModItems.CLEAVER.get(), Cleaver.getTexture());
         itemGeneratedModel(ModItems.CRYSTAL_TOMATO.get(), resourceItem("crystal_tomato"));
         itemGeneratedModel(ModItems.CRYSTAL_TOMATO_SLICED.get(), resourceItem("crystal_tomato_sliced"));
+        itemGeneratedModel(ModItems.KALE.get(), resourceItem("kale"));
+        itemGeneratedModel(ModItems.KALE_LEAVES.get(), resourceItem("kale_leaves"));
+        itemGeneratedModel(ModItems.BRACKEN_FERN.get(), resourceItem("bracken_fern"));
+        itemGeneratedModel(ModItems.PICKLED_BRACKEN_FERN.get(), resourceItem("pickled_bracken_fern"));
+        itemGeneratedModel(ModItems.PINEAPPLE.get(), resourceItem("pineapple"));
+        itemGeneratedModel(ModItems.PINEAPPLE_CHUNKS.get(), resourceItem("pineapple_chunks"));
+        itemGeneratedModel(ModItems.PARASITIC_BEAN_SPROUTS.get(), resourceItem("parasitic_bean_sprouts"));
+        itemGeneratedModel(ModItems.HAPPY_RICE.get(), resourceItem("happy_rice"));
+        itemGeneratedModel(ModItems.HAPPY_COOKED_RICE.get(), resourceItem("happy_cooked_rice"));
     }
 
     private void eggItem(Item item) {
