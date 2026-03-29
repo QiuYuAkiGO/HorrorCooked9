@@ -20,9 +20,15 @@ public class ModLangGenZhCn extends LanguageProvider {
 
 
         add(ModItems.CLEAVER.get(), "切肉刀");
+        add(ModItems.SHARPENING_STONE.get(), "磨刀石");
         add(ModItems.WOODEN_SALAD_SPOON.get(), "木制沙拉勺");
         add(ModItems.CRYSTAL_TOMATO.get(), "【宝石番茄】");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "【宝石番茄切片】");
+        add(ModItems.CRYSTAL_SALAD.get(), "宝石沙拉");
+        add(ModItems.SQUID_SALAD.get(), "鱿鱼沙拉");
+        add(ModItems.OCEAN_SALAD.get(), "海洋沙拉");
+        add(ModItems.CRISPY_NORI.get(), "香脆海苔");
+        add(ModItems.CATFISH_SKEWER.get(), "鲶鱼烤串");
         add(ModItems.KALE.get(), "【静谧甘蓝】");
         add(ModItems.KALE_LEAVES.get(), "【静谧甘蓝菜叶】");
         add(ModItems.BRACKEN_FERN.get(), "【尸苔蕨菜】");
@@ -77,6 +83,14 @@ public class ModLangGenZhCn extends LanguageProvider {
 
         add("item.horrorcooked9.happy_cooked_rice.desc.1", "煮熟过后的快乐稻米，味道千里飘香。");
         add("item.horrorcooked9.happy_cooked_rice.desc.2", "味道好极了，是千家万户的首选。");
+
+        add("book.horrorcooked9.guide.name", "恐怖烹饪手册");
+        add("book.horrorcooked9.guide.landing", "欢迎来到 Horror Cooked 9。本手册会带你快速了解基础料理流程。");
+        add("book.horrorcooked9.guide.category.getting_started", "入门指南");
+        add("book.horrorcooked9.guide.category.getting_started.desc", "基础烹饪流程，以及如何获取第一本手册。");
+        add("book.horrorcooked9.guide.entry.first_steps", "第一步");
+        add("book.horrorcooked9.guide.entry.first_steps.page1", "先用砧板处理食材，再通过沙拉碗进行混合与出菜。");
+        add("book.horrorcooked9.guide.entry.first_steps.page2", "如果手册丢失，可以随时重新合成。");
 
         add("creativetab.horrorcooked9_tab", "恐怖烹饪");
     }

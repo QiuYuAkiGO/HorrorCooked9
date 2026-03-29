@@ -105,7 +105,12 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
                 offhandItem.shrink(1);
                 return InteractionResult.CONSUME;
             }
-            return InteractionResult.PASS;
+            // 菜刀在 chopper_placeable 标签中，但上面分支会先匹配 instanceof Cleaver 而无法落到通用放置逻辑
+            ItemStack toPlace = heldItem.copy();
+            toPlace.setCount(1);
+            boardEntity.setPlacedItem(toPlace);
+            heldItem.shrink(1);
+            return InteractionResult.CONSUME;
         } else if (heldItem.is(ModTags.Items.CHOPPER_PLACEABLE)) {
             // 放置可放置物品
             ItemStack toPlace = heldItem.copy();

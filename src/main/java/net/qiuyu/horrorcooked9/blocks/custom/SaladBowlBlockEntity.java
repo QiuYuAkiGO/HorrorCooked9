@@ -125,26 +125,6 @@ public class SaladBowlBlockEntity extends BlockEntity {
         return dropped;
     }
 
-    public List<ItemStack> getBreakDrops() {
-        List<ItemStack> drops = new ArrayList<>();
-        if (completed && !resultStack.isEmpty() && remainingServings > 0) {
-            int total = resultStack.getCount() * remainingServings;
-            int maxStack = resultStack.getMaxStackSize();
-            while (total > 0) {
-                ItemStack stack = resultStack.copy();
-                stack.setCount(Math.min(maxStack, total));
-                drops.add(stack);
-                total -= stack.getCount();
-            }
-            return drops;
-        }
-
-        for (ItemStack ingredient : addedIngredients) {
-            drops.add(ingredient.copy());
-        }
-        return drops;
-    }
-
     private void markAndSync() {
         setChanged();
         if (level != null) {

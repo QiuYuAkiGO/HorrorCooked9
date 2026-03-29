@@ -1,0 +1,33 @@
+{
+  "type": "horrorcooked9:salad_bowl",
+  "ingredients_in_order": [
+    {
+      "item": "minecraft:dried_kelp"
+    },
+    {
+      "item": "minecraft:dried_kelp"
+    },
+    {
+      "item": "minecraft:dried_kelp"
+    },
+    {
+      "item": "horrorcooked9:pickled_bracken_fern"
+    },
+    {
+      "item": "horrorcooked9:pickled_bracken_fern"
+    }
+  ],
+  "mixing_tool": {
+    "tag": "horrorcooked9:salad_mixing_tools"
+  },
+  "serving_container": {
+    "tag": "horrorcooked9:salad_serving_containers"
+  },
+  "result": {
+    "item": "horrorcooked9:crispy_nori",
+    "count": 1
+  },
+  "stir_count": 4,
+  "servings": 1,
+  "mix_success_chance": 1.0
+}

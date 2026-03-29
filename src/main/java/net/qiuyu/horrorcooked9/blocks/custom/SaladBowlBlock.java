@@ -176,12 +176,6 @@ public class SaladBowlBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public void onRemove(BlockState pState, @NotNull Level pLevel, @NotNull BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.is(pNewState.getBlock())) {
-            BlockEntity be = pLevel.getBlockEntity(pPos);
-            if (be instanceof SaladBowlBlockEntity bowlEntity) {
-                dropItems(pLevel, pPos, bowlEntity.getBreakDrops());
-            }
-        }
         super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 

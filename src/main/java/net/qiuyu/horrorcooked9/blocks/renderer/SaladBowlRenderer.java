@@ -75,9 +75,9 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
         float ratio = initial > 0 ? Mth.clamp((float) remaining / initial, 0f, 1f) : 1f;
         float liquidHeight = Mth.lerp(ratio, LIQUID_MIN_HEIGHT, LIQUID_MAX_HEIGHT);
 
-        int mixedColor = computeMixedColor(ingredients);
+        int liquidColor = computeLiquidColorForCompleted(blockEntity, ingredients);
 
-        renderLiquidDisc(blockEntity, partialTick, poseStack, buffer, light, liquidHeight, mixedColor);
+        renderLiquidDisc(blockEntity, partialTick, poseStack, buffer, light, liquidHeight, liquidColor);
 
         renderIngredients(ingredients, blockEntity.getBlockPos(), poseStack, buffer,
                 itemRenderer, level, light, true);
@@ -166,6 +166,35 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
 
     // ---- color computation ----
 
+    /**
+     * 完成态液体颜色与最终产物一致（物品着色 / 纹理主色）；无法解析时回退为配料混合色。
+     */
+    private int computeLiquidColorForCompleted(SaladBowlBlockEntity blockEntity, List<ItemStack> ingredients) {
+        ItemStack result = blockEntity.getResultStack();
+        if (!result.isEmpty()) {
+            ItemColors itemColors = Minecraft.getInstance().getItemColors();
+            int color = getIngredientColor(result, itemColors);
+            if (color != -1) {
+                return boostLowBrightness(color);
+            }
+        }
+        return computeMixedColor(ingredients);
+    }
+
+    private int boostLowBrightness(int rgb) {
+        int r = (rgb >> 16) & 0xFF;
+        int g = (rgb >> 8) & 0xFF;
+        int b = rgb & 0xFF;
+        int brightness = Math.max(r, Math.max(g, b));
+        if (brightness < 60) {
+            float boost = 60f / Math.max(brightness, 1);
+            r = Math.min(255, (int) (r * boost));
+            g = Math.min(255, (int) (g * boost));
+            b = Math.min(255, (int) (b * boost));
+        }
+        return (r << 16) | (g << 8) | b;
+    }
+
     private int computeMixedColor(List<ItemStack> ingredients) {
         ItemColors itemColors = Minecraft.getInstance().getItemColors();
         long totalR = 0, totalG = 0, totalB = 0;
@@ -187,15 +216,7 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
         int g = (int) (totalG / count);
         int b = (int) (totalB / count);
 
-        int brightness = Math.max(r, Math.max(g, b));
-        if (brightness < 60) {
-            float boost = 60f / Math.max(brightness, 1);
-            r = Math.min(255, (int) (r * boost));
-            g = Math.min(255, (int) (g * boost));
-            b = Math.min(255, (int) (b * boost));
-        }
-
-        return (r << 16) | (g << 8) | b;
+        return boostLowBrightness((r << 16) | (g << 8) | b);
     }
 
     private int getIngredientColor(ItemStack stack, ItemColors itemColors) {
