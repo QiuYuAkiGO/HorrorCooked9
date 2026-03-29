@@ -19,6 +19,11 @@ public final class GameplayNetworkRegistrar {
                 .decoder(StirResultPacket::new)
                 .consumerMainThread(StirResultPacket::handle)
                 .add();
+        channel.messageBuilder(ChoppingBoardDashPacket.class, id++, NetworkDirection.PLAY_TO_SERVER)
+                .encoder(ChoppingBoardDashPacket::encode)
+                .decoder(ChoppingBoardDashPacket::new)
+                .consumerMainThread(ChoppingBoardDashPacket::handle)
+                .add();
         return id;
     }
 }

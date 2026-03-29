@@ -12,6 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.armor.custom.CaptainHat;
 import net.qiuyu.horrorcooked9.items.custom.BrackenFernItem;
+import net.qiuyu.horrorcooked9.items.custom.ChoppingBoardItem;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
 import net.qiuyu.horrorcooked9.items.custom.CrystalTomato;
 import net.qiuyu.horrorcooked9.items.custom.CrystalTomatoSlicedItem;
@@ -30,7 +31,7 @@ public class ModItems {
             DeferredRegister.create(ForgeRegistries.ITEMS, HorrorCooked9.MODID);
 
     public static final RegistryObject<Item> CHOPPING_BOARD = ITEMS.register("chopping_board",
-            () -> new BlockItem(ModBlocks.CHOPPING_BOARD.get(), new Item.Properties()));
+            () -> new ChoppingBoardItem(ModBlocks.CHOPPING_BOARD.get(), new Item.Properties().stacksTo(1).durability(336)));
 
     public static final RegistryObject<Item> SALAD_BOWL = ITEMS.register("salad_bowl",
             () -> new SaladBowlItem(ModBlocks.SALAD_BOWL.get(), new Item.Properties().stacksTo(16)));

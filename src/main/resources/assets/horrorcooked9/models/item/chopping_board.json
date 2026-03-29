@@ -1,3 +1,25 @@
 {
-  "parent": "horrorcooked9:block/chopping_board"
+  "parent": "horrorcooked9:block/chopping_board",
+  "display": {
+    "thirdperson_righthand": {
+      "rotation": [0, 0, 90],
+      "translation": [-2.75, -2.25, 0],
+      "scale": [1.0, 1.0, 1.0]
+    },
+    "thirdperson_lefthand": {
+      "rotation": [0, 0, 90],
+      "translation": [-2.75, -2.75, 0],
+      "scale": [1.0, 1.0, 1.0]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 0, 90],
+      "translation": [-1.5, 2, -0.5],
+      "scale": [1.0, 1.0, 1.0]
+    },
+    "firstperson_lefthand": {
+      "rotation": [0, 0, 90],
+      "translation": [-1.5, 2, -0.5],
+      "scale": [1.0, 1.0, 1.0]
+    }
+  }
 }

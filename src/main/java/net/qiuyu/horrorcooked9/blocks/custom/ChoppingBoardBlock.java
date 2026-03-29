@@ -72,6 +72,7 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
         }
 
         ItemStack heldItem = pPlayer.getItemInHand(pHand);
+        boolean sneaking = pPlayer.isShiftKeyDown();
 
         if (boardEntity.hasPlacedItem()) {
             // 手持菜刀右键：打开切割小游戏
@@ -84,6 +85,9 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
                     return InteractionResult.SUCCESS;
                 }
             }
+            if (!sneaking) {
+                return InteractionResult.PASS;
+            }
             if (pLevel.isClientSide()) {
                 return InteractionResult.SUCCESS;
             }
@@ -93,9 +97,17 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
                 pPlayer.drop(removed, false);
             }
             return InteractionResult.CONSUME;
-        } else if (pLevel.isClientSide()) {
+        }
+
+        if (!sneaking) {
+            return InteractionResult.PASS;
+        }
+
+        if (pLevel.isClientSide()) {
             return InteractionResult.SUCCESS;
-        } else if (heldItem.getItem() instanceof Cleaver) {
+        }
+
+        if (heldItem.getItem() instanceof Cleaver) {
             // 主手持菜刀时，优先将副手可放置物品放入砧板
             ItemStack offhandItem = pPlayer.getOffhandItem();
             if (offhandItem.is(ModTags.Items.CHOPPER_PLACEABLE)) {
