@@ -1,5 +1,6 @@
 package net.qiuyu.horrorcooked9.gameplay.chopping;
 
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -22,6 +23,8 @@ import java.util.Random;
  */
 public class ChopMinigameScreen extends Screen {
     private static final float DEFAULT_CURSOR_SPEED = 0.015F;
+    private static final float TICKS_PER_SECOND = 20.0F;
+    private static final float MAX_FRAME_DELTA_SECONDS = 0.05F;
 
     private final BlockPos boardPos;
     private final boolean hasRecipeConfig;
@@ -39,6 +42,7 @@ public class ChopMinigameScreen extends Screen {
     private float cursorSpeed = DEFAULT_CURSOR_SPEED;
     private int cursorDirection = 1; // 1=向右, -1=向左
     private boolean stopped = false;
+    private long lastCursorUpdateNanos = 0L;
 
     public ChopMinigameScreen(BlockPos boardPos) {
         super(Component.literal("切割小游戏"));
@@ -93,21 +97,6 @@ public class ChopMinigameScreen extends Screen {
     }
 
     @Override
-    public void tick() {
-        super.tick();
-        if (!stopped) {
-            cursorPos += cursorSpeed * cursorDirection;
-            if (cursorPos >= 1.0f) {
-                cursorPos = 1.0f;
-                cursorDirection = -1;
-            } else if (cursorPos <= 0.0f) {
-                cursorPos = 0.0f;
-                cursorDirection = 1;
-            }
-        }
-    }
-
-    @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == 0 && !stopped) {
             if (!hasRecipeConfig) {
@@ -144,6 +133,8 @@ public class ChopMinigameScreen extends Screen {
 
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        updateCursorByRenderTime();
+
         // 不绘制背景暗化
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
@@ -174,5 +165,29 @@ public class ChopMinigameScreen extends Screen {
                 : Component.literal("该食材暂无切菜配方");
         int textWidth = this.font.width(hint);
         guiGraphics.drawString(this.font, hint, centerX - textWidth / 2, barTop - 16, 0xFFFFFFFF);
+    }
+
+    private void updateCursorByRenderTime() {
+        if (stopped) {
+            return;
+        }
+
+        long nowNanos = Util.getNanos();
+        if (lastCursorUpdateNanos == 0L) {
+            lastCursorUpdateNanos = nowNanos;
+            return;
+        }
+
+        float deltaSeconds = Math.min((nowNanos - lastCursorUpdateNanos) / 1_000_000_000.0F, MAX_FRAME_DELTA_SECONDS);
+        lastCursorUpdateNanos = nowNanos;
+
+        cursorPos += cursorSpeed * TICKS_PER_SECOND * cursorDirection * deltaSeconds;
+        if (cursorPos >= 1.0f) {
+            cursorPos = 1.0f;
+            cursorDirection = -1;
+        } else if (cursorPos <= 0.0f) {
+            cursorPos = 0.0f;
+            cursorDirection = 1;
+        }
     }
 }
