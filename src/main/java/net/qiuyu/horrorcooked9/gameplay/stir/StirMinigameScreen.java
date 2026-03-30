@@ -1,5 +1,6 @@
 package net.qiuyu.horrorcooked9.gameplay.stir;
 
+import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
@@ -22,6 +23,8 @@ public class StirMinigameScreen extends Screen {
     private static final int OUTER_RADIUS = 64;
     private static final int INNER_RADIUS = 18;
     private static final float ANGULAR_SPEED = 5.0F; // degree / tick
+    private static final float TICKS_PER_SECOND = 20.0F;
+    private static final float MAX_FRAME_DELTA_SECONDS = 0.05F;
     private static final float POINTER_ANGLE = 270.0F; // 12点方向
 
     private final BlockPos bowlPos;
@@ -33,6 +36,7 @@ public class StirMinigameScreen extends Screen {
 
     private float currentAngle = 0.0F;
     private boolean submitted = false;
+    private long lastAngleUpdateNanos = 0L;
 
     public StirMinigameScreen(BlockPos bowlPos, int requiredStirCount) {
         super(Component.literal("Stir Minigame"));
@@ -45,14 +49,6 @@ public class StirMinigameScreen extends Screen {
     @Override
     public boolean isPauseScreen() {
         return false;
-    }
-
-    @Override
-    public void tick() {
-        super.tick();
-        if (!submitted) {
-            currentAngle = normalizeAngle(currentAngle + ANGULAR_SPEED);
-        }
     }
 
     @Override
@@ -125,6 +121,7 @@ public class StirMinigameScreen extends Screen {
 
     @Override
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        updateAngleByRenderTime();
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
         int cx = this.width / 2;
@@ -165,5 +162,21 @@ public class StirMinigameScreen extends Screen {
         guiGraphics.drawString(this.font, title, cx - this.font.width(title) / 2, cy - OUTER_RADIUS - 32, 0xFFFFFFFF);
         guiGraphics.drawString(this.font, roundText, cx - this.font.width(roundText) / 2, cy - OUTER_RADIUS - 20, 0xFFE0E0E0);
         guiGraphics.drawString(this.font, hint, cx - this.font.width(hint) / 2, cy + OUTER_RADIUS + 10, 0xFFE0E0E0);
+    }
+
+    private void updateAngleByRenderTime() {
+        if (submitted) {
+            return;
+        }
+
+        long nowNanos = Util.getNanos();
+        if (lastAngleUpdateNanos == 0L) {
+            lastAngleUpdateNanos = nowNanos;
+            return;
+        }
+
+        float deltaSeconds = Math.min((nowNanos - lastAngleUpdateNanos) / 1_000_000_000.0F, MAX_FRAME_DELTA_SECONDS);
+        lastAngleUpdateNanos = nowNanos;
+        currentAngle = normalizeAngle(currentAngle + ANGULAR_SPEED * TICKS_PER_SECOND * deltaSeconds);
     }
 }
