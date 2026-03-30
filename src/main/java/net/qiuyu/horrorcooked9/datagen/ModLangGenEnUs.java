@@ -17,9 +17,15 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModBlocks.CHOPPING_BOARD.get(), "Chopping Board");
         add(ModBlocks.SALAD_BOWL.get(), "Salad Bowl");
         add(ModItems.CLEAVER.get(), "Cleaver");
+        add(ModItems.SHARPENING_STONE.get(), "Sharpening Stone");
         add(ModItems.WOODEN_SALAD_SPOON.get(), "Wooden Salad Spoon");
         add(ModItems.CRYSTAL_TOMATO.get(), "[Crystal Tomato]");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "[Crystal Tomato Sliced]");
+        add(ModItems.CRYSTAL_SALAD.get(), "Crystal Salad");
+        add(ModItems.SQUID_SALAD.get(), "Squid Salad");
+        add(ModItems.OCEAN_SALAD.get(), "Ocean Salad");
+        add(ModItems.CRISPY_NORI.get(), "Crispy Nori");
+        add(ModItems.CATFISH_SKEWER.get(), "Catfish Skewer");
         add(ModItems.KALE.get(), "[Kale]");
         add(ModItems.KALE_LEAVES.get(), "[Kale Leaves]");
         add(ModItems.BRACKEN_FERN.get(), "[Bracken Fern]");
@@ -73,6 +79,14 @@ public class ModLangGenEnUs extends LanguageProvider {
 
         add("item.horrorcooked9.happy_cooked_rice.desc.1", "Cooked Happy Rice whose aroma travels for miles.");
         add("item.horrorcooked9.happy_cooked_rice.desc.2", "It tastes amazing and is the top choice of countless families.");
+
+        add("book.horrorcooked9.guide.name", "Horror Cooked Handbook");
+        add("book.horrorcooked9.guide.landing", "Welcome to Horror Cooked 9. This handbook introduces your first tools and dishes.");
+        add("book.horrorcooked9.guide.category.getting_started", "Getting Started");
+        add("book.horrorcooked9.guide.category.getting_started.desc", "Basic cooking workflow and how to obtain your first guide book.");
+        add("book.horrorcooked9.guide.entry.first_steps", "First Steps");
+        add("book.horrorcooked9.guide.entry.first_steps.page1", "Use the Chopping Board and Salad Bowl to process ingredients and mix dishes.");
+        add("book.horrorcooked9.guide.entry.first_steps.page2", "Craft this guide book at any time if you lose it.");
 
         add("creativetab.horrorcooked9_tab", "Horror Cooked");
     }

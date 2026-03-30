@@ -10,6 +10,7 @@ public class ModTags {
 
     public static class Items {
         public static final TagKey<Item> CHOPPER_PLACEABLE = tag("chopper_placeable");
+        public static final TagKey<Item> SHARPENING_STONES = tag("sharpening_stones");
         public static final TagKey<Item> SALAD_MIXING_TOOLS = tag("salad_mixing_tools");
         public static final TagKey<Item> SALAD_SERVING_CONTAINERS = tag("salad_serving_containers");
 

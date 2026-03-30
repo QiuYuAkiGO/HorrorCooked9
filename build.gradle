@@ -25,6 +25,9 @@ minecraft {
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
+            // Required for deobf dependency mixins (e.g. Patchouli) in dev/data runs.
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
             mods {
                 "${mod_id}" {
                     source sourceSets.main
@@ -69,6 +72,7 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+    maven { url = "https://maven.blamejared.com" }
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
     maven { url = "https://maven.createmod.net" }
 }
@@ -80,6 +84,8 @@ dependencies {
     runtimeOnly(fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}"))
     compileOnly("net.createmod.ponder:Ponder-Forge-${minecraft_version}:${ponder_version}")
     compileOnly("dev.engine-room.flywheel:flywheel-forge-api-${flywheel_minecraft_version}:${flywheel_version}")
+    compileOnly(fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api"))
+    runtimeOnly(fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}"))
 }
 
 tasks.named('processResources', ProcessResources).configure {

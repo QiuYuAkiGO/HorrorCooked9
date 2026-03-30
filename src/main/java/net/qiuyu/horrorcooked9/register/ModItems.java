@@ -38,6 +38,9 @@ public class ModItems {
     public static final RegistryObject<Item> CLEAVER = ITEMS.register("cleaver",
             () -> new Cleaver(new Item.Properties().stacksTo(1).durability(512)));
 
+    public static final RegistryObject<Item> SHARPENING_STONE = ITEMS.register("sharpening_stone",
+            () -> new Item(new Item.Properties().stacksTo(64)));
+
     public static final RegistryObject<Item> WOODEN_SALAD_SPOON = ITEMS.register("wooden_salad_spoon",
             () -> new Item(new Item.Properties().stacksTo(1).durability(192)));
 
@@ -52,6 +55,18 @@ public class ModItems {
 
     public static final RegistryObject<Item> CRYSTAL_SALAD = ITEMS.register("crystal_salad",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationMod(0.8f).build())));
+
+    public static final RegistryObject<Item> SQUID_SALAD = ITEMS.register("squid_salad",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(0.9f).build())));
+
+    public static final RegistryObject<Item> OCEAN_SALAD = ITEMS.register("ocean_salad",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(0.9f).build())));
+
+    public static final RegistryObject<Item> CRISPY_NORI = ITEMS.register("crispy_nori",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationMod(0.6f).build())));
+
+    public static final RegistryObject<Item> CATFISH_SKEWER = ITEMS.register("catfish_skewer",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1.0f).build())));
 
     public static final RegistryObject<Item> KALE = ITEMS.register("kale",
             () -> new KaleItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build())));

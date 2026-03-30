@@ -1,0 +1,18 @@
+{
+  "default": {
+    "repair_amount": 0,
+    "repair_percent_of_cleaver_max": 0.0,
+    "stone_damage_per_use": 0,
+    "stone_damage_percent_of_max": 0.0,
+    "use_duration_ticks": 100
+  },
+  "stones": {
+    "horrorcooked9:sharpening_stone": {
+      "repair_amount": 24,
+      "repair_percent_of_cleaver_max": 0.0,
+      "stone_damage_per_use": 0,
+      "stone_damage_percent_of_max": 0.0,
+      "use_duration_ticks": 100
+    }
+  }
+}

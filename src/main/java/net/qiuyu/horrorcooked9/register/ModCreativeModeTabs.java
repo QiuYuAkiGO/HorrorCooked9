@@ -21,11 +21,16 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CHOPPING_BOARD.get());
                         output.accept(ModItems.SALAD_BOWL.get());
                         output.accept(ModItems.CLEAVER.get());
+                        output.accept(ModItems.SHARPENING_STONE.get());
                         output.accept(ModItems.WOODEN_SALAD_SPOON.get());
                         output.accept(ModItems.SALAD_TONGS.get());
                         output.accept(ModItems.CRYSTAL_TOMATO.get());
                         output.accept(ModItems.CRYSTAL_TOMATO_SLICED.get());
                         output.accept(ModItems.CRYSTAL_SALAD.get());
+                        output.accept(ModItems.SQUID_SALAD.get());
+                        output.accept(ModItems.OCEAN_SALAD.get());
+                        output.accept(ModItems.CRISPY_NORI.get());
+                        output.accept(ModItems.CATFISH_SKEWER.get());
                         output.accept(ModItems.KALE.get());
                         output.accept(ModItems.KALE_LEAVES.get());
                         output.accept(ModItems.BRACKEN_FERN.get());

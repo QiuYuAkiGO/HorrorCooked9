@@ -23,6 +23,7 @@ public class ModItemModelGen extends ItemModelProvider {
     protected void registerModels() {
         withExistingParent(itemName(ModItems.CHOPPING_BOARD.get()), modLoc("block/chopping_board"));
         itemHandheldModel(ModItems.CLEAVER.get(), Cleaver.getTexture());
+        withExistingParent(itemName(ModItems.SHARPENING_STONE.get()), GENERATED).texture("layer0", mcLoc("item/flint"));
         itemGeneratedModel(ModItems.CRYSTAL_TOMATO.get(), resourceItem("crystal_tomato"));
         itemGeneratedModel(ModItems.CRYSTAL_TOMATO_SLICED.get(), resourceItem("crystal_tomato_sliced"));
         itemGeneratedModel(ModItems.KALE.get(), resourceItem("kale"));
