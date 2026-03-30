@@ -15,6 +15,7 @@ import net.qiuyu.horrorcooked9.items.custom.BrackenFernItem;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
 import net.qiuyu.horrorcooked9.items.custom.CrystalTomato;
 import net.qiuyu.horrorcooked9.items.custom.CrystalTomatoSlicedItem;
+import net.qiuyu.horrorcooked9.items.custom.FarRealmGemBowlItem;
 import net.qiuyu.horrorcooked9.items.custom.KaleItem;
 import net.qiuyu.horrorcooked9.items.custom.KaleLeavesItem;
 import net.qiuyu.horrorcooked9.items.custom.ParasiticBeanSproutsItem;
@@ -24,6 +25,7 @@ import net.qiuyu.horrorcooked9.items.custom.HappyCookedRiceItem;
 import net.qiuyu.horrorcooked9.items.custom.PineappleChunksItem;
 import net.qiuyu.horrorcooked9.items.custom.PineappleItem;
 import net.qiuyu.horrorcooked9.items.custom.SaladBowlItem;
+import net.qiuyu.horrorcooked9.items.custom.ShitItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -56,6 +58,9 @@ public class ModItems {
     public static final RegistryObject<Item> CRYSTAL_SALAD = ITEMS.register("crystal_salad",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationMod(0.8f).build())));
 
+    public static final RegistryObject<Item> CRYSTAL_TOMATO_KETCHUP = ITEMS.register("crystal_tomato_ketchup",
+            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0.3f).build())));
+
     public static final RegistryObject<Item> SQUID_SALAD = ITEMS.register("squid_salad",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(0.9f).build())));
 
@@ -67,6 +72,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> CATFISH_SKEWER = ITEMS.register("catfish_skewer",
             () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1.0f).build())));
+
+    public static final RegistryObject<Item> FAR_REALM_GEM_BOWL = ITEMS.register("far_realm_gem_bowl",
+            () -> new FarRealmGemBowlItem(new Item.Properties().stacksTo(1)
+                    .food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6f).build())));
 
     public static final RegistryObject<Item> KALE = ITEMS.register("kale",
             () -> new KaleItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build())));
@@ -94,6 +103,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> HAPPY_COOKED_RICE = ITEMS.register("happy_cooked_rice",
             () -> new HappyCookedRiceItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1.2f).build())));
+
+    public static final RegistryObject<Item> SHIT = ITEMS.register("shit",
+            () -> new ShitItem(new Item.Properties()));
 
     public static final RegistryObject<Item> CAPTAIN_HAT = ITEMS.register("captain_hat",
             () -> new CaptainHat(CaptainHat.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));

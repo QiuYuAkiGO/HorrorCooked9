@@ -79,8 +79,9 @@ public class SaladBowlBlockEntity extends BlockEntity {
         this.completed = true;
         this.currentRecipeId = recipe.getId();
         this.resultStack = recipe.getResultStack();
-        this.remainingServings = recipe.getServings();
-        this.initialServings = recipe.getServings();
+        int resolvedServings = recipe.resolveServingsForCompletedSequence(addedIngredients);
+        this.remainingServings = resolvedServings;
+        this.initialServings = resolvedServings;
         markAndSync();
     }
 

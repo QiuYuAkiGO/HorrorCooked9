@@ -27,10 +27,12 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.CRYSTAL_TOMATO.get());
                         output.accept(ModItems.CRYSTAL_TOMATO_SLICED.get());
                         output.accept(ModItems.CRYSTAL_SALAD.get());
+                        output.accept(ModItems.CRYSTAL_TOMATO_KETCHUP.get());
                         output.accept(ModItems.SQUID_SALAD.get());
                         output.accept(ModItems.OCEAN_SALAD.get());
                         output.accept(ModItems.CRISPY_NORI.get());
                         output.accept(ModItems.CATFISH_SKEWER.get());
+                        output.accept(ModItems.FAR_REALM_GEM_BOWL.get());
                         output.accept(ModItems.KALE.get());
                         output.accept(ModItems.KALE_LEAVES.get());
                         output.accept(ModItems.BRACKEN_FERN.get());
@@ -40,6 +42,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.PARASITIC_BEAN_SPROUTS.get());
                         output.accept(ModItems.HAPPY_RICE.get());
                         output.accept(ModItems.HAPPY_COOKED_RICE.get());
+                        output.accept(ModItems.SHIT.get());
                         output.accept(ModItems.CAPTAIN_HAT.get());
                         output.accept(ModItems.FOODWORKS_TABLE.get());
                     })

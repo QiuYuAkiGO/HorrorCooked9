@@ -22,10 +22,12 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.CRYSTAL_TOMATO.get(), "[Crystal Tomato]");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "[Crystal Tomato Sliced]");
         add(ModItems.CRYSTAL_SALAD.get(), "Crystal Salad");
+        add(ModItems.CRYSTAL_TOMATO_KETCHUP.get(), "Crystal Tomato Ketchup");
         add(ModItems.SQUID_SALAD.get(), "Squid Salad");
         add(ModItems.OCEAN_SALAD.get(), "Ocean Salad");
         add(ModItems.CRISPY_NORI.get(), "Crispy Nori");
         add(ModItems.CATFISH_SKEWER.get(), "Catfish Skewer");
+        add(ModItems.FAR_REALM_GEM_BOWL.get(), "Far Realm Gem Bowl");
         add(ModItems.KALE.get(), "[Kale]");
         add(ModItems.KALE_LEAVES.get(), "[Kale Leaves]");
         add(ModItems.BRACKEN_FERN.get(), "[Bracken Fern]");
@@ -35,8 +37,11 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.PARASITIC_BEAN_SPROUTS.get(), "[Parasitic Bean Sprouts]");
         add(ModItems.HAPPY_RICE.get(), "[Happy Rice]");
         add(ModItems.HAPPY_COOKED_RICE.get(), "[Happy Cooked Rice]");
+        add(ModItems.SHIT.get(), "Shit");
         add(ModItems.CAPTAIN_HAT.get(), "Captain Hat");
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "Captain's Inspiration");
+        add(ModEffects.DIARRHEA.get(), "Diarrhea");
+        add("effect.horrorcooked9.diarrhea.events.desc.1", "While active, every 10 seconds there is a 75% chance of only an unpleasant sound; otherwise you gain Slowness and Mining Fatigue for a short time, briefly receive extreme Slowness, hear a blast, and feces drop behind you.");
         add(ModBlocks.FOODWORKS_TABLE.get(), "Foodworks Table");
 
         add("item.horrorcooked9.crystal_tomato.desc.1", "A crop from Earth that mutated on an alien world, hard as a \"Droplet\".");
@@ -67,11 +72,14 @@ public class ModLangGenEnUs extends LanguageProvider {
 
         add("item.horrorcooked9.pineapple_chunks.desc.1", "Cut chunks of Far-Honey Pineapple still pretending to be ordinary fruit.");
         add("item.horrorcooked9.pineapple_chunks.desc.2", "Juicier and more tempting, yet strangely colder and more addictive.");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.1", "It looks like an ordinary fruit platter.");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.2", "Its sparkling shine is dazzling.");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.3", "Juicy and tempting, sweet with a gentle tang.");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.4", "But you know this is the illusion given by the Far-Honey Pineapple.");
 
-        add("item.horrorcooked9.parasitic_bean_sprouts.desc.1", "A black-market high-value crop that only becomes processable at certain times.");
-        add("item.horrorcooked9.parasitic_bean_sprouts.desc.2", "No one knows where it came from; one sprout can keep hunger away for months, even a year.");
-        add("item.horrorcooked9.parasitic_bean_sprouts.desc.3", "If it appears among your harvest, congratulations: you have been marked.");
-        add("item.horrorcooked9.parasitic_bean_sprouts.desc.4", "For the coming days... do not close your eyes.");
+        add("item.horrorcooked9.parasitic_bean_sprouts.desc.1", "A strange crop that circulates on the black market; no one knows where it truly came from.");
+        add("item.horrorcooked9.parasitic_bean_sprouts.desc.2", "If you grow it, watch the plot closely—if it vanishes into the soil, find it before it finds you.");
+        add("item.horrorcooked9.parasitic_bean_sprouts.desc.3", "The sap released when you cut it does not seem to agree with living bodies.");
 
         add("item.horrorcooked9.happy_rice.desc.1", "A crop perfected across generations of research, packed with dense energy matter.");
         add("item.horrorcooked9.happy_rice.desc.2", "An excellent direct energy source for physical activity, promoted across the universe.");

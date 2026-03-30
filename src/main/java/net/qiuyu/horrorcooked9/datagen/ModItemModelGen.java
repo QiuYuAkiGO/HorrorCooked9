@@ -26,6 +26,8 @@ public class ModItemModelGen extends ItemModelProvider {
         withExistingParent(itemName(ModItems.SHARPENING_STONE.get()), GENERATED).texture("layer0", mcLoc("item/flint"));
         itemGeneratedModel(ModItems.CRYSTAL_TOMATO.get(), resourceItem("crystal_tomato"));
         itemGeneratedModel(ModItems.CRYSTAL_TOMATO_SLICED.get(), resourceItem("crystal_tomato_sliced"));
+        itemGeneratedModel(ModItems.CRYSTAL_TOMATO_KETCHUP.get(), mcLoc("item/beetroot_soup"));
+        itemGeneratedModel(ModItems.FAR_REALM_GEM_BOWL.get(), mcLoc("item/beetroot_soup"));
         itemGeneratedModel(ModItems.KALE.get(), resourceItem("kale"));
         itemGeneratedModel(ModItems.KALE_LEAVES.get(), resourceItem("kale_leaves"));
         itemGeneratedModel(ModItems.BRACKEN_FERN.get(), resourceItem("bracken_fern"));
@@ -35,6 +37,7 @@ public class ModItemModelGen extends ItemModelProvider {
         itemGeneratedModel(ModItems.PARASITIC_BEAN_SPROUTS.get(), resourceItem("parasitic_bean_sprouts"));
         itemGeneratedModel(ModItems.HAPPY_RICE.get(), resourceItem("happy_rice"));
         itemGeneratedModel(ModItems.HAPPY_COOKED_RICE.get(), resourceItem("happy_cooked_rice"));
+        itemGeneratedModel(ModItems.SHIT.get(), resourceItem("shit"));
     }
 
     private void eggItem(Item item) {

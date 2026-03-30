@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.effects.CaptainInspiration;
+import net.qiuyu.horrorcooked9.effects.DiarrheaEffect;
 
 public class ModEffects {
     public static final DeferredRegister<MobEffect> ITEMS =
@@ -14,6 +15,8 @@ public class ModEffects {
 
     public static final RegistryObject<MobEffect> CAPTAIN_INSPIRATION =
             ITEMS.register("captain_inspiration", CaptainInspiration::new);
+    public static final RegistryObject<MobEffect> DIARRHEA =
+            ITEMS.register("diarrhea", DiarrheaEffect::new);
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

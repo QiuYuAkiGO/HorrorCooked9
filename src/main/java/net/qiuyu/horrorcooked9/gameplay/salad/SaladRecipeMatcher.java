@@ -32,7 +32,7 @@ public final class SaladRecipeMatcher {
      */
     public static SaladBowlRecipe findExactMatch(List<ItemStack> sequence, List<SaladBowlRecipe> allRecipes) {
         return allRecipes.stream()
-                .filter(recipe -> recipe.getIngredientsInOrder().size() == sequence.size() && isPrefixMatch(sequence, recipe))
+                .filter(recipe -> isExactMatch(sequence, recipe))
                 .sorted(Comparator.comparing(recipe -> recipe.getId().toString()))
                 .findFirst()
                 .orElse(null);
@@ -42,15 +42,60 @@ public final class SaladRecipeMatcher {
      * 判断当前投料序列是否为目标配方的前缀。
      */
     public static boolean isPrefixMatch(List<ItemStack> sequence, SaladBowlRecipe recipe) {
-        if (sequence.size() > recipe.getIngredientsInOrder().size()) {
+        List<SaladBowlIngredientSlot> slots = recipe.getIngredientSlots();
+        if (slots.isEmpty()) {
+            return sequence.isEmpty();
+        }
+
+        boolean hasRepeatableLastSlot = slots.get(slots.size() - 1).repeatable();
+        int fixedSlotCount = hasRepeatableLastSlot ? slots.size() - 1 : slots.size();
+
+        int matchedFixed = Math.min(sequence.size(), fixedSlotCount);
+        for (int i = 0; i < matchedFixed; i++) {
+            if (!slots.get(i).ingredient().test(sequence.get(i))) {
+                return false;
+            }
+        }
+
+        if (sequence.size() <= fixedSlotCount) {
+            return true;
+        }
+
+        if (!hasRepeatableLastSlot) {
             return false;
         }
 
-        for (int i = 0; i < sequence.size(); i++) {
-            if (!recipe.getIngredientsInOrder().get(i).test(sequence.get(i))) {
+        SaladBowlIngredientSlot repeatableSlot = slots.get(slots.size() - 1);
+        int repeatableCount = sequence.size() - fixedSlotCount;
+        if (repeatableCount > repeatableSlot.max()) {
+            return false;
+        }
+
+        for (int i = fixedSlotCount; i < sequence.size(); i++) {
+            if (!repeatableSlot.ingredient().test(sequence.get(i))) {
                 return false;
             }
         }
         return true;
+    }
+
+    public static boolean isExactMatch(List<ItemStack> sequence, SaladBowlRecipe recipe) {
+        if (!isPrefixMatch(sequence, recipe)) {
+            return false;
+        }
+
+        List<SaladBowlIngredientSlot> slots = recipe.getIngredientSlots();
+        if (slots.isEmpty()) {
+            return sequence.isEmpty();
+        }
+
+        SaladBowlIngredientSlot lastSlot = slots.get(slots.size() - 1);
+        if (!lastSlot.repeatable()) {
+            return sequence.size() == slots.size();
+        }
+
+        int fixedSlotCount = slots.size() - 1;
+        int repeatableCount = sequence.size() - fixedSlotCount;
+        return repeatableCount >= lastSlot.min() && repeatableCount <= lastSlot.max();
     }
 }

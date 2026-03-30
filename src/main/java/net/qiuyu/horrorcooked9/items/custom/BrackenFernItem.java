@@ -26,7 +26,6 @@ public class BrackenFernItem extends Item {
         pTooltipComponents.add(Component.translatable("item.horrorcooked9.bracken_fern.desc.1").withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.ITALIC));
         pTooltipComponents.add(Component.translatable("item.horrorcooked9.bracken_fern.desc.2").withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.ITALIC));
         pTooltipComponents.add(Component.translatable("item.horrorcooked9.bracken_fern.desc.3").withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.ITALIC));
-        pTooltipComponents.add(Component.translatable("item.horrorcooked9.bracken_fern.desc.4").withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.ITALIC));
         super.appendHoverText(pStack, pLevel, pTooltipComponents, pIsAdvanced);
     }
 }

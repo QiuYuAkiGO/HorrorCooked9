@@ -25,10 +25,12 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.CRYSTAL_TOMATO.get(), "【宝石番茄】");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "【宝石番茄切片】");
         add(ModItems.CRYSTAL_SALAD.get(), "宝石沙拉");
+        add(ModItems.CRYSTAL_TOMATO_KETCHUP.get(), "宝石番茄酱");
         add(ModItems.SQUID_SALAD.get(), "鱿鱼沙拉");
         add(ModItems.OCEAN_SALAD.get(), "海洋沙拉");
         add(ModItems.CRISPY_NORI.get(), "香脆海苔");
         add(ModItems.CATFISH_SKEWER.get(), "鲶鱼烤串");
+        add(ModItems.FAR_REALM_GEM_BOWL.get(), "远境宝石碗");
         add(ModItems.KALE.get(), "【静谧甘蓝】");
         add(ModItems.KALE_LEAVES.get(), "【静谧甘蓝菜叶】");
         add(ModItems.BRACKEN_FERN.get(), "【尸苔蕨菜】");
@@ -38,10 +40,13 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.PARASITIC_BEAN_SPROUTS.get(), "【寄生豆芽】");
         add(ModItems.HAPPY_RICE.get(), "【快乐米】");
         add(ModItems.HAPPY_COOKED_RICE.get(), "【快乐米饭】");
+        add(ModItems.SHIT.get(), "粪便");
         add(ModItems.CAPTAIN_HAT.get(), "船长帽");
         add(ModBlocks.FOODWORKS_TABLE.get(), "手工料理台");
 
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "船长的激励");
+        add(ModEffects.DIARRHEA.get(), "腹泻");
+        add("effect.horrorcooked9.diarrhea.events.desc.1", "效果持续期间，每 10 秒有 75% 几率仅发出不适感；否则短暂获得缓慢与挖掘疲劳、极强短暂缓慢，并伴随爆炸声在身后掉落粪便。");
 
         add("item.horrorcooked9.crystal_tomato.desc.1", "原产自地球的作物，被偷到异星后就莫名其妙地变异，硬度堪比\"水滴\"。");
         add("item.horrorcooked9.crystal_tomato.desc.2", "有目击者称，在太空中看异星外围，只能看到红色的球体。");
@@ -51,10 +56,9 @@ public class ModLangGenZhCn extends LanguageProvider {
 
         add("item.horrorcooked9.pickled_bracken_fern.desc.1", "不知道哪个富哥把没吃完的蕨菜和调料倒在一起，没几天，一股香味不断地从蕨菜上飘出。");
         add("item.horrorcooked9.pickled_bracken_fern.desc.2", "研究发现，尸苔蕨菜的叶子有很多细孔，非常通透，会渗入各种调料。");
-        add("item.horrorcooked9.bracken_fern.desc.1", "【尸苔蕨菜】");
-        add("item.horrorcooked9.bracken_fern.desc.2", "这是从旧世界腐尸堆爬出来的诡异植物，味道鲜美，但极其稀有");
-        add("item.horrorcooked9.bracken_fern.desc.3", "你种它，就要用命护着，等它成熟，这片地，就再也长不出别的活物了");
-        add("item.horrorcooked9.bracken_fern.desc.4", "被联盟同时列为濒危物种和入侵物种");
+        add("item.horrorcooked9.bracken_fern.desc.1", "这是从旧世界腐尸堆爬出来的诡异植物，味道鲜美，但极其稀有");
+        add("item.horrorcooked9.bracken_fern.desc.2", "你种它，就要用命护着，等它成熟，这片地，就再也长不出别的活物了");
+        add("item.horrorcooked9.bracken_fern.desc.3", "被联盟同时列为濒危物种和入侵物种");
 
         add("item.horrorcooked9.kale.desc.1", "质地极脆、极薄，切开时会微微反光，像太空中漂浮着的冷光冰晶。");
         add("item.horrorcooked9.kale.desc.2", "味道极度清淡，几乎没有气味，适合做拌菜和配菜。");
@@ -71,11 +75,14 @@ public class ModLangGenZhCn extends LanguageProvider {
 
         add("item.horrorcooked9.pineapple_chunks.desc.1", "经过切制处理的远境蜜菠萝切块，仍旧在伪装成普通菠萝。");
         add("item.horrorcooked9.pineapple_chunks.desc.2", "虽然看着更多汁诱人，但不知为何比整个菠萝多出一种令人沉迷的寒意。");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.1", "看上去就是很普通的水果拼盘。");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.2", "闪闪发光的样子很是耀眼。");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.3", "多汁诱人，酸甜可口。");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.4", "但你知道，这是远境蜜菠萝给予你的错觉。");
 
-        add("item.horrorcooked9.parasitic_bean_sprouts.desc.1", "流通于黑市的高价作物，只会在某个时间变成可处理状态。");
-        add("item.horrorcooked9.parasitic_bean_sprouts.desc.2", "没有人知道它从哪里来，但它，只需一颗，便可以让你一个月甚至一年内摆脱饥饿。");
-        add("item.horrorcooked9.parasitic_bean_sprouts.desc.3", "当你收获时发现它出现在你的作物上，恭喜你，你被盯上了，接下来的时间。");
-        add("item.horrorcooked9.parasitic_bean_sprouts.desc.4", "请不要闭上眼睛。");
+        add("item.horrorcooked9.parasitic_bean_sprouts.desc.1", "从黑市流通而来的奇怪作物，至于起源，无从得知。");
+        add("item.horrorcooked9.parasitic_bean_sprouts.desc.2", "种植时请务必做好监管，如果你发现它消失在你的耕地里，那你最好能立马把它找出来。");
+        add("item.horrorcooked9.parasitic_bean_sprouts.desc.3", "切割时产生的汁液对生物健康的影响似乎不是很好。");
 
         add("item.horrorcooked9.happy_rice.desc.1", "科研人员耗费十几代的心血，极致改良的作物，内含大量的能量物质。");
         add("item.horrorcooked9.happy_rice.desc.2", "是一种极其优秀的身体活动最直接的能量来源，被全宇宙推广。");
