@@ -1,0 +1,35 @@
+{
+  "containers": [
+    {
+      "id": "furnace_smelting",
+      "kind": "vanilla_recipe",
+      "recipe_type": "minecraft:smelting",
+      "recipe": "horrorcooked9:boil_filtered_water_furnace"
+    },
+    {
+      "id": "blast_furnace",
+      "kind": "vanilla_recipe",
+      "recipe_type": "minecraft:blasting",
+      "recipe": "horrorcooked9:boil_filtered_water_blast_furnace"
+    },
+    {
+      "id": "smoker",
+      "kind": "vanilla_recipe",
+      "recipe_type": "minecraft:smoking",
+      "recipe": "horrorcooked9:boil_filtered_water_smoker"
+    },
+    {
+      "id": "campfire",
+      "kind": "vanilla_recipe",
+      "recipe_type": "minecraft:campfire_cooking",
+      "recipe": "horrorcooked9:boil_filtered_water_campfire"
+    },
+    {
+      "id": "cauldron_heat",
+      "kind": "cauldron",
+      "requires_heat_below": true,
+      "fluid_in_cauldron": "water",
+      "min_level": 1
+    }
+  ]
+}

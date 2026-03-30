@@ -1,0 +1,177 @@
+{
+  "default": {
+    "edible": false,
+    "nutrition": 0,
+    "saturation_modifier": 0.0,
+    "always_edible": false,
+    "effects": []
+  },
+  "items": {
+    "horrorcooked9:pig_liver": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.35,
+      "effects": [
+        {
+          "id": "minecraft:hunger",
+          "duration_ticks": 120,
+          "amplifier": 0,
+          "probability": 0.2
+        }
+      ]
+    },
+    "horrorcooked9:pig_stomach": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.25
+    },
+    "horrorcooked9:pig_intestine": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.25
+    },
+    "horrorcooked9:pig_heart": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.35
+    },
+    "horrorcooked9:pig_kidney": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.28
+    },
+    "horrorcooked9:pig_lung": {
+      "edible": true,
+      "nutrition": 2,
+      "saturation_modifier": 0.2
+    },
+    "horrorcooked9:pig_tongue": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.35
+    },
+    "horrorcooked9:pig_brain": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.32,
+      "effects": [
+        {
+          "id": "minecraft:nausea",
+          "duration_ticks": 160,
+          "amplifier": 0,
+          "probability": 0.12
+        }
+      ]
+    },
+    "horrorcooked9:beef_tripe": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.26
+    },
+    "horrorcooked9:beef_omasum": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.26
+    },
+    "horrorcooked9:beef_heart": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.36
+    },
+    "horrorcooked9:beef_liver": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.36
+    },
+    "horrorcooked9:beef_tongue": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.36
+    },
+    "horrorcooked9:beef_marrow": {
+      "edible": true,
+      "nutrition": 5,
+      "saturation_modifier": 0.45
+    },
+    "horrorcooked9:beef_tendon": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.3
+    },
+    "horrorcooked9:lamb_offal_mix": {
+      "edible": true,
+      "nutrition": 5,
+      "saturation_modifier": 0.4
+    },
+    "horrorcooked9:lamb_kidney": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.28
+    },
+    "horrorcooked9:lamb_tripe": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.28
+    },
+    "horrorcooked9:lamb_liver": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.34
+    },
+    "horrorcooked9:chicken_gizzard": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.25
+    },
+    "horrorcooked9:chicken_heart": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.28
+    },
+    "horrorcooked9:chicken_liver": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.28
+    },
+    "horrorcooked9:chicken_intestine": {
+      "edible": true,
+      "nutrition": 2,
+      "saturation_modifier": 0.2
+    },
+    "horrorcooked9:chicken_blood": {
+      "edible": true,
+      "nutrition": 2,
+      "saturation_modifier": 0.2
+    },
+    "horrorcooked9:duck_gizzard": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.26
+    },
+    "horrorcooked9:duck_liver": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.34
+    },
+    "horrorcooked9:duck_intestine": {
+      "edible": true,
+      "nutrition": 2,
+      "saturation_modifier": 0.2
+    },
+    "horrorcooked9:duck_blood": {
+      "edible": true,
+      "nutrition": 2,
+      "saturation_modifier": 0.2
+    },
+    "horrorcooked9:duck_heart": {
+      "edible": true,
+      "nutrition": 3,
+      "saturation_modifier": 0.28
+    },
+    "horrorcooked9:pineapple_juice_bottle": {
+      "edible": true,
+      "nutrition": 4,
+      "saturation_modifier": 0.45
+    }
+  }
+}

@@ -16,7 +16,13 @@ public class ModLangGenEnUs extends LanguageProvider {
     protected void addTranslations() {
         add(ModBlocks.CHOPPING_BOARD.get(), "Chopping Board");
         add(ModBlocks.SALAD_BOWL.get(), "Salad Bowl");
+        add(ModBlocks.SIMPLE_FILTER.get(), "Simple Filter");
+        add(ModBlocks.JUICER.get(), "Juicer");
         add(ModItems.CLEAVER.get(), "Cleaver");
+        add(ModItems.FILTERED_WATER_BUCKET.get(), "Filtered Water Bucket");
+        add(ModItems.CLEAR_WATER_BUCKET.get(), "Clear Water Bucket");
+        add(ModItems.PINEAPPLE_JUICE_BUCKET.get(), "Pineapple Juice Bucket");
+        add(ModItems.PINEAPPLE_JUICE_BOTTLE.get(), "Pineapple Juice Bottle");
         add(ModItems.SHARPENING_STONE.get(), "Sharpening Stone");
         add(ModItems.WOODEN_SALAD_SPOON.get(), "Wooden Salad Spoon");
         add(ModItems.CRYSTAL_TOMATO.get(), "[Crystal Tomato]");
@@ -38,6 +44,39 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.CAPTAIN_HAT.get(), "Captain Hat");
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "Captain's Inspiration");
         add(ModBlocks.FOODWORKS_TABLE.get(), "Foodworks Table");
+        add(ModItems.PIG_CARCASS.get(), "Pig Carcass");
+        add(ModItems.COW_CARCASS.get(), "Cow Carcass");
+        add(ModItems.SHEEP_CARCASS.get(), "Sheep Carcass");
+        add(ModItems.CHICKEN_CARCASS.get(), "Chicken Carcass");
+        add(ModItems.PIG_LIVER.get(), "Pig Liver");
+        add(ModItems.PIG_STOMACH.get(), "Pig Stomach");
+        add(ModItems.PIG_INTESTINE.get(), "Pig Intestine");
+        add(ModItems.PIG_HEART.get(), "Pig Heart");
+        add(ModItems.PIG_KIDNEY.get(), "Pig Kidney");
+        add(ModItems.PIG_LUNG.get(), "Pig Lung");
+        add(ModItems.PIG_TONGUE.get(), "Pig Tongue");
+        add(ModItems.PIG_BRAIN.get(), "Pig Brain");
+        add(ModItems.BEEF_TRIPE.get(), "Beef Tripe");
+        add(ModItems.BEEF_OMASUM.get(), "Beef Omasum");
+        add(ModItems.BEEF_HEART.get(), "Beef Heart");
+        add(ModItems.BEEF_LIVER.get(), "Beef Liver");
+        add(ModItems.BEEF_TONGUE.get(), "Beef Tongue");
+        add(ModItems.BEEF_MARROW.get(), "Beef Marrow");
+        add(ModItems.BEEF_TENDON.get(), "Beef Tendon");
+        add(ModItems.LAMB_OFFAL_MIX.get(), "Lamb Offal Mix");
+        add(ModItems.LAMB_KIDNEY.get(), "Lamb Kidney");
+        add(ModItems.LAMB_TRIPE.get(), "Lamb Tripe");
+        add(ModItems.LAMB_LIVER.get(), "Lamb Liver");
+        add(ModItems.CHICKEN_GIZZARD.get(), "Chicken Gizzard");
+        add(ModItems.CHICKEN_HEART.get(), "Chicken Heart");
+        add(ModItems.CHICKEN_LIVER.get(), "Chicken Liver");
+        add(ModItems.CHICKEN_INTESTINE.get(), "Chicken Intestine");
+        add(ModItems.CHICKEN_BLOOD.get(), "Chicken Blood");
+        add(ModItems.DUCK_GIZZARD.get(), "Duck Gizzard");
+        add(ModItems.DUCK_LIVER.get(), "Duck Liver");
+        add(ModItems.DUCK_INTESTINE.get(), "Duck Intestine");
+        add(ModItems.DUCK_BLOOD.get(), "Duck Blood");
+        add(ModItems.DUCK_HEART.get(), "Duck Heart");
 
         add("item.horrorcooked9.crystal_tomato.desc.1", "A crop from Earth that mutated on an alien world, hard as a \"Droplet\".");
         add("item.horrorcooked9.crystal_tomato.desc.2", "Witnesses say from orbit, the planet looks like a red sphere.");
@@ -79,6 +118,12 @@ public class ModLangGenEnUs extends LanguageProvider {
 
         add("item.horrorcooked9.happy_cooked_rice.desc.1", "Cooked Happy Rice whose aroma travels for miles.");
         add("item.horrorcooked9.happy_cooked_rice.desc.2", "It tastes amazing and is the top choice of countless families.");
+        add("item.horrorcooked9.pig_carcass.desc.1", "Hold a butchery tool in offhand and right-click to harvest pig offal.");
+        add("item.horrorcooked9.cow_carcass.desc.1", "Hold a butchery tool in offhand and right-click to harvest beef offal.");
+        add("item.horrorcooked9.sheep_carcass.desc.1", "Hold a butchery tool in offhand and right-click to harvest lamb offal.");
+        add("item.horrorcooked9.chicken_carcass.desc.1", "Hold a butchery tool in offhand and right-click to harvest chicken offal.");
+        add("screen.horrorcooked9.juicer.fluid", "Fluid: %s mb");
+        add("screen.horrorcooked9.juicer.pulp", "Pulp: %s mb");
 
         add("book.horrorcooked9.guide.name", "Horror Cooked Handbook");
         add("book.horrorcooked9.guide.landing", "Welcome to Horror Cooked 9. This handbook introduces your first tools and dishes.");

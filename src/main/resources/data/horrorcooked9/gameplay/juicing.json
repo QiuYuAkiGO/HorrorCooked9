@@ -1,0 +1,51 @@
+{
+  "defaults": {
+    "tank_capacity_mb": 4000,
+    "bottle_amount_mb": 250,
+    "allow_mixing": false,
+    "create_minimum_speed": 16,
+    "manual_interrupted_reset_ticks": 10
+  },
+  "entries": [
+    {
+      "fruit": "horrorcooked9:pineapple",
+      "fluid": "horrorcooked9:pineapple_juice",
+      "bottle_item": "horrorcooked9:pineapple_juice_bottle",
+      "pulp_total_mb": 750,
+      "manual_hold_ticks": 16,
+      "manual_fluid_mb": 125,
+      "auto_step_mb": 75,
+      "byproducts": [
+        {
+          "item": "minecraft:sugar",
+          "min": 1,
+          "max": 1,
+          "weight": 4
+        },
+        {
+          "item": "minecraft:bone_meal",
+          "min": 1,
+          "max": 2,
+          "weight": 2
+        }
+      ]
+    },
+    {
+      "fruit": "minecraft:apple",
+      "fluid": "horrorcooked9:pineapple_juice",
+      "bottle_item": "horrorcooked9:pineapple_juice_bottle",
+      "pulp_total_mb": 500,
+      "manual_hold_ticks": 12,
+      "manual_fluid_mb": 100,
+      "auto_step_mb": 60,
+      "byproducts": [
+        {
+          "item": "minecraft:apple",
+          "min": 1,
+          "max": 1,
+          "weight": 1
+        }
+      ]
+    }
+  ]
+}

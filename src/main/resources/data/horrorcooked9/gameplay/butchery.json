@@ -1,0 +1,110 @@
+{
+  "interaction": {
+    "kill_weapon_item_tag": "horrorcooked9:slaughter_weapons",
+    "harvest_tool_item_tag": "horrorcooked9:harvest_tools",
+    "require_harvest_tool_in_offhand": true,
+    "harvest_cooldown_ticks": 8,
+    "harvest_tool_damage_per_use": 1,
+    "harvest_sound": "minecraft:item.axe.strip"
+  },
+  "entities": {
+    "minecraft:pig": {
+      "enabled": true,
+      "spawn_carcass": true,
+      "carcass_item": "horrorcooked9:pig_carcass",
+      "carcass_count_min": 1,
+      "carcass_count_max": 1,
+      "remove_vanilla_raw_meat": true,
+      "remove_items": [],
+      "extra_drop_rolls_min": 0,
+      "extra_drop_rolls_max": 0,
+      "extra_drops": []
+    },
+    "minecraft:cow": {
+      "enabled": true,
+      "spawn_carcass": true,
+      "carcass_item": "horrorcooked9:cow_carcass",
+      "carcass_count_min": 1,
+      "carcass_count_max": 1,
+      "remove_vanilla_raw_meat": true,
+      "remove_items": [],
+      "extra_drop_rolls_min": 0,
+      "extra_drop_rolls_max": 0,
+      "extra_drops": []
+    },
+    "minecraft:sheep": {
+      "enabled": true,
+      "spawn_carcass": true,
+      "carcass_item": "horrorcooked9:sheep_carcass",
+      "carcass_count_min": 1,
+      "carcass_count_max": 1,
+      "remove_vanilla_raw_meat": true,
+      "remove_items": [],
+      "extra_drop_rolls_min": 0,
+      "extra_drop_rolls_max": 0,
+      "extra_drops": []
+    },
+    "minecraft:chicken": {
+      "enabled": true,
+      "spawn_carcass": true,
+      "carcass_item": "horrorcooked9:chicken_carcass",
+      "carcass_count_min": 1,
+      "carcass_count_max": 1,
+      "remove_vanilla_raw_meat": true,
+      "remove_items": [],
+      "extra_drop_rolls_min": 0,
+      "extra_drop_rolls_max": 0,
+      "extra_drops": []
+    }
+  },
+  "carcass_harvest": {
+    "horrorcooked9:pig_carcass": {
+      "rolls_min": 4,
+      "rolls_max": 6,
+      "drops": [
+        { "item": "horrorcooked9:pig_liver", "min": 1, "max": 1, "weight": 8 },
+        { "item": "horrorcooked9:pig_stomach", "min": 1, "max": 1, "weight": 5 },
+        { "item": "horrorcooked9:pig_intestine", "min": 1, "max": 2, "weight": 8 },
+        { "item": "horrorcooked9:pig_heart", "min": 1, "max": 1, "weight": 6 },
+        { "item": "horrorcooked9:pig_kidney", "min": 1, "max": 1, "weight": 6 },
+        { "item": "horrorcooked9:pig_lung", "min": 1, "max": 1, "weight": 5 },
+        { "item": "horrorcooked9:pig_tongue", "min": 1, "max": 1, "weight": 4 },
+        { "item": "horrorcooked9:pig_brain", "min": 1, "max": 1, "weight": 3 }
+      ]
+    },
+    "horrorcooked9:cow_carcass": {
+      "rolls_min": 4,
+      "rolls_max": 6,
+      "drops": [
+        { "item": "horrorcooked9:beef_tripe", "min": 1, "max": 1, "weight": 8 },
+        { "item": "horrorcooked9:beef_omasum", "min": 1, "max": 1, "weight": 7 },
+        { "item": "horrorcooked9:beef_heart", "min": 1, "max": 1, "weight": 6 },
+        { "item": "horrorcooked9:beef_liver", "min": 1, "max": 1, "weight": 7 },
+        { "item": "horrorcooked9:beef_tongue", "min": 1, "max": 1, "weight": 5 },
+        { "item": "horrorcooked9:beef_marrow", "min": 1, "max": 1, "weight": 4 },
+        { "item": "horrorcooked9:beef_tendon", "min": 1, "max": 2, "weight": 6 }
+      ]
+    },
+    "horrorcooked9:sheep_carcass": {
+      "rolls_min": 3,
+      "rolls_max": 5,
+      "drops": [
+        { "item": "horrorcooked9:lamb_offal_mix", "min": 1, "max": 1, "weight": 8 },
+        { "item": "horrorcooked9:lamb_kidney", "min": 1, "max": 1, "weight": 7 },
+        { "item": "horrorcooked9:lamb_tripe", "min": 1, "max": 1, "weight": 6 },
+        { "item": "horrorcooked9:lamb_liver", "min": 1, "max": 1, "weight": 7 }
+      ]
+    },
+    "horrorcooked9:chicken_carcass": {
+      "rolls_min": 3,
+      "rolls_max": 5,
+      "drops": [
+        { "item": "horrorcooked9:chicken_gizzard", "min": 1, "max": 1, "weight": 8 },
+        { "item": "horrorcooked9:chicken_heart", "min": 1, "max": 1, "weight": 8 },
+        { "item": "horrorcooked9:chicken_liver", "min": 1, "max": 1, "weight": 8 },
+        { "item": "horrorcooked9:chicken_intestine", "min": 1, "max": 1, "weight": 7 },
+        { "item": "horrorcooked9:chicken_blood", "min": 1, "max": 1, "weight": 6 }
+      ]
+    }
+  }
+}

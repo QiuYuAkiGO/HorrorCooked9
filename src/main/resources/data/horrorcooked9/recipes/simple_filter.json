@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "DCD",
+    "WWW",
+    "S S"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:sand"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    },
+    "C": {
+      "item": "minecraft:charcoal"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "result": {
+    "item": "horrorcooked9:simple_filter",
+    "count": 1
+  }
+}

@@ -17,9 +17,15 @@ public class ModLangGenZhCn extends LanguageProvider {
     protected void addTranslations() {
         add(ModBlocks.CHOPPING_BOARD.get(), "砧板");
         add(ModBlocks.SALAD_BOWL.get(), "沙拉碗");
+        add(ModBlocks.SIMPLE_FILTER.get(), "简易滤水器");
+        add(ModBlocks.JUICER.get(), "榨汁机");
 
 
         add(ModItems.CLEAVER.get(), "切肉刀");
+        add(ModItems.FILTERED_WATER_BUCKET.get(), "滤过水桶");
+        add(ModItems.CLEAR_WATER_BUCKET.get(), "清水桶");
+        add(ModItems.PINEAPPLE_JUICE_BUCKET.get(), "菠萝汁桶");
+        add(ModItems.PINEAPPLE_JUICE_BOTTLE.get(), "菠萝汁瓶");
         add(ModItems.SHARPENING_STONE.get(), "磨刀石");
         add(ModItems.WOODEN_SALAD_SPOON.get(), "木制沙拉勺");
         add(ModItems.CRYSTAL_TOMATO.get(), "【宝石番茄】");
@@ -40,6 +46,39 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.HAPPY_COOKED_RICE.get(), "【快乐米饭】");
         add(ModItems.CAPTAIN_HAT.get(), "船长帽");
         add(ModBlocks.FOODWORKS_TABLE.get(), "手工料理台");
+        add(ModItems.PIG_CARCASS.get(), "猪尸体");
+        add(ModItems.COW_CARCASS.get(), "牛尸体");
+        add(ModItems.SHEEP_CARCASS.get(), "羊尸体");
+        add(ModItems.CHICKEN_CARCASS.get(), "鸡尸体");
+        add(ModItems.PIG_LIVER.get(), "猪肝");
+        add(ModItems.PIG_STOMACH.get(), "猪肚");
+        add(ModItems.PIG_INTESTINE.get(), "猪肠");
+        add(ModItems.PIG_HEART.get(), "猪心");
+        add(ModItems.PIG_KIDNEY.get(), "猪腰");
+        add(ModItems.PIG_LUNG.get(), "猪肺");
+        add(ModItems.PIG_TONGUE.get(), "猪舌");
+        add(ModItems.PIG_BRAIN.get(), "猪脑");
+        add(ModItems.BEEF_TRIPE.get(), "牛肚");
+        add(ModItems.BEEF_OMASUM.get(), "牛百叶");
+        add(ModItems.BEEF_HEART.get(), "牛心");
+        add(ModItems.BEEF_LIVER.get(), "牛肝");
+        add(ModItems.BEEF_TONGUE.get(), "牛舌");
+        add(ModItems.BEEF_MARROW.get(), "牛骨髓");
+        add(ModItems.BEEF_TENDON.get(), "牛蹄筋");
+        add(ModItems.LAMB_OFFAL_MIX.get(), "羊杂");
+        add(ModItems.LAMB_KIDNEY.get(), "羊腰");
+        add(ModItems.LAMB_TRIPE.get(), "羊肚");
+        add(ModItems.LAMB_LIVER.get(), "羊肝");
+        add(ModItems.CHICKEN_GIZZARD.get(), "鸡胗");
+        add(ModItems.CHICKEN_HEART.get(), "鸡心");
+        add(ModItems.CHICKEN_LIVER.get(), "鸡肝");
+        add(ModItems.CHICKEN_INTESTINE.get(), "鸡肠");
+        add(ModItems.CHICKEN_BLOOD.get(), "鸡血");
+        add(ModItems.DUCK_GIZZARD.get(), "鸭胗");
+        add(ModItems.DUCK_LIVER.get(), "鸭肝");
+        add(ModItems.DUCK_INTESTINE.get(), "鸭肠");
+        add(ModItems.DUCK_BLOOD.get(), "鸭血");
+        add(ModItems.DUCK_HEART.get(), "鸭心");
 
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "船长的激励");
 
@@ -83,6 +122,12 @@ public class ModLangGenZhCn extends LanguageProvider {
 
         add("item.horrorcooked9.happy_cooked_rice.desc.1", "煮熟过后的快乐稻米，味道千里飘香。");
         add("item.horrorcooked9.happy_cooked_rice.desc.2", "味道好极了，是千家万户的首选。");
+        add("item.horrorcooked9.pig_carcass.desc.1", "副手持屠宰工具右键分解，可获得猪内脏。");
+        add("item.horrorcooked9.cow_carcass.desc.1", "副手持屠宰工具右键分解，可获得牛内脏。");
+        add("item.horrorcooked9.sheep_carcass.desc.1", "副手持屠宰工具右键分解，可获得羊内脏。");
+        add("item.horrorcooked9.chicken_carcass.desc.1", "副手持屠宰工具右键分解，可获得鸡内脏。");
+        add("screen.horrorcooked9.juicer.fluid", "液体：%s mb");
+        add("screen.horrorcooked9.juicer.pulp", "果泥：%s mb");
 
         add("book.horrorcooked9.guide.name", "恐怖烹饪手册");
         add("book.horrorcooked9.guide.landing", "欢迎来到 Horror Cooked 9。本手册会带你快速了解基础料理流程。");

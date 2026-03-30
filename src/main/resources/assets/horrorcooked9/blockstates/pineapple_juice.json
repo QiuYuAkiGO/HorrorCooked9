@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "forge:block/fluid"
+    }
+  }
+}

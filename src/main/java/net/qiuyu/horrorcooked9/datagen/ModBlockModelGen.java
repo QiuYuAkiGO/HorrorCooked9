@@ -22,6 +22,8 @@ public class ModBlockModelGen extends BlockStateProvider {
         horizontalBlock(ModBlocks.CHOPPING_BOARD.get(),
                 models().withExistingParent("chopping_board",
                         ResourceLocation.parse(HorrorCooked9.MODID + ":block/chopping_board")));
+        simpleBlock(ModBlocks.SIMPLE_FILTER.get(),
+                models().cubeAll("simple_filter", ResourceLocation.parse("minecraft:block/sand")));
     }
     public ResourceLocation blockTexture(Block block) {
         ResourceLocation name = key(block);

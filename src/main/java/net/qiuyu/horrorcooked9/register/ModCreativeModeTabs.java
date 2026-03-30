@@ -20,7 +20,13 @@ public class ModCreativeModeTabs {
                     .displayItems((parameters, output) -> {
                         output.accept(ModItems.CHOPPING_BOARD.get());
                         output.accept(ModItems.SALAD_BOWL.get());
+                        output.accept(ModItems.SIMPLE_FILTER.get());
+                        output.accept(ModItems.JUICER.get());
                         output.accept(ModItems.CLEAVER.get());
+                        output.accept(ModItems.FILTERED_WATER_BUCKET.get());
+                        output.accept(ModItems.CLEAR_WATER_BUCKET.get());
+                        output.accept(ModItems.PINEAPPLE_JUICE_BUCKET.get());
+                        output.accept(ModItems.PINEAPPLE_JUICE_BOTTLE.get());
                         output.accept(ModItems.SHARPENING_STONE.get());
                         output.accept(ModItems.WOODEN_SALAD_SPOON.get());
                         output.accept(ModItems.SALAD_TONGS.get());
@@ -42,6 +48,51 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.HAPPY_COOKED_RICE.get());
                         output.accept(ModItems.CAPTAIN_HAT.get());
                         output.accept(ModItems.FOODWORKS_TABLE.get());
+
+                        // Carcasses
+                        output.accept(ModItems.PIG_CARCASS.get());
+                        output.accept(ModItems.COW_CARCASS.get());
+                        output.accept(ModItems.SHEEP_CARCASS.get());
+                        output.accept(ModItems.CHICKEN_CARCASS.get());
+
+                        // Pig offal
+                        output.accept(ModItems.PIG_LIVER.get());
+                        output.accept(ModItems.PIG_STOMACH.get());
+                        output.accept(ModItems.PIG_INTESTINE.get());
+                        output.accept(ModItems.PIG_HEART.get());
+                        output.accept(ModItems.PIG_KIDNEY.get());
+                        output.accept(ModItems.PIG_LUNG.get());
+                        output.accept(ModItems.PIG_TONGUE.get());
+                        output.accept(ModItems.PIG_BRAIN.get());
+
+                        // Beef offal
+                        output.accept(ModItems.BEEF_TRIPE.get());
+                        output.accept(ModItems.BEEF_OMASUM.get());
+                        output.accept(ModItems.BEEF_HEART.get());
+                        output.accept(ModItems.BEEF_LIVER.get());
+                        output.accept(ModItems.BEEF_TONGUE.get());
+                        output.accept(ModItems.BEEF_MARROW.get());
+                        output.accept(ModItems.BEEF_TENDON.get());
+
+                        // Lamb offal
+                        output.accept(ModItems.LAMB_OFFAL_MIX.get());
+                        output.accept(ModItems.LAMB_KIDNEY.get());
+                        output.accept(ModItems.LAMB_TRIPE.get());
+                        output.accept(ModItems.LAMB_LIVER.get());
+
+                        // Chicken offal
+                        output.accept(ModItems.CHICKEN_GIZZARD.get());
+                        output.accept(ModItems.CHICKEN_HEART.get());
+                        output.accept(ModItems.CHICKEN_LIVER.get());
+                        output.accept(ModItems.CHICKEN_INTESTINE.get());
+                        output.accept(ModItems.CHICKEN_BLOOD.get());
+
+                        // Duck offal (placeholder)
+                        output.accept(ModItems.DUCK_GIZZARD.get());
+                        output.accept(ModItems.DUCK_LIVER.get());
+                        output.accept(ModItems.DUCK_INTESTINE.get());
+                        output.accept(ModItems.DUCK_BLOOD.get());
+                        output.accept(ModItems.DUCK_HEART.get());
                     })
                     .build());
 

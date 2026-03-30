@@ -17,7 +17,7 @@ import java.util.List;
  * Stir 转盘小游戏：
  * 玩家在指针固定位置点击左键，连续完成多轮判定后统一提交到服务端。
  */
-public class StirMinigameScreen extends Screen {
+public class    StirMinigameScreen extends Screen {
 
     private static final int OUTER_RADIUS = 64;
     private static final int INNER_RADIUS = 18;

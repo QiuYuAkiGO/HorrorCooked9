@@ -4,10 +4,12 @@ import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -15,12 +17,15 @@ import net.qiuyu.horrorcooked9.armor.renderer.CaptainHatRenderer;
 import net.qiuyu.horrorcooked9.blocks.renderer.ChoppingBoardRenderer;
 import net.qiuyu.horrorcooked9.blocks.renderer.SaladBowlRenderer;
 import net.qiuyu.horrorcooked9.config.ModServerConfig;
+import net.qiuyu.horrorcooked9.gameplay.juicing.JuicerScreen;
 import net.qiuyu.horrorcooked9.network.ModNetworking;
 import net.qiuyu.horrorcooked9.register.ModBlockEntities;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModCreativeModeTabs;
 import net.qiuyu.horrorcooked9.register.ModEffects;
+import net.qiuyu.horrorcooked9.register.ModFluids;
 import net.qiuyu.horrorcooked9.register.ModItems;
+import net.qiuyu.horrorcooked9.register.ModMenus;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -38,9 +43,11 @@ public class HorrorCooked9
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModFluids.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModMenus.register(modEventBus);
         ModEffects.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         ModRecipes.register(modEventBus);
@@ -63,6 +70,11 @@ public class HorrorCooked9
         {
             event.registerBlockEntityRenderer(ModBlockEntities.CHOPPING_BOARD_BE.get(), ChoppingBoardRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.SALAD_BOWL_BE.get(), SaladBowlRenderer::new);
+        }
+
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event) {
+            event.enqueueWork(() -> MenuScreens.register(ModMenus.JUICER_MENU.get(), JuicerScreen::new));
         }
 
         @SuppressWarnings({"unchecked", "rawtypes"})
