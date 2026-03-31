@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.qiuyu.horrorcooked9.client.ClientHelper;
+import net.qiuyu.horrorcooked9.common.ClientRuntimeBridge;
 import net.qiuyu.horrorcooked9.gameplay.salad.SaladBowlRecipe;
 import net.qiuyu.horrorcooked9.gameplay.salad.SaladRecipeMatcher;
 import net.qiuyu.horrorcooked9.gameplay.stir.StirToolBalanceConfig;
@@ -85,7 +85,7 @@ public class SaladBowlBlock extends BaseEntityBlock {
                     exactRecipe.getStirCount()
             );
             if (pLevel.isClientSide()) {
-                ClientHelper.openStirMinigame(pPos, requiredStirCount);
+                ClientRuntimeBridge.openStirMinigame(pPos, requiredStirCount);
             }
             return InteractionResult.CONSUME;
         }

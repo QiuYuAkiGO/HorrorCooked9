@@ -4,7 +4,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
-import net.qiuyu.horrorcooked9.client.DataPackUploadClient;
+import net.qiuyu.horrorcooked9.common.ClientRuntimeBridge;
 
 import java.util.function.Supplier;
 
@@ -27,7 +27,7 @@ public class OpenDataPackPickerPacket {
     public void handle(Supplier<NetworkEvent.Context> contextSupplier) {
         NetworkEvent.Context ctx = contextSupplier.get();
         ctx.enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT,
-                () -> () -> DataPackUploadClient.openFilePicker(maxUploadBytes)));
+                () -> () -> ClientRuntimeBridge.openDataPackPicker(maxUploadBytes)));
         ctx.setPacketHandled(true);
     }
 }

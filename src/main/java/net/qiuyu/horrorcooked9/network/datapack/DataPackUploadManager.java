@@ -3,6 +3,7 @@ package net.qiuyu.horrorcooked9.network.datapack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.world.level.storage.LevelResource;
 import net.qiuyu.horrorcooked9.config.ModServerConfig;
 
@@ -126,6 +127,7 @@ public final class DataPackUploadManager {
         try {
             Path installed = installToDatapacks(player.getServer(), session.packName(), allBytes);
             player.sendSystemMessage(Component.literal("数据包上传完成：" + installed.getFileName()));
+            triggerServerReload(player.getServer(), player);
         } catch (IOException ex) {
             player.sendSystemMessage(Component.literal("上传失败：" + ex.getMessage()));
         }
@@ -223,6 +225,17 @@ public final class DataPackUploadManager {
         } finally {
             Files.deleteIfExists(tempZip);
         }
+    }
+
+    private static void triggerServerReload(MinecraftServer server, ServerPlayer player) {
+        player.sendSystemMessage(Component.literal("正在重载数据包与玩法配置..."));
+        PackRepository repository = server.getPackRepository();
+        server.reloadResources(repository.getSelectedIds())
+                .thenRun(() -> server.execute(() -> player.sendSystemMessage(Component.literal("数据包已重载生效。"))))
+                .exceptionally(error -> {
+                    server.execute(() -> player.sendSystemMessage(Component.literal("数据包重载失败：" + error.getMessage())));
+                    return null;
+                });
     }
 
     private static void unzipSecure(Path zipPath, Path targetDir) throws IOException {

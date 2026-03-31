@@ -1,0 +1,97 @@
+{
+  "items": {
+    "horrorcooked9:crystal_tomato": {
+      "nutrition": 3,
+      "saturation_mod": 0.5
+    },
+    "horrorcooked9:crystal_tomato_sliced": {
+      "nutrition": 3,
+      "saturation_mod": 0.5
+    },
+    "horrorcooked9:crystal_salad": {
+      "nutrition": 6,
+      "saturation_mod": 0.8
+    },
+    "horrorcooked9:crystal_tomato_ketchup": {
+      "nutrition": 2,
+      "saturation_mod": 0.3
+    },
+    "horrorcooked9:squid_salad": {
+      "nutrition": 7,
+      "saturation_mod": 0.9
+    },
+    "horrorcooked9:ocean_salad": {
+      "nutrition": 7,
+      "saturation_mod": 0.9
+    },
+    "horrorcooked9:crispy_nori": {
+      "nutrition": 5,
+      "saturation_mod": 0.6
+    },
+    "horrorcooked9:catfish_skewer": {
+      "nutrition": 8,
+      "saturation_mod": 1.0
+    },
+    "horrorcooked9:far_realm_gem_bowl": {
+      "nutrition": 4,
+      "saturation_mod": 0.6,
+      "uses": 2,
+      "bar_color": "#4CD3FF"
+    },
+    "horrorcooked9:kale": {
+      "nutrition": 2,
+      "saturation_mod": 0.2
+    },
+    "horrorcooked9:kale_leaves": {
+      "nutrition": 3,
+      "saturation_mod": 0.35
+    },
+    "horrorcooked9:bracken_fern": {
+      "nutrition": 2,
+      "saturation_mod": 0.2
+    },
+    "horrorcooked9:pickled_bracken_fern": {
+      "nutrition": 4,
+      "saturation_mod": 0.6
+    },
+    "horrorcooked9:pineapple": {
+      "nutrition": 3,
+      "saturation_mod": 0.3
+    },
+    "horrorcooked9:pineapple_chunks": {
+      "nutrition": 4,
+      "saturation_mod": 0.5
+    },
+    "horrorcooked9:parasitic_bean_sprouts": {
+      "nutrition": 7,
+      "saturation_mod": 1.0,
+      "inventory_consume_effect": {
+        "enabled": true,
+        "effect": "horrorcooked9:diarrhea",
+        "duration_per_count_ticks": 100,
+        "max_duration_ticks": 2400,
+        "max_amplifier": 4,
+        "ambient": false,
+        "visible": true
+      }
+    },
+    "horrorcooked9:happy_rice": {
+      "nutrition": 5,
+      "saturation_mod": 0.8
+    },
+    "horrorcooked9:happy_cooked_rice": {
+      "nutrition": 8,
+      "saturation_mod": 1.2
+    }
+  },
+  "diarrhea_events": {
+    "proc_interval_ticks": 200,
+    "base_penalty_duration_ticks": 40,
+    "stop_duration_ticks": 40,
+    "sound_only_chance": 0.75,
+    "drop_distance": 2.0,
+    "drop_vertical_offset": 0.4,
+    "drop_speed": 0.2,
+    "drop_upward_speed": 0.2
+  }
+}

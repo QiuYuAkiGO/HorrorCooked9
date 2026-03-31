@@ -36,6 +36,8 @@ public final class SharpeningStoneConfig {
 
     @Nullable
     private static volatile BalanceData classpathCache;
+    @Nullable
+    private static volatile BalanceData runtimeSnapshot;
 
     private SharpeningStoneConfig() {
     }
@@ -79,7 +81,22 @@ public final class SharpeningStoneConfig {
         return data.stonesByItemId.getOrDefault(itemId, data.defaultProfile);
     }
 
+    public static void reload(@Nullable ResourceManager resourceManager) {
+        if (resourceManager != null) {
+            Optional<BalanceData> loaded = loadFromResourceManager(resourceManager);
+            if (loaded.isPresent()) {
+                runtimeSnapshot = loaded.get();
+                return;
+            }
+        }
+        runtimeSnapshot = loadFromClasspathCached();
+    }
+
     private static BalanceData load(@Nullable ResourceManager resourceManager) {
+        BalanceData current = runtimeSnapshot;
+        if (current != null) {
+            return current;
+        }
         if (resourceManager != null) {
             Optional<BalanceData> loaded = loadFromResourceManager(resourceManager);
             if (loaded.isPresent()) {

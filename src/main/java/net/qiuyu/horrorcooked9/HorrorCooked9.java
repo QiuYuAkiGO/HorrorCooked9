@@ -16,11 +16,14 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.qiuyu.horrorcooked9.armor.renderer.CaptainHatRenderer;
 import net.qiuyu.horrorcooked9.blocks.renderer.ChoppingBoardRenderer;
 import net.qiuyu.horrorcooked9.blocks.renderer.SaladBowlRenderer;
+import net.qiuyu.horrorcooked9.client.ClientRuntimeBridgeImpl;
+import net.qiuyu.horrorcooked9.common.ClientRuntimeBridge;
 import net.qiuyu.horrorcooked9.config.ModServerConfig;
 import net.qiuyu.horrorcooked9.network.ModNetworking;
 import net.qiuyu.horrorcooked9.register.ModBlockEntities;
@@ -64,6 +67,10 @@ public class HorrorCooked9
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
+        @SubscribeEvent
+        public static void onClientSetup(final FMLClientSetupEvent event) {
+            event.enqueueWork(() -> ClientRuntimeBridge.install(new ClientRuntimeBridgeImpl()));
+        }
 
         @SubscribeEvent
         public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event)

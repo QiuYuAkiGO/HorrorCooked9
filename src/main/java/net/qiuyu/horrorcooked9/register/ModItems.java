@@ -2,6 +2,7 @@ package net.qiuyu.horrorcooked9.register;
 
 
 import net.minecraft.world.food.FoodProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,6 +27,7 @@ import net.qiuyu.horrorcooked9.items.custom.PineappleChunksItem;
 import net.qiuyu.horrorcooked9.items.custom.PineappleItem;
 import net.qiuyu.horrorcooked9.items.custom.SaladBowlItem;
 import net.qiuyu.horrorcooked9.items.custom.ShitItem;
+import net.qiuyu.horrorcooked9.gameplay.food.FoodRuntimeConfigs;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS =
@@ -50,59 +52,59 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(1).durability(384)));
 
     public static final RegistryObject<Item> CRYSTAL_TOMATO = ITEMS.register("crystal_tomato",
-            () -> new CrystalTomato(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(0.5f).build())));
+            () -> new CrystalTomato(new Item.Properties().food(jsonFood("horrorcooked9:crystal_tomato", 3, 0.5f))));
 
     public static final RegistryObject<Item> CRYSTAL_TOMATO_SLICED = ITEMS.register("crystal_tomato_sliced",
-            () -> new CrystalTomatoSlicedItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(0.5f).build())));
+            () -> new CrystalTomatoSlicedItem(new Item.Properties().food(jsonFood("horrorcooked9:crystal_tomato_sliced", 3, 0.5f))));
 
     public static final RegistryObject<Item> CRYSTAL_SALAD = ITEMS.register("crystal_salad",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(6).saturationMod(0.8f).build())));
+            () -> new Item(new Item.Properties().food(jsonFood("horrorcooked9:crystal_salad", 6, 0.8f))));
 
     public static final RegistryObject<Item> CRYSTAL_TOMATO_KETCHUP = ITEMS.register("crystal_tomato_ketchup",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0.3f).build())));
+            () -> new Item(new Item.Properties().food(jsonFood("horrorcooked9:crystal_tomato_ketchup", 2, 0.3f))));
 
     public static final RegistryObject<Item> SQUID_SALAD = ITEMS.register("squid_salad",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(0.9f).build())));
+            () -> new Item(new Item.Properties().food(jsonFood("horrorcooked9:squid_salad", 7, 0.9f))));
 
     public static final RegistryObject<Item> OCEAN_SALAD = ITEMS.register("ocean_salad",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(0.9f).build())));
+            () -> new Item(new Item.Properties().food(jsonFood("horrorcooked9:ocean_salad", 7, 0.9f))));
 
     public static final RegistryObject<Item> CRISPY_NORI = ITEMS.register("crispy_nori",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationMod(0.6f).build())));
+            () -> new Item(new Item.Properties().food(jsonFood("horrorcooked9:crispy_nori", 5, 0.6f))));
 
     public static final RegistryObject<Item> CATFISH_SKEWER = ITEMS.register("catfish_skewer",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1.0f).build())));
+            () -> new Item(new Item.Properties().food(jsonFood("horrorcooked9:catfish_skewer", 8, 1.0f))));
 
     public static final RegistryObject<Item> FAR_REALM_GEM_BOWL = ITEMS.register("far_realm_gem_bowl",
             () -> new FarRealmGemBowlItem(new Item.Properties().stacksTo(1)
-                    .food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6f).build())));
+                    .food(jsonFood("horrorcooked9:far_realm_gem_bowl", 4, 0.6f))));
 
     public static final RegistryObject<Item> KALE = ITEMS.register("kale",
-            () -> new KaleItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build())));
+            () -> new KaleItem(new Item.Properties().food(jsonFood("horrorcooked9:kale", 2, 0.2f))));
 
     public static final RegistryObject<Item> KALE_LEAVES = ITEMS.register("kale_leaves",
-            () -> new KaleLeavesItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(0.35f).build())));
+            () -> new KaleLeavesItem(new Item.Properties().food(jsonFood("horrorcooked9:kale_leaves", 3, 0.35f))));
 
     public static final RegistryObject<Item> BRACKEN_FERN = ITEMS.register("bracken_fern",
-            () -> new BrackenFernItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(2).saturationMod(0.2f).build())));
+            () -> new BrackenFernItem(new Item.Properties().food(jsonFood("horrorcooked9:bracken_fern", 2, 0.2f))));
 
     public static final RegistryObject<Item> PICKLED_BRACKEN_FERN = ITEMS.register("pickled_bracken_fern",
-            () -> new PickledBrackenFernItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.6f).build())));
+            () -> new PickledBrackenFernItem(new Item.Properties().food(jsonFood("horrorcooked9:pickled_bracken_fern", 4, 0.6f))));
 
     public static final RegistryObject<Item> PINEAPPLE = ITEMS.register("pineapple",
-            () -> new PineappleItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(0.3f).build())));
+            () -> new PineappleItem(new Item.Properties().food(jsonFood("horrorcooked9:pineapple", 3, 0.3f))));
 
     public static final RegistryObject<Item> PINEAPPLE_CHUNKS = ITEMS.register("pineapple_chunks",
-            () -> new PineappleChunksItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(4).saturationMod(0.5f).build())));
+            () -> new PineappleChunksItem(new Item.Properties().food(jsonFood("horrorcooked9:pineapple_chunks", 4, 0.5f))));
 
     public static final RegistryObject<Item> PARASITIC_BEAN_SPROUTS = ITEMS.register("parasitic_bean_sprouts",
-            () -> new ParasiticBeanSproutsItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(7).saturationMod(1.0f).build())));
+            () -> new ParasiticBeanSproutsItem(new Item.Properties().food(jsonFood("horrorcooked9:parasitic_bean_sprouts", 7, 1.0f))));
 
     public static final RegistryObject<Item> HAPPY_RICE = ITEMS.register("happy_rice",
-            () -> new HappyRiceItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationMod(0.8f).build())));
+            () -> new HappyRiceItem(new Item.Properties().food(jsonFood("horrorcooked9:happy_rice", 5, 0.8f))));
 
     public static final RegistryObject<Item> HAPPY_COOKED_RICE = ITEMS.register("happy_cooked_rice",
-            () -> new HappyCookedRiceItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(8).saturationMod(1.2f).build())));
+            () -> new HappyCookedRiceItem(new Item.Properties().food(jsonFood("horrorcooked9:happy_cooked_rice", 8, 1.2f))));
 
     public static final RegistryObject<Item> SHIT = ITEMS.register("shit",
             () -> new ShitItem(new Item.Properties()));
@@ -115,5 +117,13 @@ public class ModItems {
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
+    }
+
+    private static FoodProperties jsonFood(String itemId, int fallbackNutrition, float fallbackSaturation) {
+        return FoodRuntimeConfigs.resolveRegistrationFoodProperties(
+                ResourceLocation.parse(itemId),
+                fallbackNutrition,
+                fallbackSaturation
+        );
     }
 }

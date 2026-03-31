@@ -2,23 +2,35 @@ package net.qiuyu.horrorcooked9.items.custom;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.qiuyu.horrorcooked9.gameplay.food.FoodRuntimeConfigs;
 import net.qiuyu.horrorcooked9.register.ModEffects;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class ParasiticBeanSproutsItem extends Item {
-    private static final int MAX_AMPLIFIER = 4;
-    private static final int MAX_DURATION_TICKS = 120 * 20;
-    private static final int DURATION_PER_COUNT_TICKS = 5 * 20;
+    private static final ResourceLocation ITEM_ID = ResourceLocation.parse("horrorcooked9:parasitic_bean_sprouts");
+    private static final FoodRuntimeConfigs.InventoryConsumeEffectProfile DEFAULT_PROFILE =
+            new FoodRuntimeConfigs.InventoryConsumeEffectProfile(
+                    true,
+                    ResourceLocation.parse("horrorcooked9:diarrhea"),
+                    5 * 20,
+                    120 * 20,
+                    4,
+                    false,
+                    true
+            );
 
     public ParasiticBeanSproutsItem(Properties pProperties) {
         super(pProperties);
@@ -65,8 +77,18 @@ public class ParasiticBeanSproutsItem extends Item {
         int count = triggerStack.getCount();
         triggerStack.shrink(count);
 
-        int amplifier = Math.min(Math.max(count - 1, 0), MAX_AMPLIFIER);
-        int durationTicks = Math.min(count * DURATION_PER_COUNT_TICKS, MAX_DURATION_TICKS);
-        player.addEffect(new MobEffectInstance(ModEffects.DIARRHEA.get(), durationTicks, amplifier, false, true));
+        FoodRuntimeConfigs.InventoryConsumeEffectProfile profile = FoodRuntimeConfigs.resolveInventoryConsumeEffect(ITEM_ID, DEFAULT_PROFILE);
+        if (!profile.enabled()) {
+            return;
+        }
+
+        MobEffect effect = ForgeRegistries.MOB_EFFECTS.getValue(profile.effectId());
+        if (effect == null) {
+            effect = ModEffects.DIARRHEA.get();
+        }
+
+        int amplifier = Math.min(Math.max(count - 1, 0), profile.maxAmplifier());
+        int durationTicks = Math.min(count * profile.durationPerCountTicks(), profile.maxDurationTicks());
+        player.addEffect(new MobEffectInstance(effect, durationTicks, amplifier, profile.ambient(), profile.visible()));
     }
 }
