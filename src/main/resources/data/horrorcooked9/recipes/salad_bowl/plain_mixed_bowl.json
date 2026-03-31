@@ -1,0 +1,31 @@
+{
+  "type": "horrorcooked9:salad_bowl",
+  "ingredients_in_order": [
+    {
+      "item": "horrorcooked9:kale_leaves"
+    },
+    {
+      "item": "horrorcooked9:crystal_tomato_sliced"
+    },
+    {
+      "item": "horrorcooked9:pineapple_chunks"
+    },
+    {
+      "item": "horrorcooked9:pickled_bracken_fern"
+    }
+  ],
+  "mixing_tool": {
+    "tag": "horrorcooked9:salad_mixing_tools"
+  },
+  "serving_container": {
+    "item": "minecraft:bowl"
+  },
+  "result": {
+    "item": "horrorcooked9:colorful_palette",
+    "count": 1,
+    "food_uses": 4
+  },
+  "stir_count": 3,
+  "servings": 2,
+  "mix_success_chance": 1.0
+}

@@ -20,6 +20,8 @@ import net.qiuyu.horrorcooked9.register.ModRecipes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * 沙拉碗配方定义。
@@ -37,10 +39,11 @@ public class SaladBowlRecipe implements Recipe<Container> {
     private final boolean servingsMatchRepeatableCount;
     private final float mixingSuccessChance;
     private final int stirCount;
+    private final List<Integer> stirCheckpoints;
 
     public SaladBowlRecipe(ResourceLocation id, NonNullList<SaladBowlIngredientSlot> ingredientSlots, Ingredient mixingTool,
                            Ingredient servingContainer, ItemStack result, int servings, boolean servingsMatchRepeatableCount,
-                           float mixingSuccessChance, int stirCount) {
+                           float mixingSuccessChance, int stirCount, List<Integer> stirCheckpoints) {
         this.id = id;
         this.ingredientSlots = ingredientSlots;
         this.mixingTool = mixingTool;
@@ -50,8 +53,10 @@ public class SaladBowlRecipe implements Recipe<Container> {
         this.servingsMatchRepeatableCount = servingsMatchRepeatableCount;
         this.mixingSuccessChance = mixingSuccessChance;
         this.stirCount = stirCount;
+        this.stirCheckpoints = Collections.unmodifiableList(new ArrayList<>(stirCheckpoints));
 
         validateRepeatableSlotPlacement(id, ingredientSlots);
+        validateStirCheckpoints(id, this.stirCheckpoints);
     }
 
     public List<SaladBowlIngredientSlot> getIngredientSlots() {
@@ -84,6 +89,38 @@ public class SaladBowlRecipe implements Recipe<Container> {
 
     public int getStirCount() {
         return stirCount;
+    }
+
+    public List<Integer> getStirCheckpoints() {
+        return stirCheckpoints;
+    }
+
+    public boolean hasCustomStirCheckpoints() {
+        return !stirCheckpoints.isEmpty();
+    }
+
+    public boolean requiresStirNow(int ingredientCount, int completedStirPhases, boolean isExactMatch) {
+        if (completedStirPhases < 0) {
+            return false;
+        }
+        if (stirCheckpoints.isEmpty()) {
+            return completedStirPhases == 0 && isExactMatch;
+        }
+        if (completedStirPhases >= stirCheckpoints.size()) {
+            return false;
+        }
+        int nextCheckpoint = stirCheckpoints.get(completedStirPhases);
+        return ingredientCount >= nextCheckpoint;
+    }
+
+    public boolean canCompleteNow(List<ItemStack> sequence, int completedStirPhases) {
+        if (!SaladRecipeMatcher.isExactMatch(sequence, this)) {
+            return false;
+        }
+        if (stirCheckpoints.isEmpty()) {
+            return completedStirPhases >= 1;
+        }
+        return completedStirPhases >= stirCheckpoints.size();
     }
 
     @Override
@@ -162,6 +199,19 @@ public class SaladBowlRecipe implements Recipe<Container> {
         }
     }
 
+    private static void validateStirCheckpoints(ResourceLocation recipeId, List<Integer> checkpoints) {
+        int last = 0;
+        for (Integer checkpoint : checkpoints) {
+            if (checkpoint == null || checkpoint < 1) {
+                throw new IllegalArgumentException("stir_checkpoints values must be >= 1 for recipe " + recipeId);
+            }
+            if (checkpoint <= last) {
+                throw new IllegalArgumentException("stir_checkpoints must be strictly increasing for recipe " + recipeId);
+            }
+            last = checkpoint;
+        }
+    }
+
     /**
      * 沙拉碗配方的 JSON/网络序列化器。
      */
@@ -200,9 +250,10 @@ public class SaladBowlRecipe implements Recipe<Container> {
             float mixingSuccessChance = GsonHelper.getAsFloat(json, "mix_success_chance", 1.0F);
             mixingSuccessChance = Math.max(0.0F, Math.min(1.0F, mixingSuccessChance));
             int stirCount = Math.max(1, Math.min(10, GsonHelper.getAsInt(json, "stir_count", 1)));
+            List<Integer> stirCheckpoints = parseStirCheckpoints(json);
 
             return new SaladBowlRecipe(recipeId, ingredientSlots, mixingTool, servingContainer, result, servings,
-                    servingsMatchRepeatableCount, mixingSuccessChance, stirCount);
+                    servingsMatchRepeatableCount, mixingSuccessChance, stirCount, stirCheckpoints);
         }
 
         @Override
@@ -224,9 +275,14 @@ public class SaladBowlRecipe implements Recipe<Container> {
             boolean servingsMatchRepeatableCount = buffer.readBoolean();
             float mixingSuccessChance = buffer.readFloat();
             int stirCount = buffer.readVarInt();
+            int checkpointSize = buffer.readVarInt();
+            List<Integer> stirCheckpoints = new ArrayList<>(checkpointSize);
+            for (int i = 0; i < checkpointSize; i++) {
+                stirCheckpoints.add(buffer.readVarInt());
+            }
 
             return new SaladBowlRecipe(recipeId, ingredientSlots, mixingTool, servingContainer, result, servings,
-                    servingsMatchRepeatableCount, mixingSuccessChance, stirCount);
+                    servingsMatchRepeatableCount, mixingSuccessChance, stirCount, stirCheckpoints);
         }
 
         @Override
@@ -246,6 +302,22 @@ public class SaladBowlRecipe implements Recipe<Container> {
             buffer.writeBoolean(recipe.servingsMatchRepeatableCount);
             buffer.writeFloat(recipe.mixingSuccessChance);
             buffer.writeVarInt(recipe.stirCount);
+            buffer.writeVarInt(recipe.stirCheckpoints.size());
+            for (Integer checkpoint : recipe.stirCheckpoints) {
+                buffer.writeVarInt(checkpoint);
+            }
+        }
+
+        private List<Integer> parseStirCheckpoints(JsonObject json) {
+            if (!json.has("stir_checkpoints")) {
+                return List.of();
+            }
+            JsonArray checkpointsJson = GsonHelper.getAsJsonArray(json, "stir_checkpoints");
+            List<Integer> checkpoints = new ArrayList<>(checkpointsJson.size());
+            for (JsonElement element : checkpointsJson) {
+                checkpoints.add(element.getAsInt());
+            }
+            return checkpoints;
         }
 
         private Ingredient parseIngredientForSlot(JsonObject slotObject) {

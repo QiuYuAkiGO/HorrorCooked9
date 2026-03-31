@@ -27,16 +27,24 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.CRYSTAL_SALAD.get(), "宝石沙拉");
         add(ModItems.CRYSTAL_TOMATO_KETCHUP.get(), "宝石番茄酱");
         add(ModItems.SQUID_SALAD.get(), "鱿鱼沙拉");
-        add(ModItems.OCEAN_SALAD.get(), "海洋沙拉");
+        add(ModItems.TWIN_CORPSE_PARASITIC_SALAD.get(), "双尸寄生拌");
         add(ModItems.CRISPY_NORI.get(), "香脆海苔");
         add(ModItems.CATFISH_SKEWER.get(), "鲶鱼烤串");
         add(ModItems.FAR_REALM_GEM_BOWL.get(), "远境宝石碗");
+        add(ModItems.TRANQUIL_MIXED_RICE.get(), "静谧拌饭");
+        add(ModItems.COLORFUL_PALETTE.get(), "缤纷色彩");
+        add(ModItems.TRANQUIL_BASE.get(), "宁静半成品");
+        add(ModItems.TRANQUILITY.get(), "宁静");
         add(ModItems.KALE.get(), "【静谧甘蓝】");
         add(ModItems.KALE_LEAVES.get(), "【静谧甘蓝菜叶】");
+        add(ModItems.KALE_PUREE.get(), "【静谧菜泥】");
         add(ModItems.BRACKEN_FERN.get(), "【尸苔蕨菜】");
         add(ModItems.PICKLED_BRACKEN_FERN.get(), "【腌制尸苔蕨菜叶】");
         add(ModItems.PINEAPPLE.get(), "【远境蜜菠萝】");
         add(ModItems.PINEAPPLE_CHUNKS.get(), "【远境蜜菠萝切块】");
+        add(ModItems.ROASTED_PINEAPPLE_CHUNKS.get(), "烤菠萝切块");
+        add(ModItems.PINEAPPLE_FRIED_RICE_BASE.get(), "菠萝炒饭半成品");
+        add(ModItems.PINEAPPLE_FRIED_RICE.get(), "菠萝炒饭");
         add(ModItems.PARASITIC_BEAN_SPROUTS.get(), "【寄生豆芽】");
         add(ModItems.HAPPY_RICE.get(), "【快乐米】");
         add(ModItems.HAPPY_COOKED_RICE.get(), "【快乐米饭】");
@@ -46,7 +54,9 @@ public class ModLangGenZhCn extends LanguageProvider {
 
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "船长的激励");
         add(ModEffects.DIARRHEA.get(), "腹泻");
+        add(ModEffects.PINEAPPLE_POWER_I.get(), "菠萝力量1");
         add("effect.horrorcooked9.diarrhea.events.desc.1", "效果持续期间，每 10 秒有 75% 几率仅发出不适感；否则短暂获得缓慢与挖掘疲劳、极强短暂缓慢，并伴随爆炸声在身后掉落粪便。");
+        add("effect.horrorcooked9.pineapple_power_i.desc.1", "持续期间：受到任何直接攻击时反击伤害来源 3 点生命值，并提高 3 点生命值上限。");
 
         add("item.horrorcooked9.crystal_tomato.desc.1", "原产自地球的作物，被偷到异星后就莫名其妙地变异，硬度堪比\"水滴\"。");
         add("item.horrorcooked9.crystal_tomato.desc.2", "有目击者称，在太空中看异星外围，只能看到红色的球体。");
@@ -90,6 +100,21 @@ public class ModLangGenZhCn extends LanguageProvider {
 
         add("item.horrorcooked9.happy_cooked_rice.desc.1", "煮熟过后的快乐稻米，味道千里飘香。");
         add("item.horrorcooked9.happy_cooked_rice.desc.2", "味道好极了，是千家万户的首选。");
+        add("item.horrorcooked9.twin_corpse_parasitic_salad.desc.1", "满碗管饱的尸苔蕨菜，让调味料无处可逃");
+        add("item.horrorcooked9.twin_corpse_parasitic_salad.desc.2", "虽然从颜色上不太好看，但鲜香味绝对不会让你失望");
+        add("item.horrorcooked9.twin_corpse_parasitic_salad.desc.3", "不必去思考它的生长环境，以及碗内的视线");
+        add("item.horrorcooked9.tranquil_mixed_rice.desc.1", "最早由一些农户开创的吃法");
+        add("item.horrorcooked9.tranquil_mixed_rice.desc.2", "后续被演变成一种特色料理");
+        add("item.horrorcooked9.tranquil_mixed_rice.desc.3", "静谧甘蓝菜泥让每个米粒都像星星般闪耀");
+        add("item.horrorcooked9.tranquility.desc.1", "静谧甘蓝铺在底部，在上面点缀蜜菠萝块");
+        add("item.horrorcooked9.tranquility.desc.2", "甘蓝菜泥和鸡蛋搅拌后在上面画上图案");
+        add("item.horrorcooked9.tranquility.desc.3", "整道菜给人带来一种寂静般的冷冽气息");
+        add("item.horrorcooked9.colorful_palette.desc.1", "由丰富的蔬菜和水果制成的拼盘");
+        add("item.horrorcooked9.colorful_palette.desc.2", "颜色艳丽，令人胃口大开");
+        add("item.horrorcooked9.colorful_palette.desc.3", "不必在意里面的材料都是什么");
+        add("item.horrorcooked9.colorful_palette.desc.4", "你现在只需要将它们吃进胃里");
+        add("item.horrorcooked9.pineapple_fried_rice.desc.1", "由新鲜的远境蜜菠萝搭配上上好的隔夜饭炒制而成");
+        add("item.horrorcooked9.pineapple_fried_rice.desc.2", "炒饭上面的黄色果肉不断地散发出诱惑的香气");
 
         add("book.horrorcooked9.guide.name", "恐怖烹饪手册");
         add("book.horrorcooked9.guide.landing", "欢迎来到 Horror Cooked 9。本手册会带你快速了解基础料理流程。");

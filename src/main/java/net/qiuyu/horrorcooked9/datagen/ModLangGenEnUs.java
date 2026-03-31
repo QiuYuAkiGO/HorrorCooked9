@@ -24,16 +24,24 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.CRYSTAL_SALAD.get(), "Crystal Salad");
         add(ModItems.CRYSTAL_TOMATO_KETCHUP.get(), "Crystal Tomato Ketchup");
         add(ModItems.SQUID_SALAD.get(), "Squid Salad");
-        add(ModItems.OCEAN_SALAD.get(), "Ocean Salad");
+        add(ModItems.TWIN_CORPSE_PARASITIC_SALAD.get(), "Twin-Corpse Parasitic Salad");
         add(ModItems.CRISPY_NORI.get(), "Crispy Nori");
         add(ModItems.CATFISH_SKEWER.get(), "Catfish Skewer");
         add(ModItems.FAR_REALM_GEM_BOWL.get(), "Far Realm Gem Bowl");
+        add(ModItems.TRANQUIL_MIXED_RICE.get(), "Tranquil Mixed Rice");
+        add(ModItems.COLORFUL_PALETTE.get(), "Colorful Palette");
+        add(ModItems.TRANQUIL_BASE.get(), "Tranquil Base");
+        add(ModItems.TRANQUILITY.get(), "Tranquility");
         add(ModItems.KALE.get(), "[Kale]");
         add(ModItems.KALE_LEAVES.get(), "[Kale Leaves]");
+        add(ModItems.KALE_PUREE.get(), "[Kale Puree]");
         add(ModItems.BRACKEN_FERN.get(), "[Bracken Fern]");
         add(ModItems.PICKLED_BRACKEN_FERN.get(), "[Pickled Bracken Fern]");
         add(ModItems.PINEAPPLE.get(), "[Pineapple]");
         add(ModItems.PINEAPPLE_CHUNKS.get(), "[Pineapple Chunks]");
+        add(ModItems.ROASTED_PINEAPPLE_CHUNKS.get(), "Roasted Pineapple Chunks");
+        add(ModItems.PINEAPPLE_FRIED_RICE_BASE.get(), "Pineapple Fried Rice Base");
+        add(ModItems.PINEAPPLE_FRIED_RICE.get(), "Pineapple Fried Rice");
         add(ModItems.PARASITIC_BEAN_SPROUTS.get(), "[Parasitic Bean Sprouts]");
         add(ModItems.HAPPY_RICE.get(), "[Happy Rice]");
         add(ModItems.HAPPY_COOKED_RICE.get(), "[Happy Cooked Rice]");
@@ -41,7 +49,9 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.CAPTAIN_HAT.get(), "Captain Hat");
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "Captain's Inspiration");
         add(ModEffects.DIARRHEA.get(), "Diarrhea");
+        add(ModEffects.PINEAPPLE_POWER_I.get(), "Pineapple Power I");
         add("effect.horrorcooked9.diarrhea.events.desc.1", "While active, every 10 seconds there is a 75% chance of only an unpleasant sound; otherwise you gain Slowness and Mining Fatigue for a short time, briefly receive extreme Slowness, hear a blast, and feces drop behind you.");
+        add("effect.horrorcooked9.pineapple_power_i.desc.1", "While active: retaliates 3 health to direct attackers and increases max health by 3.");
         add(ModBlocks.FOODWORKS_TABLE.get(), "Foodworks Table");
 
         add("item.horrorcooked9.crystal_tomato.desc.1", "A crop from Earth that mutated on an alien world, hard as a \"Droplet\".");
@@ -87,6 +97,21 @@ public class ModLangGenEnUs extends LanguageProvider {
 
         add("item.horrorcooked9.happy_cooked_rice.desc.1", "Cooked Happy Rice whose aroma travels for miles.");
         add("item.horrorcooked9.happy_cooked_rice.desc.2", "It tastes amazing and is the top choice of countless families.");
+        add("item.horrorcooked9.twin_corpse_parasitic_salad.desc.1", "A filling bowl of corpse-moss bracken that leaves no seasoning behind.");
+        add("item.horrorcooked9.twin_corpse_parasitic_salad.desc.2", "Its color may look rough, but the savory aroma will not disappoint.");
+        add("item.horrorcooked9.twin_corpse_parasitic_salad.desc.3", "No need to think about where it grew, or the gaze inside the bowl.");
+        add("item.horrorcooked9.tranquil_mixed_rice.desc.1", "This way of eating was first created by a few farmers.");
+        add("item.horrorcooked9.tranquil_mixed_rice.desc.2", "Later, it evolved into a signature dish.");
+        add("item.horrorcooked9.tranquil_mixed_rice.desc.3", "Tranquil kale puree makes every grain of rice shine like a star.");
+        add("item.horrorcooked9.tranquility.desc.1", "A bed of tranquil kale topped with honey pineapple chunks.");
+        add("item.horrorcooked9.tranquility.desc.2", "Kale puree and egg are mixed, then patterned across the top.");
+        add("item.horrorcooked9.tranquility.desc.3", "The whole dish gives off a silent, icy atmosphere.");
+        add("item.horrorcooked9.colorful_palette.desc.1", "A platter made from a rich mix of vegetables and fruit.");
+        add("item.horrorcooked9.colorful_palette.desc.2", "Its vivid colors spark the appetite instantly.");
+        add("item.horrorcooked9.colorful_palette.desc.3", "No need to worry about what every ingredient is.");
+        add("item.horrorcooked9.colorful_palette.desc.4", "Right now, you only need to eat them.");
+        add("item.horrorcooked9.pineapple_fried_rice.desc.1", "Stir-fried from fresh Far-Honey pineapple and premium overnight rice.");
+        add("item.horrorcooked9.pineapple_fried_rice.desc.2", "The yellow fruit on top keeps releasing an irresistible aroma.");
 
         add("book.horrorcooked9.guide.name", "Horror Cooked Handbook");
         add("book.horrorcooked9.guide.landing", "Welcome to Horror Cooked 9. This handbook introduces your first tools and dishes.");

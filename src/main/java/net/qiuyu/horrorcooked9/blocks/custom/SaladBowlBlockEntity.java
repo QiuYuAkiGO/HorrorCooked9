@@ -29,6 +29,7 @@ public class SaladBowlBlockEntity extends BlockEntity {
     private ItemStack resultStack = ItemStack.EMPTY;
     private int remainingServings;
     private int initialServings;
+    private int completedStirPhases;
 
     public SaladBowlBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.SALAD_BOWL_BE.get(), pPos, pBlockState);
@@ -75,6 +76,15 @@ public class SaladBowlBlockEntity extends BlockEntity {
         return initialServings;
     }
 
+    public int getCompletedStirPhases() {
+        return completedStirPhases;
+    }
+
+    public void markOneStirPhaseCompleted() {
+        completedStirPhases++;
+        markAndSync();
+    }
+
     public void completeWith(SaladBowlRecipe recipe) {
         this.completed = true;
         this.currentRecipeId = recipe.getId();
@@ -114,6 +124,7 @@ public class SaladBowlBlockEntity extends BlockEntity {
         resultStack = ItemStack.EMPTY;
         remainingServings = 0;
         initialServings = 0;
+        completedStirPhases = 0;
         markAndSync();
     }
 
@@ -149,6 +160,7 @@ public class SaladBowlBlockEntity extends BlockEntity {
         pTag.putBoolean("Completed", completed);
         pTag.putInt("RemainingServings", remainingServings);
         pTag.putInt("InitialServings", initialServings);
+        pTag.putInt("CompletedStirPhases", completedStirPhases);
         if (!resultStack.isEmpty()) {
             pTag.put("ResultStack", resultStack.save(new CompoundTag()));
         }
@@ -172,6 +184,7 @@ public class SaladBowlBlockEntity extends BlockEntity {
         completed = pTag.getBoolean("Completed");
         remainingServings = pTag.getInt("RemainingServings");
         initialServings = pTag.getInt("InitialServings");
+        completedStirPhases = pTag.getInt("CompletedStirPhases");
         resultStack = pTag.contains("ResultStack")
                 ? ItemStack.of(pTag.getCompound("ResultStack"))
                 : ItemStack.EMPTY;

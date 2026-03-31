@@ -1,3 +1,14 @@
+HorrorCooked9 项目更新记录
+====
+- 2026-03-31
+  - 重做沙拉碗搅拌流程：新增 `stir_checkpoints` 分段搅拌机制，方块实体持久化记录已完成搅拌阶段，支持在“精确匹配”与“前缀匹配”之间追踪目标配方；在需要搅拌时会锁定继续投料，避免流程错乱。
+  - 更新搅拌网络与结算：`StirResultPacket` 与 `SaladBowlItem` 改为按阶段推进，只有达到配方要求阶段后才完成成品，绿色结果仍可获得额外份数。
+  - 新增与调整食物/料理：移除 `ocean_salad`，新增 `twin_corpse_parasitic_salad`、`bracken_sprouts_bowl`、`colorful_palette`、`tranquil_base`、`tranquility`、`kale_puree`、`roasted_pineapple_chunks`、`pineapple_fried_rice_base`、`pineapple_fried_rice`、`tranquil_mixed_rice` 等物品与对应资源。
+  - 新增配方与多阶段料理链：补充 `bracken_sprouts_bowl`、`plain_mixed_bowl`、`tranquil_base`、`tranquil_mixed_rice`、`pineapple_fried_rice_base`、`twin_corpse_parasitic_salad` 等沙拉碗配方。
+  - 新增状态效果“菠萝力量 I”：提供最大生命值加成，并在受直接攻击时反击伤害；菠萝炒饭会提供该效果。
+  - 调整“寄生豆芽”机制：从“按持有数量一次性触发”改为“主/副手持续持有时周期触发”，每 5 秒造成少量魔法伤害并施加腹泻效果。
+  - 同步本地化与创造栏：更新中英文名称/描述与效果文本，创造模式页签物品列表同步为新料理体系。
+
 1.20.1 Changelog
 47.4
 ====
