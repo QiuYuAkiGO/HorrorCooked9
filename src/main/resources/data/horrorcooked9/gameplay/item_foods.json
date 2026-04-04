@@ -8,6 +8,14 @@
       "nutrition": 3,
       "saturation_mod": 0.5
     },
+    "horrorcooked9:candied_crystal_tomato_slices": {
+      "nutrition": 4,
+      "saturation_mod": 0.55
+    },
+    "horrorcooked9:roasted_crystal_tomato": {
+      "nutrition": 5,
+      "saturation_mod": 0.65
+    },
     "horrorcooked9:crystal_salad": {
       "nutrition": 6,
       "saturation_mod": 0.8
@@ -74,6 +82,10 @@
         "ambient": false,
         "visible": true
       }
+    },
+    "horrorcooked9:dried_bean_sprouts": {
+      "nutrition": 3,
+      "saturation_mod": 0.4
     },
     "horrorcooked9:happy_rice": {
       "nutrition": 5,

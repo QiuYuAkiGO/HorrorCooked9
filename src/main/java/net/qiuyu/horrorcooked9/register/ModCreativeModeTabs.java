@@ -26,6 +26,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SALAD_TONGS.get());
                         output.accept(ModItems.CRYSTAL_TOMATO.get());
                         output.accept(ModItems.CRYSTAL_TOMATO_SLICED.get());
+                        output.accept(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get());
+                        output.accept(ModItems.ROASTED_CRYSTAL_TOMATO.get());
                         output.accept(ModItems.CRYSTAL_SALAD.get());
                         output.accept(ModItems.CRYSTAL_TOMATO_KETCHUP.get());
                         output.accept(ModItems.SQUID_SALAD.get());
@@ -37,6 +39,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.TRANQUIL_MIXED_RICE.get());
                         output.accept(ModItems.COLORFUL_PALETTE.get());
                         output.accept(ModItems.TRANQUIL_BASE.get());
+                        output.accept(ModItems.FRIED_TRANQUIL_BASE.get());
                         output.accept(ModItems.TRANQUILITY.get());
                         output.accept(ModItems.KALE.get());
                         output.accept(ModItems.KALE_LEAVES.get());
@@ -47,8 +50,10 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.PINEAPPLE_CHUNKS.get());
                         output.accept(ModItems.ROASTED_PINEAPPLE_CHUNKS.get());
                         output.accept(ModItems.PINEAPPLE_FRIED_RICE_BASE.get());
+                        output.accept(ModItems.FRIED_PINEAPPLE_FRIED_RICE_BASE.get());
                         output.accept(ModItems.PINEAPPLE_FRIED_RICE.get());
                         output.accept(ModItems.PARASITIC_BEAN_SPROUTS.get());
+                        output.accept(ModItems.DRIED_BEAN_SPROUTS.get());
                         output.accept(ModItems.HAPPY_RICE.get());
                         output.accept(ModItems.HAPPY_COOKED_RICE.get());
                         output.accept(ModItems.SHIT.get());

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:item/rabbit_stew"
+    "layer0": "horrorcooked9:item/pineapple_fried_rice_base"
   }
 }

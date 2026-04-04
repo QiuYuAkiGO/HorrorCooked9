@@ -16,21 +16,29 @@ import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.armor.custom.CaptainHat;
 import net.qiuyu.horrorcooked9.items.custom.BrackenFernItem;
 import net.qiuyu.horrorcooked9.items.custom.BrackenSproutsBowlItem;
+import net.qiuyu.horrorcooked9.items.custom.CandiedCrystalTomatoSlicesItem;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
 import net.qiuyu.horrorcooked9.items.custom.CrystalTomato;
+import net.qiuyu.horrorcooked9.items.custom.CrystalTomatoKetchupItem;
 import net.qiuyu.horrorcooked9.items.custom.CrystalTomatoSlicedItem;
+import net.qiuyu.horrorcooked9.items.custom.DriedBeanSproutsItem;
 import net.qiuyu.horrorcooked9.items.custom.FarRealmGemBowlItem;
+import net.qiuyu.horrorcooked9.items.custom.FriedPineappleFriedRiceBaseItem;
+import net.qiuyu.horrorcooked9.items.custom.FriedTranquilBaseItem;
 import net.qiuyu.horrorcooked9.items.custom.KaleItem;
 import net.qiuyu.horrorcooked9.items.custom.KaleLeavesItem;
+import net.qiuyu.horrorcooked9.items.custom.KalePureeItem;
 import net.qiuyu.horrorcooked9.items.custom.ParasiticBeanSproutsItem;
 import net.qiuyu.horrorcooked9.items.custom.PineappleFriedRiceItem;
 import net.qiuyu.horrorcooked9.items.custom.PlainMixedBowlItem;
 import net.qiuyu.horrorcooked9.items.custom.PickledBrackenFernItem;
+import net.qiuyu.horrorcooked9.items.custom.RoastedCrystalTomatoItem;
 import net.qiuyu.horrorcooked9.items.custom.HappyRiceItem;
 import net.qiuyu.horrorcooked9.items.custom.HappyCookedRiceItem;
 import net.qiuyu.horrorcooked9.items.custom.PineappleChunksItem;
 import net.qiuyu.horrorcooked9.items.custom.PineappleItem;
 import net.qiuyu.horrorcooked9.items.custom.SaladBowlItem;
+import net.qiuyu.horrorcooked9.items.custom.RoastedPineappleChunksItem;
 import net.qiuyu.horrorcooked9.items.custom.ShitItem;
 import net.qiuyu.horrorcooked9.gameplay.food.FoodRuntimeConfigs;
 import net.qiuyu.horrorcooked9.items.custom.TranquilMixedRiceItem;
@@ -65,11 +73,17 @@ public class ModItems {
     public static final RegistryObject<Item> CRYSTAL_TOMATO_SLICED = ITEMS.register("crystal_tomato_sliced",
             () -> new CrystalTomatoSlicedItem(new Item.Properties().food(jsonFood("horrorcooked9:crystal_tomato_sliced", 3, 0.5f))));
 
+    public static final RegistryObject<Item> CANDIED_CRYSTAL_TOMATO_SLICES = ITEMS.register("candied_crystal_tomato_slices",
+            () -> new CandiedCrystalTomatoSlicesItem(new Item.Properties().food(jsonFood("horrorcooked9:candied_crystal_tomato_slices", 4, 0.55f))));
+
+    public static final RegistryObject<Item> ROASTED_CRYSTAL_TOMATO = ITEMS.register("roasted_crystal_tomato",
+            () -> new RoastedCrystalTomatoItem(new Item.Properties().food(jsonFood("horrorcooked9:roasted_crystal_tomato", 5, 0.65f))));
+
     public static final RegistryObject<Item> CRYSTAL_SALAD = ITEMS.register("crystal_salad",
             () -> new Item(new Item.Properties().food(jsonFood("horrorcooked9:crystal_salad", 6, 0.8f))));
 
     public static final RegistryObject<Item> CRYSTAL_TOMATO_KETCHUP = ITEMS.register("crystal_tomato_ketchup",
-            () -> new Item(new Item.Properties().food(jsonFood("horrorcooked9:crystal_tomato_ketchup", 2, 0.3f))));
+            () -> new CrystalTomatoKetchupItem(new Item.Properties().food(jsonFood("horrorcooked9:crystal_tomato_ketchup", 2, 0.3f))));
 
     public static final RegistryObject<Item> SQUID_SALAD = ITEMS.register("squid_salad",
             () -> new Item(new Item.Properties().food(jsonFood("horrorcooked9:squid_salad", 7, 0.9f))));
@@ -107,6 +121,9 @@ public class ModItems {
     public static final RegistryObject<Item> TRANQUIL_BASE = ITEMS.register("tranquil_base",
             () -> new Item(new Item.Properties().stacksTo(1)));
 
+    public static final RegistryObject<Item> FRIED_TRANQUIL_BASE = ITEMS.register("fried_tranquil_base",
+            () -> new FriedTranquilBaseItem(new Item.Properties().stacksTo(1)));
+
     public static final RegistryObject<Item> TRANQUILITY = ITEMS.register("tranquility",
             () -> new TranquilityItem(new Item.Properties().stacksTo(1)
                     .food(new FoodProperties.Builder()
@@ -122,7 +139,7 @@ public class ModItems {
             () -> new KaleLeavesItem(new Item.Properties().food(jsonFood("horrorcooked9:kale_leaves", 3, 0.35f))));
 
     public static final RegistryObject<Item> KALE_PUREE = ITEMS.register("kale_puree",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(0.35f).build())));
+            () -> new KalePureeItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(3).saturationMod(0.35f).build())));
 
     public static final RegistryObject<Item> BRACKEN_FERN = ITEMS.register("bracken_fern",
             () -> new BrackenFernItem(new Item.Properties().food(jsonFood("horrorcooked9:bracken_fern", 2, 0.2f))));
@@ -137,10 +154,13 @@ public class ModItems {
             () -> new PineappleChunksItem(new Item.Properties().food(jsonFood("horrorcooked9:pineapple_chunks", 4, 0.5f))));
 
     public static final RegistryObject<Item> ROASTED_PINEAPPLE_CHUNKS = ITEMS.register("roasted_pineapple_chunks",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationMod(0.7f).build())));
+            () -> new RoastedPineappleChunksItem(new Item.Properties().food(new FoodProperties.Builder().nutrition(5).saturationMod(0.7f).build())));
 
     public static final RegistryObject<Item> PINEAPPLE_FRIED_RICE_BASE = ITEMS.register("pineapple_fried_rice_base",
             () -> new Item(new Item.Properties().stacksTo(1)));
+
+    public static final RegistryObject<Item> FRIED_PINEAPPLE_FRIED_RICE_BASE = ITEMS.register("fried_pineapple_fried_rice_base",
+            () -> new FriedPineappleFriedRiceBaseItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> PINEAPPLE_FRIED_RICE = ITEMS.register("pineapple_fried_rice",
             () -> new PineappleFriedRiceItem(new Item.Properties().stacksTo(1)
@@ -148,6 +168,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> PARASITIC_BEAN_SPROUTS = ITEMS.register("parasitic_bean_sprouts",
             () -> new ParasiticBeanSproutsItem(new Item.Properties().food(jsonFood("horrorcooked9:parasitic_bean_sprouts", 7, 1.0f))));
+
+    public static final RegistryObject<Item> DRIED_BEAN_SPROUTS = ITEMS.register("dried_bean_sprouts",
+            () -> new DriedBeanSproutsItem(new Item.Properties().food(jsonFood("horrorcooked9:dried_bean_sprouts", 3, 0.4f))));
 
     public static final RegistryObject<Item> HAPPY_RICE = ITEMS.register("happy_rice",
             () -> new HappyRiceItem(new Item.Properties().food(jsonFood("horrorcooked9:happy_rice", 5, 0.8f))));

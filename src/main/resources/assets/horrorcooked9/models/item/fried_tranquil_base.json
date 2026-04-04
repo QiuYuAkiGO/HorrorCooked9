@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "horrorcooked9:item/far_realm_gem_bowl"
+    "layer0": "horrorcooked9:item/fried_tranquil_base"
   }
 }

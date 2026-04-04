@@ -21,6 +21,8 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.WOODEN_SALAD_SPOON.get(), "Wooden Salad Spoon");
         add(ModItems.CRYSTAL_TOMATO.get(), "[Crystal Tomato]");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "[Crystal Tomato Sliced]");
+        add(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get(), "Candied Crystal Tomato Slices");
+        add(ModItems.ROASTED_CRYSTAL_TOMATO.get(), "Roasted Crystal Tomato");
         add(ModItems.CRYSTAL_SALAD.get(), "Crystal Salad");
         add(ModItems.CRYSTAL_TOMATO_KETCHUP.get(), "Crystal Tomato Ketchup");
         add(ModItems.SQUID_SALAD.get(), "Squid Salad");
@@ -31,6 +33,7 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.TRANQUIL_MIXED_RICE.get(), "Tranquil Mixed Rice");
         add(ModItems.COLORFUL_PALETTE.get(), "Colorful Palette");
         add(ModItems.TRANQUIL_BASE.get(), "Tranquil Base");
+        add(ModItems.FRIED_TRANQUIL_BASE.get(), "Fried Tranquil Base");
         add(ModItems.TRANQUILITY.get(), "Tranquility");
         add(ModItems.KALE.get(), "[Kale]");
         add(ModItems.KALE_LEAVES.get(), "[Kale Leaves]");
@@ -41,8 +44,10 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.PINEAPPLE_CHUNKS.get(), "[Pineapple Chunks]");
         add(ModItems.ROASTED_PINEAPPLE_CHUNKS.get(), "Roasted Pineapple Chunks");
         add(ModItems.PINEAPPLE_FRIED_RICE_BASE.get(), "Pineapple Fried Rice Base");
+        add(ModItems.FRIED_PINEAPPLE_FRIED_RICE_BASE.get(), "Fried Pineapple Fried Rice Base");
         add(ModItems.PINEAPPLE_FRIED_RICE.get(), "Pineapple Fried Rice");
         add(ModItems.PARASITIC_BEAN_SPROUTS.get(), "[Parasitic Bean Sprouts]");
+        add(ModItems.DRIED_BEAN_SPROUTS.get(), "Dried Bean Sprouts");
         add(ModItems.HAPPY_RICE.get(), "[Happy Rice]");
         add(ModItems.HAPPY_COOKED_RICE.get(), "[Happy Cooked Rice]");
         add(ModItems.SHIT.get(), "Shit");
@@ -59,6 +64,21 @@ public class ModLangGenEnUs extends LanguageProvider {
         add("item.horrorcooked9.crystal_tomato.desc.3", "Handled properly, it is delicious and nourishing... if you can cut it open.");
         add("item.horrorcooked9.crystal_tomato_sliced.desc.1", "Slices of a full Gem Tomato, cut only with tremendous effort.");
         add("item.horrorcooked9.crystal_tomato_sliced.desc.2", "Its shell is still hard, but the flesh inside is soft, tangy-sweet, and sandy-textured.");
+        add("item.horrorcooked9.candied_crystal_tomato_slices.desc.1", "People found that pickling changes the chemistry of the Gem Tomato skin, softening the shell.");
+        add("item.horrorcooked9.candied_crystal_tomato_slices.desc.2", "Though it turns wrinkled after pickling, its unique flavor makes the sweetness stand out even more.");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.1", "After endless research into the Gem Tomato's outer-layer structure and composition, scientists reached a key result.");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.2", "With sustained heating, the surface undergoes a chain of physical changes.");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.3", "It finally behaves like tempered glass, shattering into powder the moment external force hits it.");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.4", "This dish was first born in ");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.4.bold", "a researcher's bedroom");
+        add("item.horrorcooked9.crystal_tomato_ketchup.desc.1", "Someone discovered that the Gem Tomato shell denatures under heat, and thus Crystal Tomato Ketchup was born.");
+        add("item.horrorcooked9.crystal_tomato_ketchup.desc.2", "No objection to eating ketchup directly, but it is best used as an ingredient for other dishes.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.1", "There are two stories about where this method came from.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.2", "One says a grower found the warehouse completely overrun by bean sprouts, then devised this way to shrink their bulk.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.3", "The other says a grower tried to burn off surplus sprouts and discovered the method by accident.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.4", "Whichever story is true, this is still a pretty good approach.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.5", "After drying, the sprouts turn crisp, aromatic, and make an excellent ingredient.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.6", "At least... that strange gaze is gone now.");
 
         add("item.horrorcooked9.pickled_bracken_fern.desc.1", "Someone mixed leftover fern with seasonings; days later, a rich aroma rose from it.");
         add("item.horrorcooked9.pickled_bracken_fern.desc.2", "Its porous leaves absorb flavor deeply and hold many kinds of spices.");
@@ -73,6 +93,8 @@ public class ModLangGenEnUs extends LanguageProvider {
 
         add("item.horrorcooked9.kale_leaves.desc.1", "Simple cut leaves from Tranquil Kale.");
         add("item.horrorcooked9.kale_leaves.desc.2", "Very mild raw taste; best paired with other ingredients.");
+        add("item.horrorcooked9.kale_puree.desc.1", "Shredded and pressed from Tranquil Kale leaves; after several Earth weeks, the leaves become a mildly viscous vegetable puree.");
+        add("item.horrorcooked9.kale_puree.desc.2", "Perfect with rice-you could eat ten bowls.");
 
         add("item.horrorcooked9.pineapple.desc.1", "Looks like a normal pineapple from afar, only strange up close.");
         add("item.horrorcooked9.pineapple.desc.2", "Sweet, juicy, and tender, yet the better it tastes, the nearer the void feels.");
@@ -82,6 +104,10 @@ public class ModLangGenEnUs extends LanguageProvider {
 
         add("item.horrorcooked9.pineapple_chunks.desc.1", "Cut chunks of Far-Honey Pineapple still pretending to be ordinary fruit.");
         add("item.horrorcooked9.pineapple_chunks.desc.2", "Juicier and more tempting, yet strangely colder and more addictive.");
+        add("item.horrorcooked9.roasted_pineapple_chunks.desc.1", "After obtaining food, humans always fall back on the most primitive method: roasting.");
+        add("item.horrorcooked9.roasted_pineapple_chunks.desc.2", "Far-Honey Pineapple is no exception; once roasted, its aroma becomes even stronger.");
+        add("item.horrorcooked9.roasted_pineapple_chunks.desc.3", "But after smelling it for too long, hallucinations seem to appear.");
+        add("item.horrorcooked9.roasted_pineapple_chunks.desc.4", "This phenomenon is still under investigation.");
         add("item.horrorcooked9.far_realm_gem_bowl.desc.1", "It looks like an ordinary fruit platter.");
         add("item.horrorcooked9.far_realm_gem_bowl.desc.2", "Its sparkling shine is dazzling.");
         add("item.horrorcooked9.far_realm_gem_bowl.desc.3", "Juicy and tempting, sweet with a gentle tang.");
