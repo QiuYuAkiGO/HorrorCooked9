@@ -23,6 +23,9 @@
 ### 变更
 - 模组版本号：`0.1.2` -> `0.1.3`。
 
+### 提交记录（`0.1.2` -> `0.1.3`）
+- `38494c2` feat: crystal tomato processing, Far Realm gem bowl, fried bases & salad recipes (v0.1.3)
+
 ### 开发者提示
 - 本版本以新食材链与沙拉碗配方扩展为主，食物数值可在 `item_foods.json` 中继续数据驱动调整。
 
