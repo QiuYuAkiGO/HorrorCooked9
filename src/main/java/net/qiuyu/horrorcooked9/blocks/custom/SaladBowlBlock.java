@@ -22,6 +22,7 @@ import net.qiuyu.horrorcooked9.gameplay.salad.SaladBowlRecipe;
 import net.qiuyu.horrorcooked9.gameplay.salad.SaladRecipeMatcher;
 import net.qiuyu.horrorcooked9.gameplay.stir.StirToolBalanceConfig;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
+import net.qiuyu.horrorcooked9.register.ModItems;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,6 +56,9 @@ public class SaladBowlBlock extends BaseEntityBlock {
         BlockEntity be = pLevel.getBlockEntity(pPos);
         if (!(be instanceof SaladBowlBlockEntity bowlEntity)) {
             return InteractionResult.PASS;
+        }
+        if (pPlayer.isShiftKeyDown()) {
+            return handleSneakPickup(pLevel, pPos, pPlayer, pHand, pHit, bowlEntity);
         }
         if (!pLevel.getBlockState(pPos.below()).is(ModBlocks.FOODWORKS_TABLE.get())) {
             return InteractionResult.PASS;
@@ -126,6 +130,40 @@ public class SaladBowlBlock extends BaseEntityBlock {
             heldItem.shrink(1);
         }
 
+        return InteractionResult.CONSUME;
+    }
+
+    private InteractionResult handleSneakPickup(Level level, BlockPos pos, Player player, InteractionHand hand,
+                                                BlockHitResult hitResult, SaladBowlBlockEntity bowlEntity) {
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+        ItemStack heldItem = player.getItemInHand(hand);
+        if (!player.getAbilities().mayBuild || !player.mayUseItemAt(pos, hitResult.getDirection(), heldItem)) {
+            return InteractionResult.PASS;
+        }
+
+        List<ItemStack> drops = new ArrayList<>();
+        if (bowlEntity.isCompleted()) {
+            ItemStack serving = bowlEntity.getResultStack();
+            if (!serving.isEmpty()) {
+                int servings = bowlEntity.getRemainingServings();
+                for (int i = 0; i < servings; i++) {
+                    drops.add(serving.copy());
+                }
+            }
+            bowlEntity.resetAll();
+        } else {
+            drops.addAll(bowlEntity.dumpIngredientsAndReset());
+        }
+
+        dropItems(level, pos, drops);
+        level.removeBlock(pos, false);
+
+        ItemStack bowlToReturn = new ItemStack(ModItems.SALAD_BOWL.get());
+        if (!player.getInventory().add(bowlToReturn)) {
+            player.drop(bowlToReturn, false);
+        }
         return InteractionResult.CONSUME;
     }
 
