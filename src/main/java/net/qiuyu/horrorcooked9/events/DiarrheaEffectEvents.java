@@ -13,6 +13,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.gameplay.food.FoodRuntimeConfigs;
+import net.qiuyu.horrorcooked9.register.ModGameRules;
 import net.qiuyu.horrorcooked9.register.ModEffects;
 import net.qiuyu.horrorcooked9.register.ModItems;
 
@@ -20,6 +21,7 @@ import net.qiuyu.horrorcooked9.register.ModItems;
 public class DiarrheaEffectEvents {
     /** Translation key describing periodic diarrhea logic in {@link #onPlayerTick} (tooltip/guide). */
     public static final String LANG_EVENTS_DESC = "effect.horrorcooked9.diarrhea.events.desc.1";
+    private static final String SHIT_TAG = "shit";
 
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
@@ -33,6 +35,16 @@ public class DiarrheaEffectEvents {
         }
 
         MobEffectInstance diarrhea = player.getEffect(ModEffects.DIARRHEA.get());
+        if (ModGameRules.isShelter9SupportEnabled(player.level())) {
+            if (diarrhea != null) {
+                if (!player.getTags().contains(SHIT_TAG)) {
+                    player.addTag(SHIT_TAG);
+                }
+            } else if (player.getTags().contains(SHIT_TAG)) {
+                player.removeTag(SHIT_TAG);
+            }
+        }
+
         if (diarrhea == null) {
             return;
         }

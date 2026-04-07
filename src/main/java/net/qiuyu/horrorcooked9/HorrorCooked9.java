@@ -30,6 +30,7 @@ import net.qiuyu.horrorcooked9.register.ModBlockEntities;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModCreativeModeTabs;
 import net.qiuyu.horrorcooked9.register.ModEffects;
+import net.qiuyu.horrorcooked9.register.ModGameRules;
 import net.qiuyu.horrorcooked9.register.ModItems;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
 
@@ -60,6 +61,7 @@ public class HorrorCooked9
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
+        event.enqueueWork(ModGameRules::bootstrap);
         ModNetworking.register();
     }
 
