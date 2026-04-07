@@ -41,6 +41,7 @@ public class ModItemModelGen extends ItemModelProvider {
         itemGeneratedModel(ModItems.HAPPY_RICE.get(), resourceItem("happy_rice"));
         itemGeneratedModel(ModItems.HAPPY_COOKED_RICE.get(), resourceItem("happy_cooked_rice"));
         itemGeneratedModel(ModItems.SHIT.get(), resourceItem("shit"));
+        itemGeneratedModel(ModItems.GOLDEN_SHIT.get(), resourceItem("shit"));
     }
 
     private void eggItem(Item item) {

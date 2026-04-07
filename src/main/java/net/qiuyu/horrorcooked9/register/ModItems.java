@@ -25,6 +25,7 @@ import net.qiuyu.horrorcooked9.items.custom.DriedBeanSproutsItem;
 import net.qiuyu.horrorcooked9.items.custom.FarRealmGemBowlItem;
 import net.qiuyu.horrorcooked9.items.custom.FriedPineappleFriedRiceBaseItem;
 import net.qiuyu.horrorcooked9.items.custom.FriedTranquilBaseItem;
+import net.qiuyu.horrorcooked9.items.custom.GoldenShitItem;
 import net.qiuyu.horrorcooked9.items.custom.KaleItem;
 import net.qiuyu.horrorcooked9.items.custom.KaleLeavesItem;
 import net.qiuyu.horrorcooked9.items.custom.KalePureeItem;
@@ -180,6 +181,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> SHIT = ITEMS.register("shit",
             () -> new ShitItem(new Item.Properties()));
+
+    public static final RegistryObject<Item> GOLDEN_SHIT = ITEMS.register("golden_shit",
+            () -> new GoldenShitItem(new Item.Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> CAPTAIN_HAT = ITEMS.register("captain_hat",
             () -> new CaptainHat(CaptainHat.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));

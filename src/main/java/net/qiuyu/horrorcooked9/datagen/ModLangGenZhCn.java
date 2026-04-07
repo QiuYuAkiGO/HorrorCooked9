@@ -54,6 +54,7 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.HAPPY_RICE.get(), "【快乐米】");
         add(ModItems.HAPPY_COOKED_RICE.get(), "【快乐米饭】");
         add(ModItems.SHIT.get(), "粪便");
+        add(ModItems.GOLDEN_SHIT.get(), "黄金粪便");
         add(ModItems.CAPTAIN_HAT.get(), "船长帽");
         add(ModBlocks.FOODWORKS_TABLE.get(), "手工料理台");
 

@@ -51,6 +51,7 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.HAPPY_RICE.get(), "[Happy Rice]");
         add(ModItems.HAPPY_COOKED_RICE.get(), "[Happy Cooked Rice]");
         add(ModItems.SHIT.get(), "Shit");
+        add(ModItems.GOLDEN_SHIT.get(), "Golden Shit");
         add(ModItems.CAPTAIN_HAT.get(), "Captain Hat");
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "Captain's Inspiration");
         add(ModEffects.DIARRHEA.get(), "Diarrhea");

@@ -57,6 +57,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.HAPPY_RICE.get());
                         output.accept(ModItems.HAPPY_COOKED_RICE.get());
                         output.accept(ModItems.SHIT.get());
+                        output.accept(ModItems.GOLDEN_SHIT.get());
                         output.accept(ModItems.CAPTAIN_HAT.get());
                         output.accept(ModItems.FOODWORKS_TABLE.get());
                     })
