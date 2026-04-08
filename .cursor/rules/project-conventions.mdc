@@ -1,0 +1,36 @@
+---
+description: HorrorCooked9 项目约定，适用于所有代码与资源变更
+globs:
+alwaysApply: true
+---
+
+# 项目基本信息
+
+- mod_id: `horrorcooked9`
+- Java 根包: `net.qiuyu.horrorcooked9`
+- Minecraft 1.20.1 / Forge 47.x（Parchment mappings）
+- 模组主类: `HorrorCooked9.java`（根包下）
+
+# 命名与目录
+
+遵循 `docs/naming-conventions.md`：
+- 资源 ID / Tag / JSON key / 文件名一律 `lower_snake_case`
+- 身份标签用 `chef`（禁用 `cook`）；数据包网络域用 `datapack`（禁用 `develop`）
+- 类后缀：方块 `*Block`、方块实体 `*BlockEntity`、网络包 `*Packet`、配置 `*Config`
+
+# 跨层边界
+
+- 服务端代码不得 import `net.qiuyu.horrorcooked9.client.*`
+- `common/` 放桥接接口，`client/` 放实现
+
+# 文档同步
+
+- 新增或修改 Gameplay JSON 时，检查 `docs/developer-gameplay.md` 中对应条目的「当前状态」是否需要更新
+- 发布新版本时，确保 `gradle.properties` 中 `mod_version` 与 `docs/changelog.md` 一致
+
+# 参考文档
+
+- 包与目录速查: `docs/developer-onboarding.md`
+- 玩法配置与扩展点: `docs/developer-gameplay.md`
+- 配置索引: `docs/config-index.md`
+- 全部文档索引: `docs/README.md`

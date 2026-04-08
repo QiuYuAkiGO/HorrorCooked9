@@ -14,13 +14,17 @@
 
 ## [0.1.3b] - 2026-04-08
 
+自 `bde13f8` 起至当前分支的累计说明如下（含玩法、版本号与文档）。
+
 ### 新增
 
-- 仓库根目录 `README.md`：模组简介、运行环境与构建命令、`docs/` 文档入口。
-- `docs/developer-onboarding.md`：Java 包职责、资源与数据包目录、跨层边界与模组主类入口的一页速查。
+- **Shelter9 联动**：新增游戏规则 `enableShelter9Support`（默认关闭），并在 `ModServerConfig` 中增加 `shelter9.Shelter9Support` 作为配置键缺失时的默认值；`ModGameRules.bootstrap()` 在初始化阶段完成规则注册。启用后，`DiarrheaEffectEvents` 会根据玩家是否持有腹泻效果，同步实体标签 `shit`，供与 Shelter9 侧逻辑衔接。
+- **物品「金屎」**（`GoldenShitItem`）：食用后在服务端延长或施加生命恢复 II 与伤害吸收；物品附魔闪光、可始终食用且为快速食物；已注册创造模式标签页、物品模型数据生成与中英本地化。
+- **文档**：仓库根目录 `README.md`（简介、环境与构建、`docs/` 入口）；`docs/developer-onboarding.md`（Java 包职责、资源与数据包路径、跨层边界与模组主类速查）。
 
 ### 变更
 
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3` 经 `0.1.3a` 调整为 `0.1.3b`（与发布标签一致）。
 - `docs/README.md`：明确玩家指南与实现规格的分工；补充 AI/Cursor 推荐阅读路径；文档索引增加 `changelog.md` 与 `developer-onboarding.md`。
 - `docs/developer-gameplay.md`：`item_foods.json` 的加载类与「当前状态」改为已落地（`FoodRuntimeConfigs`）；物品/流体标签说明与仓库现状一致。
 - `docs/config-index.md`：物品 Tag 描述（盛装容器、磨刀石等）与文档互链更新；补充指向玩法文档与 onboarding 的链接。
@@ -29,8 +33,16 @@
 - `docs/operations-runbook.md`：运维入口增加指向 `config-index.md` 的配置字段说明。
 - `docs/release-process.md`：与自动化说明互链；发布前检查项增加核对 `changelog.md` 与 `mod_version` 一致。
 
+### 提交记录（`bde13f8` -> `HEAD`）
+
+- `bde13f8` feat: add Shelter9 support via gamerule and server config
+- `416a9ac` feat: add Golden Shit item with custom effects and localization
+- `26e3404` chore: bump mod version to 0.1.3b in gradle properties
+- `d8f70a8` docs: add root README and developer onboarding, sync gameplay docs
+
 ### 开发者提示
 
+- Shelter9 相关行为以游戏规则为准，服务端配置仅作默认值；扩展腹泻/标签联动时注意仅在服务端逻辑中修改实体标签。
 - 改代码或扩展数据驱动字段时，优先以 `developer-gameplay.md` 与 `config-index.md` 为准，并用 `developer-onboarding.md` 定位包与资源路径。
 
 ## [0.1.3] - 2026-04-04
