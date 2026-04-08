@@ -19,8 +19,9 @@
 | `network/gameplay/` | 切割/搅拌小游戏结果包，由 `GameplayNetworkRegistrar` 注册 |
 | `network/datapack/` | 数据包上传通信，由 `DatapackNetworkRegistrar` 注册 |
 | `client/` | 客户端专有逻辑（`ClientHelper`、`DataPackUploadClient`、`ClientRuntimeBridgeImpl`） |
+| `client/screen/` | 小游戏 Screen（`ChopMinigameScreen`、`StirMinigameScreen`） |
+| `client/renderer/` | 方块实体渲染器与盔甲渲染层（`ChoppingBoardRenderer`、`SaladBowlRenderer`、`CaptainHatRenderer`） |
 | `common/` | 客户端桥接接口（`ClientRuntimeBridge`），服务端不应依赖 `client/` |
-| `armor/` | 盔甲渲染（船长帽等） |
 | `effects/` | 药水效果（菠萝力量、船长鼓舞） |
 | `datagen/` | 数据生成器（物品模型、多语言） |
 
@@ -40,9 +41,11 @@ Gameplay JSON 与加载类的对应关系详见 [developer-gameplay.md § 1](dev
 
 ## 跨层边界
 
-- `common/` 定义桥接接口，`client/` 提供实现——服务端代码不应 import `client.*`。
+- `common/` 定义桥接接口，`client/` 提供实现——`common/`、`network/`、`blocks/custom/` 等非客户端包禁止 import `client.*`。
+- 例外：`@Mod.EventBusSubscriber(value = Dist.CLIENT)` 注解的客户端事件类可引用客户端实现。
+- 凡依赖 `net.minecraft.client.*` 的 GUI / Screen / 渲染类，归入 `client/` 树下（`client/screen/`、`client/renderer/`）。
 - 网络包按业务域拆目录，不混用 `gameplay` 与 `datapack`。
-- 详见 [architecture-baseline-audit.md](architecture-baseline-audit.md) 中的跨层审计。
+- 详见 [architecture-baseline-audit.md](architecture-baseline-audit.md) 与 [phase1-boundary-guard.md](phase1-boundary-guard.md)。
 
 ## 入口类
 

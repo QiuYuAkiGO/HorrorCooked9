@@ -41,10 +41,18 @@
 
 并已在 `docs/README.md` 建立统一索引入口。
 
+## 1.4 客户端代码归位原则（0.1.3c 新增）
+
+凡依赖 `net.minecraft.client.*` 的 GUI / Screen / 渲染类，统一归入 `client/` 树下：
+
+- `client/screen/`：小游戏 Screen（`ChopMinigameScreen`、`StirMinigameScreen`）
+- `client/renderer/`：方块实体渲染器与盔甲渲染层（`ChoppingBoardRenderer`、`SaladBowlRenderer`、`CaptainHatRenderer`）
+
 ## 3. 执行检查清单
 
 - [x] 首批跨层依赖已切断（3 处）
 - [x] 客户端行为桥接层已注入
 - [x] 运维/发布/自动化文档入口已补齐
+- [x] 客户端 Screen 与 Renderer 归入 `client/` 树下（0.1.3c）
 - [ ] 追加 manifest + 脚本检查（Phase 2/3）
 - [ ] 将 `register` 做子域拆分（Phase 2）

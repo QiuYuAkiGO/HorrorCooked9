@@ -20,8 +20,10 @@ alwaysApply: true
 
 # 跨层边界
 
-- 服务端代码不得 import `net.qiuyu.horrorcooked9.client.*`
+- `common/`、`network/`、`blocks/custom/` 等非客户端包禁止 import `net.qiuyu.horrorcooked9.client.*`
+- 例外：`@Mod.EventBusSubscriber(value = Dist.CLIENT)` 注解的客户端事件类可引用客户端实现
 - `common/` 放桥接接口，`client/` 放实现
+- 凡依赖 `net.minecraft.client.*` 的 GUI / Screen / 渲染类，归入 `client/` 树下（`client/screen/`、`client/renderer/`）
 
 # 文档同步
 

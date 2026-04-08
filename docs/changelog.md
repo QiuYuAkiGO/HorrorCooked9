@@ -12,6 +12,33 @@
 
 ---
 
+## [0.1.3c] - 2026-04-08
+
+项目结构与规范化改进，无玩法功能变更。
+
+### 变更
+
+- **跨层边界规则统一**：对齐 `project-conventions.mdc` 与 `phase1-boundary-guard.md` 的客户端 import 规则，明确 `Dist.CLIENT` 场景例外，消除文档间矛盾。
+- **客户端代码归位**：将 `ChopMinigameScreen`、`StirMinigameScreen` 从 `gameplay/` 迁入 `client/screen/`；将 `ChoppingBoardRenderer`、`SaladBowlRenderer`、`CaptainHatRenderer` 从 `blocks/renderer/`、`armor/renderer/` 迁入 `client/renderer/`，统一"凡依赖 client API 均归入 client 树"的分层原则。
+- **命名规范完善**：注册入口命名从"二选一"改为按层定义（`register/` 用 `Mod*`，`network/` 用 `*Registrar`）。
+- **架构审计更新**：修正文档异味表中已过时的"入口缺口"结论，补充结构异味的当前处理状态，标记 `Untitled` 资源为已清理。
+
+### 新增
+
+- **PR 质量门 CI**：新增 `.github/workflows/pr-quality-gate.yml`，在 PR 提交时自动运行构建、跨层 import 检查与 gameplay 文件一致性校验（当前为 warning 级别）。
+- **测试策略文档**：`docs/testing.md`，定义最低测试要求与逐步引入计划。
+- **ADR 机制**：`docs/adr/` 目录，记录三项关键架构决策（ClientRuntimeBridge、网络域拆分、客户端代码归位）。
+
+### 修复
+
+- 删除语义不明的 `assets/horrorcooked9/Untitled` 文件。
+- 删除迁移后的空目录 `blocks/renderer/`、`armor/renderer/`。
+
+### 开发者提示
+
+- 新增客户端 Screen 或 Renderer 时，请直接创建在 `client/screen/` 或 `client/renderer/` 下。
+- PR 提交后 CI 会自动检查跨层 import 与 gameplay 文件一致性，当前为 warning 级别。
+
 ## [0.1.3b] - 2026-04-08
 
 自 `bde13f8` 起至当前分支的累计说明如下（含玩法、版本号与文档）。

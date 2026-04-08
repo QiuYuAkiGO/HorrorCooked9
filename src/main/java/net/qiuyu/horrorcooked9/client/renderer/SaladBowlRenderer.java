@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.blocks.renderer;
+package net.qiuyu.horrorcooked9.client.renderer;
 
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -83,8 +83,6 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
                 itemRenderer, level, light, true);
     }
 
-    // ---- ingredient rendering ----
-
     private void renderIngredients(List<ItemStack> ingredients, BlockPos pos, PoseStack poseStack,
                                    MultiBufferSource buffer, ItemRenderer itemRenderer,
                                    Level level, int light, boolean shuffled) {
@@ -125,8 +123,6 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
         }
     }
 
-    // ---- liquid disc with wobble ----
-
     private void renderLiquidDisc(SaladBowlBlockEntity blockEntity, float partialTick,
                                   PoseStack poseStack, MultiBufferSource buffer,
                                   int light, float baseHeight, int mixedColor) {
@@ -163,8 +159,6 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
                     .color(r, g, b, LIQUID_ALPHA).uv2(light).endVertex();
         }
     }
-
-    // ---- color computation ----
 
     /**
      * 完成态液体颜色与最终产物一致（物品着色 / 纹理主色）；无法解析时回退为配料混合色。
@@ -271,8 +265,6 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
         int b = Math.max(60, hash & 0xFF);
         return (r << 16) | (g << 8) | b;
     }
-
-    // ---- utility ----
 
     private float pseudoRandomFloat(long seed, float min, float max) {
         seed ^= (seed >>> 33);

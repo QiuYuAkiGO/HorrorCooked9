@@ -32,3 +32,5 @@
 | [changelog.md](changelog.md) | 版本变更记录 |
 | [developer-onboarding.md](developer-onboarding.md) | Java 包与资源目录一页速查地图 |
 | [phase1-boundary-guard.md](phase1-boundary-guard.md) | Phase 1 边界约束与文档补齐执行方案 |
+| [testing.md](testing.md) | 测试策略：最低要求、推荐类型与目录约定 |
+| [adr/](adr/) | 架构决策记录（ADR），按编号递增 |

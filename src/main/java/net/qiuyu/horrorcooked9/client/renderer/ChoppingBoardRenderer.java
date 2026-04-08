@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.blocks.renderer;
+package net.qiuyu.horrorcooked9.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -38,10 +38,8 @@ public class ChoppingBoardRenderer implements BlockEntityRenderer<ChoppingBoardB
 
         pPoseStack.pushPose();
 
-        // 移到方块中心
         pPoseStack.translate(0.5, 0.2, 0.5);
 
-        // 根据方块朝向旋转
         float yRot = switch (facing) {
             case SOUTH -> 180f;
             case WEST -> 90f;
@@ -50,16 +48,12 @@ public class ChoppingBoardRenderer implements BlockEntityRenderer<ChoppingBoardB
         };
         pPoseStack.mulPose(Axis.YP.rotationDegrees(yRot));
 
-        // 倒置：绕Z轴旋转180度，让刀刃朝上、刀柄朝下
         pPoseStack.mulPose(Axis.ZP.rotationDegrees(180f));
 
-        // 平放在砧板上：绕X轴旋转90度
         pPoseStack.mulPose(Axis.XP.rotationDegrees(90f));
 
-        // 缩放
         pPoseStack.scale(0.6f, 0.6f, 0.6f);
 
-        // 获取光照
         BlockPos pos = pBlockEntity.getBlockPos().above();
         int blockLight = level.getBrightness(LightLayer.BLOCK, pos);
         int skyLight = level.getBrightness(LightLayer.SKY, pos);

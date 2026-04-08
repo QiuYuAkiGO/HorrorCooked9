@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.gameplay.stir;
+package net.qiuyu.horrorcooked9.client.screen;
 
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
+import net.qiuyu.horrorcooked9.gameplay.stir.StirResult;
 import net.qiuyu.horrorcooked9.network.ModNetworking;
 import net.qiuyu.horrorcooked9.network.gameplay.StirResultPacket;
 import org.jetbrains.annotations.NotNull;
@@ -127,10 +128,8 @@ public class StirMinigameScreen extends Screen {
         int cx = this.width / 2;
         int cy = this.height / 2 + 10;
 
-        // 外边框
         guiGraphics.fill(cx - OUTER_RADIUS - 2, cy - OUTER_RADIUS - 2, cx + OUTER_RADIUS + 2, cy + OUTER_RADIUS + 2, 0xAA000000);
 
-        // 用极坐标采样填充转盘
         for (int angle = 0; angle < 360; angle++) {
             float localAngle = normalizeAngle(angle - currentAngle);
             StirResult segment = getResultForAngle(localAngle);
@@ -145,13 +144,11 @@ public class StirMinigameScreen extends Screen {
             }
         }
 
-        // 固定指针（上方）
         int px = cx;
         int py = cy - OUTER_RADIUS - 10;
         guiGraphics.fill(px - 3, py, px + 3, py + 8, 0xFFFFFFFF);
         guiGraphics.fill(px - 1, py + 8, px + 1, py + 12, 0xFFFFFFFF);
 
-        // 中心点
         guiGraphics.fill(cx - 3, cy - 3, cx + 3, cy + 3, 0xFFFFFFFF);
 
         int round = Math.min(roundResults.size() + 1, requiredStirCount);

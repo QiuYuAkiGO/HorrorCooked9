@@ -1,24 +1,26 @@
-# 自动化说明（最小版）
+# 自动化说明
 
-本文用于说明当前自动化能力与 Phase 1 的补充建议。发布流程详见 [release-process.md](release-process.md)。
+本文用于说明当前自动化能力与质量门配置。发布流程详见 [release-process.md](release-process.md)。
 
 ## 1. 当前已存在自动化
 
 | 名称 | 位置 | 作用 |
 | --- | --- | --- |
 | PR 合并自动构建并发布 | `.github/workflows/release-on-pr-merge.yml` | 合并后构建并上传 Release |
+| PR 质量门 | `.github/workflows/pr-quality-gate.yml` | PR 提交时自动构建、跨层 import 检查、gameplay 文件一致性校验 |
 
-## 2. 当前缺口
+## 2. PR 质量门说明（0.1.3c 新增）
 
-- 缺少文档与资源一致性校验。
-- 缺少跨层依赖约束检查（`common/network -> client`）。
+`.github/workflows/pr-quality-gate.yml` 包含三个并行 job：
 
-## 3. Phase 1 建议（低风险，规划中 — 尚未落地）
+- **build**：`gradlew build`，确保编译与测试通过。
+- **boundary-check**：扫描 `common/`、`network/gameplay/`、`network/datapack/`、`blocks/custom/` 是否存在对 `client.*` 的非法 import（当前为 warning，稳定后升级为 error）。
+- **gameplay-consistency**：检查已落地的 gameplay JSON 文件是否存在于 `data/horrorcooked9/gameplay/`（当前为 warning）。
 
-- 在 CI 中新增“只读检查”步骤：
-  - 检查 `docs/config-index.md` 声明的 gameplay JSON 是否存在。
-  - 检查非客户端层是否直接 import `net.qiuyu.horrorcooked9.client.*`。
-- 初期可先做告警（warning），稳定后再升级为失败（error）。
+## 3. 后续计划
+
+- 稳定运行后将 boundary-check 与 gameplay-consistency 从 warning 升级为 error。
+- 增加文档索引与资源清单的 manifest 校验。
 
 ## 4. 责任分工建议
 

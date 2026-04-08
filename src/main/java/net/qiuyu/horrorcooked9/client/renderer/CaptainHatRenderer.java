@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.armor.renderer;
+package net.qiuyu.horrorcooked9.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;

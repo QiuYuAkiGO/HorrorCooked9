@@ -1,0 +1,87 @@
+name: PR Quality Gate
+
+on:
+  pull_request:
+    branches: [master, main]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build (compile + test)
+        run: ./gradlew --no-daemon build
+
+  boundary-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check cross-layer imports
+        run: |
+          echo "Checking for forbidden cross-layer imports..."
+          FORBIDDEN_DIRS="common network/gameplay network/datapack blocks/custom"
+          BASE="src/main/java/net/qiuyu/horrorcooked9"
+          EXIT_CODE=0
+
+          for dir in $FORBIDDEN_DIRS; do
+            if [ -d "$BASE/$dir" ]; then
+              HITS=$(grep -rn 'import net\.qiuyu\.horrorcooked9\.client\.' "$BASE/$dir" || true)
+              if [ -n "$HITS" ]; then
+                echo "::warning::Forbidden client import found in $dir:"
+                echo "$HITS"
+                EXIT_CODE=1
+              fi
+            fi
+          done
+
+          if [ $EXIT_CODE -ne 0 ]; then
+            echo "::warning::Cross-layer import violations detected (warning only for now)."
+          else
+            echo "No cross-layer import violations found."
+          fi
+
+  gameplay-consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check gameplay JSON existence
+        run: |
+          echo "Checking declared gameplay JSON files..."
+          GAMEPLAY_DIR="src/main/resources/data/horrorcooked9/gameplay"
+          EXPECTED_FILES="stir_tool_balance.json sharpening_stones.json item_foods.json"
+          EXIT_CODE=0
+
+          for f in $EXPECTED_FILES; do
+            if [ ! -f "$GAMEPLAY_DIR/$f" ]; then
+              echo "::warning::Expected gameplay file missing: $GAMEPLAY_DIR/$f"
+              EXIT_CODE=1
+            fi
+          done
+
+          if [ $EXIT_CODE -ne 0 ]; then
+            echo "::warning::Some expected gameplay files are missing."
+          else
+            echo "All expected gameplay files present."
+          fi

@@ -1,4 +1,4 @@
-package net.qiuyu.horrorcooked9.gameplay.chopping;
+package net.qiuyu.horrorcooked9.client.screen;
 
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
@@ -8,6 +8,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoardBlockEntity;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopResult;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperMinigameRecipe;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperRecipeMatcher;
 import net.qiuyu.horrorcooked9.network.ModNetworking;
 import net.qiuyu.horrorcooked9.network.gameplay.ChopResultPacket;
 import org.jetbrains.annotations.NotNull;
@@ -105,9 +108,7 @@ public class ChopMinigameScreen extends Screen {
             }
             stopped = true;
             ChopResult result = getResultFromCursor();
-            // 发送结果到服务端
             ModNetworking.CHANNEL.sendToServer(new ChopResultPacket(boardPos, result));
-            // 关闭界面
             this.onClose();
             return true;
         }
@@ -135,7 +136,6 @@ public class ChopMinigameScreen extends Screen {
     public void render(@NotNull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         updateCursorByRenderTime();
 
-        // 不绘制背景暗化
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
         int centerX = this.width / 2;
@@ -143,10 +143,8 @@ public class ChopMinigameScreen extends Screen {
         int barLeft = centerX - BAR_WIDTH / 2;
         int barTop = centerY - BAR_HEIGHT / 2;
 
-        // 绘制进度条背景（黑色边框）
         guiGraphics.fill(barLeft - 2, barTop - 2, barLeft + BAR_WIDTH + 2, barTop + BAR_HEIGHT + 2, 0xFF000000);
 
-        // 绘制三个颜色区域（比例 6:3:1）
         float offset = 0;
         for (int i = 0; i < segmentColors.size(); i++) {
             int left = barLeft + (int)(BAR_WIDTH * offset);
@@ -155,11 +153,9 @@ public class ChopMinigameScreen extends Screen {
             guiGraphics.fill(left, barTop, right, barTop + BAR_HEIGHT, getColorForResult(segmentColors.get(i)));
         }
 
-        // 绘制光标（白色竖线）
         int cursorX = barLeft + (int)(BAR_WIDTH * cursorPos);
         guiGraphics.fill(cursorX - 1, barTop - 4, cursorX + 1, barTop + BAR_HEIGHT + 4, 0xFFFFFFFF);
 
-        // 绘制提示文字
         Component hint = hasRecipeConfig
                 ? Component.literal("点击左键停止光标!")
                 : Component.literal("该食材暂无切菜配方");
