@@ -28,6 +28,8 @@ public class SaladBowlBlockEntity extends BlockEntity {
     private boolean completed;
     private ItemStack resultStack = ItemStack.EMPTY;
     private int remainingServings;
+    private int initialServings;
+    private int completedStirPhases;
 
     public SaladBowlBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.SALAD_BOWL_BE.get(), pPos, pBlockState);
@@ -70,11 +72,26 @@ public class SaladBowlBlockEntity extends BlockEntity {
         return remainingServings;
     }
 
+    public int getInitialServings() {
+        return initialServings;
+    }
+
+    public int getCompletedStirPhases() {
+        return completedStirPhases;
+    }
+
+    public void markOneStirPhaseCompleted() {
+        completedStirPhases++;
+        markAndSync();
+    }
+
     public void completeWith(SaladBowlRecipe recipe) {
         this.completed = true;
         this.currentRecipeId = recipe.getId();
         this.resultStack = recipe.getResultStack();
-        this.remainingServings = recipe.getServings();
+        int resolvedServings = recipe.resolveServingsForCompletedSequence(addedIngredients);
+        this.remainingServings = resolvedServings;
+        this.initialServings = resolvedServings;
         markAndSync();
     }
 
@@ -94,6 +111,9 @@ public class SaladBowlBlockEntity extends BlockEntity {
             return;
         }
         remainingServings += extra;
+        if (remainingServings > initialServings) {
+            initialServings = remainingServings;
+        }
         markAndSync();
     }
 
@@ -103,6 +123,8 @@ public class SaladBowlBlockEntity extends BlockEntity {
         completed = false;
         resultStack = ItemStack.EMPTY;
         remainingServings = 0;
+        initialServings = 0;
+        completedStirPhases = 0;
         markAndSync();
     }
 
@@ -113,26 +135,6 @@ public class SaladBowlBlockEntity extends BlockEntity {
         }
         resetAll();
         return dropped;
-    }
-
-    public List<ItemStack> getBreakDrops() {
-        List<ItemStack> drops = new ArrayList<>();
-        if (completed && !resultStack.isEmpty() && remainingServings > 0) {
-            int total = resultStack.getCount() * remainingServings;
-            int maxStack = resultStack.getMaxStackSize();
-            while (total > 0) {
-                ItemStack stack = resultStack.copy();
-                stack.setCount(Math.min(maxStack, total));
-                drops.add(stack);
-                total -= stack.getCount();
-            }
-            return drops;
-        }
-
-        for (ItemStack ingredient : addedIngredients) {
-            drops.add(ingredient.copy());
-        }
-        return drops;
     }
 
     private void markAndSync() {
@@ -157,6 +159,8 @@ public class SaladBowlBlockEntity extends BlockEntity {
         }
         pTag.putBoolean("Completed", completed);
         pTag.putInt("RemainingServings", remainingServings);
+        pTag.putInt("InitialServings", initialServings);
+        pTag.putInt("CompletedStirPhases", completedStirPhases);
         if (!resultStack.isEmpty()) {
             pTag.put("ResultStack", resultStack.save(new CompoundTag()));
         }
@@ -179,6 +183,8 @@ public class SaladBowlBlockEntity extends BlockEntity {
                 : null;
         completed = pTag.getBoolean("Completed");
         remainingServings = pTag.getInt("RemainingServings");
+        initialServings = pTag.getInt("InitialServings");
+        completedStirPhases = pTag.getInt("CompletedStirPhases");
         resultStack = pTag.contains("ResultStack")
                 ? ItemStack.of(pTag.getCompound("ResultStack"))
                 : ItemStack.EMPTY;

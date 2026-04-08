@@ -1,0 +1,33 @@
+{
+  "type": "horrorcooked9:salad_bowl",
+  "ingredients_in_order": [
+    {
+      "item": "horrorcooked9:crystal_tomato_sliced"
+    },
+    {
+      "item": "horrorcooked9:kale_leaves"
+    },
+    {
+      "item": "horrorcooked9:pickled_bracken_fern"
+    },
+    {
+      "item": "horrorcooked9:pineapple_chunks"
+    },
+    {
+      "item": "horrorcooked9:kale_leaves"
+    }
+  ],
+  "mixing_tool": {
+    "item": "minecraft:stick"
+  },
+  "serving_container": {
+    "tag": "horrorcooked9:salad_serving_containers"
+  },
+  "result": {
+    "item": "horrorcooked9:catfish_skewer",
+    "count": 1
+  },
+  "stir_count": 5,
+  "servings": 1,
+  "mix_success_chance": 1.0
+}

@@ -1,0 +1,25 @@
+{
+  "type": "horrorcooked9:salad_bowl",
+  "ingredients_in_order": [
+    {
+      "item": "horrorcooked9:crystal_tomato_sliced",
+      "repeatable": true,
+      "min": 1,
+      "max": 64
+    }
+  ],
+  "mixing_tool": {
+    "tag": "horrorcooked9:salad_mixing_tools"
+  },
+  "serving_container": {
+    "tag": "horrorcooked9:salad_serving_containers"
+  },
+  "result": {
+    "item": "horrorcooked9:crystal_tomato_ketchup",
+    "count": 1
+  },
+  "stir_count": 2,
+  "servings": 1,
+  "servings_match_repeatable_count": true,
+  "mix_success_chance": 1.0
+}

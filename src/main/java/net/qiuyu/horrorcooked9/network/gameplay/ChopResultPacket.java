@@ -4,13 +4,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
 import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoardBlockEntity;
 import net.qiuyu.horrorcooked9.gameplay.chopping.ChopResult;
-import net.qiuyu.horrorcooked9.gameplay.chopping.IChoppable;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperMinigameRecipe;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperRecipeMatcher;
+import net.qiuyu.horrorcooked9.register.ModItems;
 
 import java.util.function.Supplier;
 
@@ -50,16 +53,31 @@ public class ChopResultPacket {
             if (!boardEntity.hasPlacedItem()) return;
 
             ItemStack placedItem = boardEntity.getPlacedItem();
-            if (!(placedItem.getItem() instanceof IChoppable choppable)) return;
-
             ChopResult result = ChopResult.fromOrdinal(resultOrdinal);
-            choppable.onChop(level, pos, player, placedItem, result);
+            ChopperMinigameRecipe recipe = ChopperRecipeMatcher.findByInput(placedItem, level);
+            if (recipe == null) {
+                return;
+            }
+
+            ItemStack output = recipe.getResultFor(result);
+            if (!output.isEmpty()) {
+                ItemEntity itemEntity = new ItemEntity(level,
+                        pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, output);
+                level.addFreshEntity(itemEntity);
+            }
             boardEntity.removePlacedItem();
 
             // 消耗菜刀耐久
             ItemStack mainHand = player.getMainHandItem();
-            if (mainHand.getItem() instanceof net.qiuyu.horrorcooked9.items.custom.Cleaver) {
-                mainHand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+            if (mainHand.getItem() instanceof net.qiuyu.horrorcooked9.items.custom.Cleaver && mainHand.isDamageableItem()) {
+                if (placedItem.is(ModItems.CRYSTAL_TOMATO.get())) {
+                    int remainingDurability = mainHand.getMaxDamage() - mainHand.getDamageValue();
+                    if (remainingDurability > 0) {
+                        mainHand.hurtAndBreak(remainingDurability, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+                    }
+                } else {
+                    mainHand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+                }
             }
         });
         ctx.setPacketHandled(true);

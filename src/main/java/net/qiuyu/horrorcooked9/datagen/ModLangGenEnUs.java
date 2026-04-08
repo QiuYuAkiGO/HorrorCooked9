@@ -1,0 +1,153 @@
+package net.qiuyu.horrorcooked9.datagen;
+
+import net.minecraft.data.PackOutput;
+import net.minecraftforge.common.data.LanguageProvider;
+import net.qiuyu.horrorcooked9.HorrorCooked9;
+import net.qiuyu.horrorcooked9.register.ModBlocks;
+import net.qiuyu.horrorcooked9.register.ModItems;
+import net.qiuyu.horrorcooked9.register.ModEffects;
+
+public class ModLangGenEnUs extends LanguageProvider {
+    public ModLangGenEnUs(PackOutput output, String locale) {
+        super(output, HorrorCooked9.MODID, locale);
+    }
+
+    @Override
+    protected void addTranslations() {
+        add(ModBlocks.CHOPPING_BOARD.get(), "Chopping Board");
+        add(ModBlocks.SALAD_BOWL.get(), "Salad Bowl");
+        add(ModItems.CLEAVER.get(), "Cleaver");
+        add(ModItems.SHARPENING_STONE.get(), "Sharpening Stone");
+        add(ModItems.WOODEN_SALAD_SPOON.get(), "Wooden Salad Spoon");
+        add(ModItems.CRYSTAL_TOMATO.get(), "[Crystal Tomato]");
+        add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "[Crystal Tomato Sliced]");
+        add(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get(), "Candied Crystal Tomato Slices");
+        add(ModItems.ROASTED_CRYSTAL_TOMATO.get(), "Roasted Crystal Tomato");
+        add(ModItems.CRYSTAL_SALAD.get(), "Crystal Salad");
+        add(ModItems.CRYSTAL_TOMATO_KETCHUP.get(), "Crystal Tomato Ketchup");
+        add(ModItems.SQUID_SALAD.get(), "Squid Salad");
+        add(ModItems.TWIN_CORPSE_PARASITIC_SALAD.get(), "Twin-Corpse Parasitic Salad");
+        add(ModItems.CRISPY_NORI.get(), "Crispy Nori");
+        add(ModItems.CATFISH_SKEWER.get(), "Catfish Skewer");
+        add(ModItems.FAR_REALM_GEM_BOWL.get(), "Far Realm Gem Bowl");
+        add(ModItems.TRANQUIL_MIXED_RICE.get(), "Tranquil Mixed Rice");
+        add(ModItems.COLORFUL_PALETTE.get(), "Colorful Palette");
+        add(ModItems.TRANQUIL_BASE.get(), "Tranquil Base");
+        add(ModItems.FRIED_TRANQUIL_BASE.get(), "Fried Tranquil Base");
+        add(ModItems.TRANQUILITY.get(), "Tranquility");
+        add(ModItems.KALE.get(), "[Kale]");
+        add(ModItems.KALE_LEAVES.get(), "[Kale Leaves]");
+        add(ModItems.KALE_PUREE.get(), "[Kale Puree]");
+        add(ModItems.BRACKEN_FERN.get(), "[Bracken Fern]");
+        add(ModItems.PICKLED_BRACKEN_FERN.get(), "[Pickled Bracken Fern]");
+        add(ModItems.PINEAPPLE.get(), "[Pineapple]");
+        add(ModItems.PINEAPPLE_CHUNKS.get(), "[Pineapple Chunks]");
+        add(ModItems.ROASTED_PINEAPPLE_CHUNKS.get(), "Roasted Pineapple Chunks");
+        add(ModItems.PINEAPPLE_FRIED_RICE_BASE.get(), "Pineapple Fried Rice Base");
+        add(ModItems.FRIED_PINEAPPLE_FRIED_RICE_BASE.get(), "Fried Pineapple Fried Rice Base");
+        add(ModItems.PINEAPPLE_FRIED_RICE.get(), "Pineapple Fried Rice");
+        add(ModItems.PARASITIC_BEAN_SPROUTS.get(), "[Parasitic Bean Sprouts]");
+        add(ModItems.DRIED_BEAN_SPROUTS.get(), "Dried Bean Sprouts");
+        add(ModItems.HAPPY_RICE.get(), "[Happy Rice]");
+        add(ModItems.HAPPY_COOKED_RICE.get(), "[Happy Cooked Rice]");
+        add(ModItems.SHIT.get(), "Shit");
+        add(ModItems.GOLDEN_SHIT.get(), "Golden Shit");
+        add(ModItems.CAPTAIN_HAT.get(), "Captain Hat");
+        add(ModEffects.CAPTAIN_INSPIRATION.get(), "Captain's Inspiration");
+        add(ModEffects.DIARRHEA.get(), "Diarrhea");
+        add(ModEffects.PINEAPPLE_POWER_I.get(), "Pineapple Power I");
+        add("effect.horrorcooked9.diarrhea.events.desc.1", "While active, every 10 seconds there is a 75% chance of only an unpleasant sound; otherwise you gain Slowness and Mining Fatigue for a short time, briefly receive extreme Slowness, hear a blast, and feces drop behind you.");
+        add("effect.horrorcooked9.pineapple_power_i.desc.1", "While active: retaliates 3 health to direct attackers and increases max health by 3.");
+        add(ModBlocks.FOODWORKS_TABLE.get(), "Foodworks Table");
+
+        add("item.horrorcooked9.crystal_tomato.desc.1", "A crop from Earth that mutated on an alien world, hard as a \"Droplet\".");
+        add("item.horrorcooked9.crystal_tomato.desc.2", "Witnesses say from orbit, the planet looks like a red sphere.");
+        add("item.horrorcooked9.crystal_tomato.desc.3", "Handled properly, it is delicious and nourishing... if you can cut it open.");
+        add("item.horrorcooked9.crystal_tomato_sliced.desc.1", "Slices of a full Gem Tomato, cut only with tremendous effort.");
+        add("item.horrorcooked9.crystal_tomato_sliced.desc.2", "Its shell is still hard, but the flesh inside is soft, tangy-sweet, and sandy-textured.");
+        add("item.horrorcooked9.candied_crystal_tomato_slices.desc.1", "People found that pickling changes the chemistry of the Gem Tomato skin, softening the shell.");
+        add("item.horrorcooked9.candied_crystal_tomato_slices.desc.2", "Though it turns wrinkled after pickling, its unique flavor makes the sweetness stand out even more.");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.1", "After endless research into the Gem Tomato's outer-layer structure and composition, scientists reached a key result.");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.2", "With sustained heating, the surface undergoes a chain of physical changes.");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.3", "It finally behaves like tempered glass, shattering into powder the moment external force hits it.");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.4", "This dish was first born in ");
+        add("item.horrorcooked9.roasted_crystal_tomato.desc.4.bold", "a researcher's bedroom");
+        add("item.horrorcooked9.crystal_tomato_ketchup.desc.1", "Someone discovered that the Gem Tomato shell denatures under heat, and thus Crystal Tomato Ketchup was born.");
+        add("item.horrorcooked9.crystal_tomato_ketchup.desc.2", "No objection to eating ketchup directly, but it is best used as an ingredient for other dishes.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.1", "There are two stories about where this method came from.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.2", "One says a grower found the warehouse completely overrun by bean sprouts, then devised this way to shrink their bulk.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.3", "The other says a grower tried to burn off surplus sprouts and discovered the method by accident.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.4", "Whichever story is true, this is still a pretty good approach.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.5", "After drying, the sprouts turn crisp, aromatic, and make an excellent ingredient.");
+        add("item.horrorcooked9.dried_bean_sprouts.desc.6", "At least... that strange gaze is gone now.");
+
+        add("item.horrorcooked9.pickled_bracken_fern.desc.1", "Someone mixed leftover fern with seasonings; days later, a rich aroma rose from it.");
+        add("item.horrorcooked9.pickled_bracken_fern.desc.2", "Its porous leaves absorb flavor deeply and hold many kinds of spices.");
+        add("item.horrorcooked9.bracken_fern.desc.1", "[Bracken Fern]");
+        add("item.horrorcooked9.bracken_fern.desc.2", "A bizarre plant crawling out of old-world corpse mounds: delicious, yet extremely rare.");
+        add("item.horrorcooked9.bracken_fern.desc.3", "If you grow it, guard it with your life; once mature, nothing else will live in that soil again.");
+        add("item.horrorcooked9.bracken_fern.desc.4", "The Alliance lists it as both an endangered species and an invasive species.");
+
+        add("item.horrorcooked9.kale.desc.1", "Crisp and thin, it glints faintly when sliced, like cold crystals in space.");
+        add("item.horrorcooked9.kale.desc.2", "Its taste is extremely light, almost scentless, ideal for salads and sides.");
+        add("item.horrorcooked9.kale.desc.3", "Quiet and gentle, it drifts with lonely ships from one star system to another.");
+
+        add("item.horrorcooked9.kale_leaves.desc.1", "Simple cut leaves from Tranquil Kale.");
+        add("item.horrorcooked9.kale_leaves.desc.2", "Very mild raw taste; best paired with other ingredients.");
+        add("item.horrorcooked9.kale_puree.desc.1", "Shredded and pressed from Tranquil Kale leaves; after several Earth weeks, the leaves become a mildly viscous vegetable puree.");
+        add("item.horrorcooked9.kale_puree.desc.2", "Perfect with rice-you could eat ten bowls.");
+
+        add("item.horrorcooked9.pineapple.desc.1", "Looks like a normal pineapple from afar, only strange up close.");
+        add("item.horrorcooked9.pineapple.desc.2", "Sweet, juicy, and tender, yet the better it tastes, the nearer the void feels.");
+        add("item.horrorcooked9.pineapple.desc.3", "A cultivar domesticated from alien pineapple after deep-space colonization.");
+        add("item.horrorcooked9.pineapple.desc.4", "Its Earth-like look exists to calm the mind and invite another bite.");
+        add("item.horrorcooked9.pineapple.desc.5", "The danger hides in sweetness: cosmic silence quietly erodes your consciousness.");
+
+        add("item.horrorcooked9.pineapple_chunks.desc.1", "Cut chunks of Far-Honey Pineapple still pretending to be ordinary fruit.");
+        add("item.horrorcooked9.pineapple_chunks.desc.2", "Juicier and more tempting, yet strangely colder and more addictive.");
+        add("item.horrorcooked9.roasted_pineapple_chunks.desc.1", "After obtaining food, humans always fall back on the most primitive method: roasting.");
+        add("item.horrorcooked9.roasted_pineapple_chunks.desc.2", "Far-Honey Pineapple is no exception; once roasted, its aroma becomes even stronger.");
+        add("item.horrorcooked9.roasted_pineapple_chunks.desc.3", "But after smelling it for too long, hallucinations seem to appear.");
+        add("item.horrorcooked9.roasted_pineapple_chunks.desc.4", "This phenomenon is still under investigation.");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.1", "It looks like an ordinary fruit platter.");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.2", "Its sparkling shine is dazzling.");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.3", "Juicy and tempting, sweet with a gentle tang.");
+        add("item.horrorcooked9.far_realm_gem_bowl.desc.4", "But you know this is the illusion given by the Far-Honey Pineapple.");
+
+        add("item.horrorcooked9.parasitic_bean_sprouts.desc.1", "A strange crop that circulates on the black market; no one knows where it truly came from.");
+        add("item.horrorcooked9.parasitic_bean_sprouts.desc.2", "If you grow it, watch the plot closely—if it vanishes into the soil, find it before it finds you.");
+        add("item.horrorcooked9.parasitic_bean_sprouts.desc.3", "The sap released when you cut it does not seem to agree with living bodies.");
+
+        add("item.horrorcooked9.happy_rice.desc.1", "A crop perfected across generations of research, packed with dense energy matter.");
+        add("item.horrorcooked9.happy_rice.desc.2", "An excellent direct energy source for physical activity, promoted across the universe.");
+        add("item.horrorcooked9.happy_rice.desc.3", "Exceptionally delicious, a staple in every household.");
+
+        add("item.horrorcooked9.happy_cooked_rice.desc.1", "Cooked Happy Rice whose aroma travels for miles.");
+        add("item.horrorcooked9.happy_cooked_rice.desc.2", "It tastes amazing and is the top choice of countless families.");
+        add("item.horrorcooked9.twin_corpse_parasitic_salad.desc.1", "A filling bowl of corpse-moss bracken that leaves no seasoning behind.");
+        add("item.horrorcooked9.twin_corpse_parasitic_salad.desc.2", "Its color may look rough, but the savory aroma will not disappoint.");
+        add("item.horrorcooked9.twin_corpse_parasitic_salad.desc.3", "No need to think about where it grew, or the gaze inside the bowl.");
+        add("item.horrorcooked9.tranquil_mixed_rice.desc.1", "This way of eating was first created by a few farmers.");
+        add("item.horrorcooked9.tranquil_mixed_rice.desc.2", "Later, it evolved into a signature dish.");
+        add("item.horrorcooked9.tranquil_mixed_rice.desc.3", "Tranquil kale puree makes every grain of rice shine like a star.");
+        add("item.horrorcooked9.tranquility.desc.1", "A bed of tranquil kale topped with honey pineapple chunks.");
+        add("item.horrorcooked9.tranquility.desc.2", "Kale puree and egg are mixed, then patterned across the top.");
+        add("item.horrorcooked9.tranquility.desc.3", "The whole dish gives off a silent, icy atmosphere.");
+        add("item.horrorcooked9.colorful_palette.desc.1", "A platter made from a rich mix of vegetables and fruit.");
+        add("item.horrorcooked9.colorful_palette.desc.2", "Its vivid colors spark the appetite instantly.");
+        add("item.horrorcooked9.colorful_palette.desc.3", "No need to worry about what every ingredient is.");
+        add("item.horrorcooked9.colorful_palette.desc.4", "Right now, you only need to eat them.");
+        add("item.horrorcooked9.pineapple_fried_rice.desc.1", "Stir-fried from fresh Far-Honey pineapple and premium overnight rice.");
+        add("item.horrorcooked9.pineapple_fried_rice.desc.2", "The yellow fruit on top keeps releasing an irresistible aroma.");
+
+        add("book.horrorcooked9.guide.name", "Horror Cooked Handbook");
+        add("book.horrorcooked9.guide.landing", "Welcome to Horror Cooked 9. This handbook introduces your first tools and dishes.");
+        add("book.horrorcooked9.guide.category.getting_started", "Getting Started");
+        add("book.horrorcooked9.guide.category.getting_started.desc", "Basic cooking workflow and how to obtain your first guide book.");
+        add("book.horrorcooked9.guide.entry.first_steps", "First Steps");
+        add("book.horrorcooked9.guide.entry.first_steps.page1", "Use the Chopping Board and Salad Bowl to process ingredients and mix dishes.");
+        add("book.horrorcooked9.guide.entry.first_steps.page2", "Craft this guide book at any time if you lose it.");
+
+        add("creativetab.horrorcooked9_tab", "Horror Cooked");
+    }
+}
