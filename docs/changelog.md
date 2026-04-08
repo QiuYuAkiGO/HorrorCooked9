@@ -18,6 +18,7 @@
 
 ### 变更
 
+- **PR 合并后发布附件**：`.github/workflows/release-on-pr-merge.yml` 不再排除 `-sources.jar` 与 `-javadoc.jar`；若构建产出上述构件，将随主模组 JAR 一并上传至 GitHub Release。
 - **跨层边界规则统一**：对齐 `project-conventions.mdc` 与 `phase1-boundary-guard.md` 的客户端 import 规则，明确 `Dist.CLIENT` 场景例外，消除文档间矛盾。
 - **客户端代码归位**：将 `ChopMinigameScreen`、`StirMinigameScreen` 从 `gameplay/` 迁入 `client/screen/`；将 `ChoppingBoardRenderer`、`SaladBowlRenderer`、`CaptainHatRenderer` 从 `blocks/renderer/`、`armor/renderer/` 迁入 `client/renderer/`，统一"凡依赖 client API 均归入 client 树"的分层原则。
 - **命名规范完善**：注册入口命名从"二选一"改为按层定义（`register/` 用 `Mod*`，`network/` 用 `*Registrar`）。
