@@ -47,14 +47,15 @@
 | 路径 | 现象 | 建议 |
 | --- | --- | --- |
 | `assets/horrorcooked9/Untitled` | 无扩展名文件，语义不明确 | 登记来源并决定保留/清理 |
-| `data/horrorcooked9/gameplay/` | 当前仅有 `stir_tool_balance.json`、`sharpening_stones.json` | 建立 manifest，避免文档先行漂移 |
+| `data/horrorcooked9/gameplay/` | 当前已有 `stir_tool_balance.json`、`sharpening_stones.json`、`item_foods.json` | 建立 manifest，避免文档先行漂移 |
 
 ### 与文档声明不一致（当前缺失）
 
 - `juicing.json`
 - `butchery.json`
-- `item_foods.json`
 - `clear_water_boiling.json`
+
+> `item_foods.json` 已在 0.1.2 版本落地，由 `FoodRuntimeConfigs` 加载。
 
 ## 4) 基线结论
 

@@ -4,7 +4,7 @@
 
 ## 1. 数据包Gameplay JSON（classpath 默认 + 可覆盖）
 
-以下文件默认位于 `src/main/resources/data/horrorcooked9/gameplay/`，打包后由对应 `*Config` 类读取；数据包可通过同名路径覆盖。
+以下文件默认位于 `src/main/resources/data/horrorcooked9/gameplay/`，打包后由对应加载类读取（多数以 `*Config` 命名，`item_foods.json` 由 `FoodRuntimeConfigs` 加载）；数据包可通过同名路径覆盖。
 
 | 文件 | 用途 | 主要加载类 | 当前状态 |
 | --- | --- | --- | --- |
@@ -12,7 +12,7 @@
 | `sharpening_stones.json` | 磨刀石与菜刀交互 | `SharpeningStoneConfig` | 已落地 |
 | `juicing.json` | 榨汁机默认参数与水果条目 | `JuicingConfig` | 规划中（未落地） |
 | `butchery.json` | 屠宰武器、实体掉落、尸体收割 | `ButcheryConfig` | 规划中（未落地） |
-| `item_foods.json` | 物品是否可食及营养、效果覆盖 | `ItemFoodConfig` | 规划中（未落地） |
+| `item_foods.json` | 物品饱食度、饱和系数、多次食用、背包效果、腹泻参数 | `FoodRuntimeConfigs` | 已落地 |
 | `clear_water_boiling.json` | 过滤水煮沸与炼药锅加热等规则 | `ClearWaterBoilingConfig` | 规划中（未落地） |
 
 实现上多在 `HorrorCooked9` 模组初始化阶段注册到游戏内，具体静态字段见各类中 `CLASSPATH_CONFIG_PATH`。
@@ -23,8 +23,8 @@
 | --- | --- | --- |
 | 沙拉碗配方 | `data/horrorcooked9/recipes/salad_bowl/*.json` | 类型 `horrorcooked9:salad_bowl` |
 | 切割小游戏 | `data/horrorcooked9/recipes/chopper_minigame/*.json` | 与 `ChopperRecipeMatcher` / `ChopperMinigameRecipe` 配合 |
-| 物品标签 | `data/horrorcooked9/tags/items/*.json` | 如 `chopper_placeable`、`slaughter_weapons`、`harvest_tools`、水相关容器等 |
-| 流体标签 | `data/horrorcooked9/tags/fluids/*.json` | 如 `clear_water`、`filtered_water` |
+| 物品标签 | `data/horrorcooked9/tags/items/*.json` | 当前已有：`chopper_placeable`、`salad_mixing_tools`、`salad_serving_containers`、`sharpening_stones` |
+| 流体标签 | `data/horrorcooked9/tags/fluids/*.json` | 暂无落地文件（`clear_water`、`filtered_water` 等待屠宰/过滤系统落地后补充） |
 
 ## 3. 方块实体与 UI 注册（当前基线）
 

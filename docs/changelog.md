@@ -12,6 +12,27 @@
 
 ---
 
+## [0.1.3b] - 2026-04-08
+
+### 新增
+
+- 仓库根目录 `README.md`：模组简介、运行环境与构建命令、`docs/` 文档入口。
+- `docs/developer-onboarding.md`：Java 包职责、资源与数据包目录、跨层边界与模组主类入口的一页速查。
+
+### 变更
+
+- `docs/README.md`：明确玩家指南与实现规格的分工；补充 AI/Cursor 推荐阅读路径；文档索引增加 `changelog.md` 与 `developer-onboarding.md`。
+- `docs/developer-gameplay.md`：`item_foods.json` 的加载类与「当前状态」改为已落地（`FoodRuntimeConfigs`）；物品/流体标签说明与仓库现状一致。
+- `docs/config-index.md`：物品 Tag 描述（盛装容器、磨刀石等）与文档互链更新；补充指向玩法文档与 onboarding 的链接。
+- `docs/architecture-baseline-audit.md`：`gameplay` 目录审计更新为已包含 `item_foods.json`，并注明由 `FoodRuntimeConfigs` 加载。
+- `docs/automation-overview.md`：指向发布流程；标明 Phase 1 自动化建议为规划中、尚未落地。
+- `docs/operations-runbook.md`：运维入口增加指向 `config-index.md` 的配置字段说明。
+- `docs/release-process.md`：与自动化说明互链；发布前检查项增加核对 `changelog.md` 与 `mod_version` 一致。
+
+### 开发者提示
+
+- 改代码或扩展数据驱动字段时，优先以 `developer-gameplay.md` 与 `config-index.md` 为准，并用 `developer-onboarding.md` 定位包与资源路径。
+
 ## [0.1.3] - 2026-04-04
 
 ### 新增

@@ -1,6 +1,6 @@
 # 发布流程（最小版）
 
-本文是 Phase 1 发布入口，覆盖从版本号到自动发布的最小闭环。
+本文是 Phase 1 发布入口，覆盖从版本号到自动发布的最小闭环。自动化能力与缺口详见 [automation-overview.md](automation-overview.md)。
 
 ## 1. 发布前准备
 
@@ -9,6 +9,7 @@
   - `docs/config-index.md`
   - `docs/developer-gameplay.md`
   - `docs/README.md`
+- 确认 `docs/changelog.md` 已记录本次变更，且版本号与 `gradle.properties` 中 `mod_version` 一致。
 
 ## 2. 本地验证
 

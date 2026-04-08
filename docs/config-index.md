@@ -45,8 +45,8 @@
 
 | 配置项 | 文件位置 | 作用域 | 生效方式 |
 | --- | --- | --- | --- |
-| 物品 Tag（砧板可放置、搅拌工具、屠宰/收割等） | `data/horrorcooked9/tags/items/*.json` | 数据包/配方与判定 | 数据包加载时生效 |
-| 流体 Tag | `data/horrorcooked9/tags/fluids/*.json` | 过滤与煮沸判定 | 数据包加载时生效 |
+| 物品 Tag（砧板可放置、搅拌工具、盛装容器、磨刀石） | `data/horrorcooked9/tags/items/*.json` | 数据包/配方与判定 | 数据包加载时生效 |
+| 流体 Tag | `data/horrorcooked9/tags/fluids/*.json` | 过滤与煮沸判定（目录暂未落地，待过滤/屠宰系统实现后补充） | 数据包加载时生效 |
 | 沙拉、切割、榨汁等配方 | `data/horrorcooked9/recipes/**/*.json` | 数据包 | 数据包加载时生效 |
 | Patchouli 书与条目 | `data/.../patchouli_books/` 与 `assets/.../patchouli_books/` | 客户端展示 | 资源重载或重启后生效 |
 
@@ -67,6 +67,8 @@
 
 | 主题 | 文档 |
 | --- | --- |
+| 玩法配置类、事件与扩展点 | [developer-gameplay.md](developer-gameplay.md) |
+| 包与目录速查 | [developer-onboarding.md](developer-onboarding.md) |
 | 玩家向玩法总览 | [player-guide.md](player-guide.md) |
 | 沙拉成品食用后返还盛装容器（不返还搅拌工具） | [salad-eat-return.md](salad-eat-return.md) |
 | 身份分配命令 | [identity_usage_manual.md](identity_usage_manual.md) |
