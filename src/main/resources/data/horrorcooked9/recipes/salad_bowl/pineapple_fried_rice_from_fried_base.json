@@ -1,0 +1,31 @@
+{
+  "type": "horrorcooked9:salad_bowl",
+  "ingredients_in_order": [
+    {
+      "item": "horrorcooked9:fried_pineapple_fried_rice_base"
+    },
+    {
+      "item": "horrorcooked9:happy_cooked_rice"
+    },
+    {
+      "item": "horrorcooked9:happy_cooked_rice"
+    },
+    {
+      "item": "horrorcooked9:roasted_pineapple_chunks"
+    }
+  ],
+  "mixing_tool": {
+    "tag": "horrorcooked9:salad_mixing_tools"
+  },
+  "serving_container": {
+    "tag": "horrorcooked9:salad_serving_containers"
+  },
+  "result": {
+    "item": "horrorcooked9:pineapple_fried_rice",
+    "count": 1,
+    "food_uses": 2
+  },
+  "stir_count": 4,
+  "servings": 1,
+  "mix_success_chance": 1.0
+}

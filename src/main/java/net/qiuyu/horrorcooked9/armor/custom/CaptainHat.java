@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.qiuyu.horrorcooked9.armor.renderer.CaptainHatRenderer;
+import net.qiuyu.horrorcooked9.client.renderer.CaptainHatRenderer;
 
 public class CaptainHat extends ArmorItem {
     private static final String ARMOR_TEXTURE_PATH = "horrorcooked9:textures/item/captain_hat_layer_1.png";

@@ -1,0 +1,33 @@
+{
+  "type": "horrorcooked9:salad_bowl",
+  "ingredients_in_order": [
+    {
+      "item": "horrorcooked9:bracken_fern"
+    },
+    {
+      "item": "horrorcooked9:bracken_fern"
+    },
+    {
+      "item": "horrorcooked9:parasitic_bean_sprouts"
+    },
+    {
+      "item": "horrorcooked9:parasitic_bean_sprouts"
+    },
+    {
+      "item": "horrorcooked9:pickled_bracken_fern"
+    }
+  ],
+  "mixing_tool": {
+    "tag": "horrorcooked9:salad_mixing_tools"
+  },
+  "serving_container": {
+    "tag": "horrorcooked9:salad_serving_containers"
+  },
+  "result": {
+    "item": "horrorcooked9:twin_corpse_parasitic_salad",
+    "count": 1
+  },
+  "stir_count": 5,
+  "servings": 1,
+  "mix_success_chance": 1.0
+}

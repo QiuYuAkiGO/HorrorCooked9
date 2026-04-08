@@ -38,9 +38,12 @@ public class SaladBowlItem extends BlockItem implements IStirrable {
             return;
         }
 
-        bowlEntity.completeWith(recipe);
-        if (finalResult == StirResult.GREEN) {
-            bowlEntity.addBonusServings(1);
+        bowlEntity.markOneStirPhaseCompleted();
+        if (recipe.canCompleteNow(bowlEntity.getAddedIngredients(), bowlEntity.getCompletedStirPhases())) {
+            bowlEntity.completeWith(recipe);
+            if (finalResult == StirResult.GREEN) {
+                bowlEntity.addBonusServings(1);
+            }
         }
 
         consumeMixingToolDurability(player);

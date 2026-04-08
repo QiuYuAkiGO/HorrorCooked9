@@ -13,6 +13,7 @@ import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoardBlockEntity;
 import net.qiuyu.horrorcooked9.gameplay.chopping.ChopResult;
 import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperMinigameRecipe;
 import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperRecipeMatcher;
+import net.qiuyu.horrorcooked9.register.ModItems;
 
 import java.util.function.Supplier;
 
@@ -68,8 +69,15 @@ public class ChopResultPacket {
 
             // 消耗菜刀耐久
             ItemStack mainHand = player.getMainHandItem();
-            if (mainHand.getItem() instanceof net.qiuyu.horrorcooked9.items.custom.Cleaver) {
-                mainHand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+            if (mainHand.getItem() instanceof net.qiuyu.horrorcooked9.items.custom.Cleaver && mainHand.isDamageableItem()) {
+                if (placedItem.is(ModItems.CRYSTAL_TOMATO.get())) {
+                    int remainingDurability = mainHand.getMaxDamage() - mainHand.getDamageValue();
+                    if (remainingDurability > 0) {
+                        mainHand.hurtAndBreak(remainingDurability, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+                    }
+                } else {
+                    mainHand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+                }
             }
         });
         ctx.setPacketHandled(true);

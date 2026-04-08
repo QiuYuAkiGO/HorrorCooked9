@@ -21,7 +21,7 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.qiuyu.horrorcooked9.client.ClientHelper;
+import net.qiuyu.horrorcooked9.common.ClientRuntimeBridge;
 import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperRecipeMatcher;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
@@ -79,7 +79,7 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
                 ItemStack placedItem = boardEntity.getPlacedItem();
                 if (ChopperRecipeMatcher.findByInput(placedItem, pLevel) != null) {
                     if (pLevel.isClientSide()) {
-                        ClientHelper.openChopMinigame(pPos);
+                        ClientRuntimeBridge.openChopMinigame(pPos);
                     }
                     return InteractionResult.SUCCESS;
                 }

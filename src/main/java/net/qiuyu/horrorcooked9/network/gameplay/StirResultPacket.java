@@ -2,8 +2,10 @@ package net.qiuyu.horrorcooked9.network.gameplay;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
@@ -17,6 +19,7 @@ import net.qiuyu.horrorcooked9.register.ModItems;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -67,8 +70,14 @@ public class StirResultPacket {
             }
 
             List<SaladBowlRecipe> recipes = level.getRecipeManager().getAllRecipesFor(ModRecipes.SALAD_BOWL_TYPE.get());
-            SaladBowlRecipe recipe = SaladRecipeMatcher.findExactMatch(bowlEntity.getAddedIngredients(), recipes);
-            if (recipe == null || !recipe.getMixingTool().test(player.getMainHandItem())) {
+            List<ItemStack> sequence = bowlEntity.getAddedIngredients();
+            SaladBowlRecipe recipe = resolveStirRecipe(bowlEntity.getCurrentRecipeId(), sequence, recipes);
+            if (recipe == null) {
+                return;
+            }
+            boolean exactNow = SaladRecipeMatcher.isExactMatch(sequence, recipe);
+            if (!recipe.requiresStirNow(sequence.size(), bowlEntity.getCompletedStirPhases(), exactNow)
+                    || !recipe.getMixingTool().test(player.getMainHandItem())) {
                 return;
             }
 
@@ -93,5 +102,26 @@ public class StirResultPacket {
             stirrable.onStir(level, pos, player, bowlEntity, recipe, roundResults);
         });
         ctx.setPacketHandled(true);
+    }
+
+    private SaladBowlRecipe resolveStirRecipe(ResourceLocation trackedRecipeId, List<ItemStack> sequence,
+                                              List<SaladBowlRecipe> recipes) {
+        SaladBowlRecipe exact = SaladRecipeMatcher.findExactMatch(sequence, recipes);
+        if (exact != null) {
+            return exact;
+        }
+
+        if (trackedRecipeId != null) {
+            for (SaladBowlRecipe recipe : recipes) {
+                if (recipe.getId().equals(trackedRecipeId) && SaladRecipeMatcher.isPrefixMatch(sequence, recipe)) {
+                    return recipe;
+                }
+            }
+        }
+        return SaladRecipeMatcher.findPrefixMatches(sequence, recipes).stream()
+                .sorted(Comparator.comparingInt((SaladBowlRecipe candidate) -> candidate.getIngredientSlots().size())
+                        .thenComparing(candidate -> candidate.getId().toString()))
+                .findFirst()
+                .orElse(null);
     }
 }

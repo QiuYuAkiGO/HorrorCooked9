@@ -2,8 +2,8 @@ package net.qiuyu.horrorcooked9.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
-import net.qiuyu.horrorcooked9.gameplay.chopping.ChopMinigameScreen;
-import net.qiuyu.horrorcooked9.gameplay.stir.StirMinigameScreen;
+import net.qiuyu.horrorcooked9.client.screen.ChopMinigameScreen;
+import net.qiuyu.horrorcooked9.client.screen.StirMinigameScreen;
 
 /**
  * 客户端辅助类，用于在客户端打开切割小游戏界面。

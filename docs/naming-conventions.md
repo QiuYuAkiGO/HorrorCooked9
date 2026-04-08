@@ -16,7 +16,8 @@
 - 方块实体类统一使用 `*BlockEntity` 后缀。
 - 网络包类统一使用 `*Packet` 后缀。
 - 配置类统一使用 `*Config` 后缀。
-- 注册入口类统一使用 `*Registrar` 或 `Mod*`（二选一保持一致）。
+- Forge 注册入口类（`register/` 包）统一使用 `Mod*` 前缀（如 `ModBlocks`、`ModItems`）。
+- 网络装配注册器（`network/` 子包）统一使用 `*Registrar` 后缀（如 `GameplayNetworkRegistrar`、`DatapackNetworkRegistrar`）。
 
 ## 3. 领域词汇白名单
 

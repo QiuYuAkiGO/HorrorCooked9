@@ -5,6 +5,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -16,16 +17,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.qiuyu.horrorcooked9.client.ClientHelper;
+import net.qiuyu.horrorcooked9.common.ClientRuntimeBridge;
 import net.qiuyu.horrorcooked9.gameplay.salad.SaladBowlRecipe;
 import net.qiuyu.horrorcooked9.gameplay.salad.SaladRecipeMatcher;
 import net.qiuyu.horrorcooked9.gameplay.stir.StirToolBalanceConfig;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
+import net.qiuyu.horrorcooked9.register.ModItems;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SaladBowlBlock extends BaseEntityBlock {
@@ -54,6 +57,9 @@ public class SaladBowlBlock extends BaseEntityBlock {
         if (!(be instanceof SaladBowlBlockEntity bowlEntity)) {
             return InteractionResult.PASS;
         }
+        if (pPlayer.isShiftKeyDown()) {
+            return handleSneakPickup(pLevel, pPos, pPlayer, pHand, pHit, bowlEntity);
+        }
         if (!pLevel.getBlockState(pPos.below()).is(ModBlocks.FOODWORKS_TABLE.get())) {
             return InteractionResult.PASS;
         }
@@ -77,21 +83,28 @@ public class SaladBowlBlock extends BaseEntityBlock {
         }
 
         List<ItemStack> currentSequence = new ArrayList<>(bowlEntity.getAddedIngredients());
-        SaladBowlRecipe exactRecipe = SaladRecipeMatcher.findExactMatch(currentSequence, recipes);
-        if (exactRecipe != null && exactRecipe.getMixingTool().test(heldItem)) {
+        SaladBowlRecipe stirRecipe = resolveStirRecipe(bowlEntity, currentSequence, recipes);
+        boolean exactNow = stirRecipe != null && SaladRecipeMatcher.isExactMatch(currentSequence, stirRecipe);
+        if (stirRecipe != null
+                && stirRecipe.requiresStirNow(currentSequence.size(), bowlEntity.getCompletedStirPhases(), exactNow)
+                && stirRecipe.getMixingTool().test(heldItem)) {
             int requiredStirCount = StirToolBalanceConfig.resolveEffectiveStirCount(
                     pLevel.getServer() != null ? pLevel.getServer().getResourceManager() : null,
                     heldItem,
-                    exactRecipe.getStirCount()
+                    stirRecipe.getStirCount()
             );
             if (pLevel.isClientSide()) {
-                ClientHelper.openStirMinigame(pPos, requiredStirCount);
+                ClientRuntimeBridge.openStirMinigame(pPos, requiredStirCount);
             }
             return InteractionResult.CONSUME;
         }
 
         if (pLevel.isClientSide()) {
             return InteractionResult.SUCCESS;
+        }
+
+        if (isLockedByPendingStir(bowlEntity, currentSequence, recipes)) {
+            return InteractionResult.CONSUME;
         }
 
         ItemStack ingredientToAdd = heldItem.copy();
@@ -111,13 +124,46 @@ public class SaladBowlBlock extends BaseEntityBlock {
         }
 
         bowlEntity.addIngredient(ingredientToAdd);
-        SaladBowlRecipe nextExact = SaladRecipeMatcher.findExactMatch(nextSequence, recipes);
-        bowlEntity.setCurrentRecipeId(nextExact != null ? nextExact.getId() : null);
+        bowlEntity.setCurrentRecipeId(resolveTrackedRecipeId(nextSequence, candidates));
 
         if (!pPlayer.getAbilities().instabuild) {
             heldItem.shrink(1);
         }
 
+        return InteractionResult.CONSUME;
+    }
+
+    private InteractionResult handleSneakPickup(Level level, BlockPos pos, Player player, InteractionHand hand,
+                                                BlockHitResult hitResult, SaladBowlBlockEntity bowlEntity) {
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+        ItemStack heldItem = player.getItemInHand(hand);
+        if (!player.getAbilities().mayBuild || !player.mayUseItemAt(pos, hitResult.getDirection(), heldItem)) {
+            return InteractionResult.PASS;
+        }
+
+        List<ItemStack> drops = new ArrayList<>();
+        if (bowlEntity.isCompleted()) {
+            ItemStack serving = bowlEntity.getResultStack();
+            if (!serving.isEmpty()) {
+                int servings = bowlEntity.getRemainingServings();
+                for (int i = 0; i < servings; i++) {
+                    drops.add(serving.copy());
+                }
+            }
+            bowlEntity.resetAll();
+        } else {
+            drops.addAll(bowlEntity.dumpIngredientsAndReset());
+        }
+
+        dropItems(level, pos, drops);
+        level.removeBlock(pos, false);
+
+        ItemStack bowlToReturn = new ItemStack(ModItems.SALAD_BOWL.get());
+        if (!player.getInventory().add(bowlToReturn)) {
+            player.drop(bowlToReturn, false);
+        }
         return InteractionResult.CONSUME;
     }
 
@@ -171,6 +217,56 @@ public class SaladBowlBlock extends BaseEntityBlock {
             ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 0.8, pos.getZ() + 0.5, stack);
             level.addFreshEntity(itemEntity);
         }
+    }
+
+    @Nullable
+    private SaladBowlRecipe resolveStirRecipe(SaladBowlBlockEntity bowlEntity, List<ItemStack> currentSequence,
+                                              List<SaladBowlRecipe> recipes) {
+        SaladBowlRecipe exact = SaladRecipeMatcher.findExactMatch(currentSequence, recipes);
+        if (exact != null) {
+            return exact;
+        }
+
+        if (bowlEntity.getCurrentRecipeId() != null) {
+            for (SaladBowlRecipe recipe : recipes) {
+                if (recipe.getId().equals(bowlEntity.getCurrentRecipeId())
+                        && SaladRecipeMatcher.isPrefixMatch(currentSequence, recipe)) {
+                    return recipe;
+                }
+            }
+        }
+
+        return SaladRecipeMatcher.findPrefixMatches(currentSequence, recipes).stream()
+                .sorted(Comparator.comparingInt((SaladBowlRecipe recipe) -> recipe.getIngredientSlots().size())
+                        .thenComparing(recipe -> recipe.getId().toString()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private boolean isLockedByPendingStir(SaladBowlBlockEntity bowlEntity, List<ItemStack> currentSequence, List<SaladBowlRecipe> recipes) {
+        SaladBowlRecipe tracked = resolveStirRecipe(bowlEntity, currentSequence, recipes);
+        if (tracked == null || !tracked.hasCustomStirCheckpoints()) {
+            return false;
+        }
+        boolean exactNow = SaladRecipeMatcher.isExactMatch(currentSequence, tracked);
+        return tracked.requiresStirNow(currentSequence.size(), bowlEntity.getCompletedStirPhases(), exactNow);
+    }
+
+    @Nullable
+    private ResourceLocation resolveTrackedRecipeId(List<ItemStack> sequence, List<SaladBowlRecipe> candidates) {
+        if (candidates.isEmpty()) {
+            return null;
+        }
+        SaladBowlRecipe exact = SaladRecipeMatcher.findExactMatch(sequence, candidates);
+        if (exact != null) {
+            return exact.getId();
+        }
+        return candidates.stream()
+                .sorted(Comparator.comparingInt((SaladBowlRecipe recipe) -> recipe.getIngredientSlots().size())
+                        .thenComparing(recipe -> recipe.getId().toString()))
+                .findFirst()
+                .map(SaladBowlRecipe::getId)
+                .orElse(null);
     }
 
     @SuppressWarnings("deprecation")
