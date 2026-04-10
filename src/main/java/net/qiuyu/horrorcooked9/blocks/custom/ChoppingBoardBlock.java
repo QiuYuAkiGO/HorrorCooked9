@@ -37,10 +37,7 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
     // 每个参数的范围为 0~16，对应方块内的 0~1 格（16 = 1格 = 1个方块）
     // 当前值：底面全覆盖，高度为 1（即 1/16 方块高）
     // 如需调整碰撞箱，直接修改下面 6 个数值即可
-    private static final VoxelShape SHAPE_NORTH = Block.box(0, 0, 0, 16, 2.5, 16);
-    private static final VoxelShape SHAPE_SOUTH = Block.box(0, 0, 0, 16, 2.5, 16);
-    private static final VoxelShape SHAPE_WEST  = Block.box(0, 0, 0, 16, 2.5, 16);
-    private static final VoxelShape SHAPE_EAST  = Block.box(0, 0, 0, 16, 2.5, 16);
+    private static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 2.5, 16);
 
     public ChoppingBoardBlock(Properties pProperties) {
         super(pProperties);
@@ -99,24 +96,15 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
             // 主手持菜刀时，优先将副手可放置物品放入砧板
             ItemStack offhandItem = pPlayer.getOffhandItem();
             if (offhandItem.is(ModTags.Items.CHOPPER_PLACEABLE)) {
-                ItemStack toPlace = offhandItem.copy();
-                toPlace.setCount(1);
-                boardEntity.setPlacedItem(toPlace);
-                offhandItem.shrink(1);
+                placeItemOnBoard(offhandItem, boardEntity);
                 return InteractionResult.CONSUME;
             }
             // 菜刀在 chopper_placeable 标签中，但上面分支会先匹配 instanceof Cleaver 而无法落到通用放置逻辑
-            ItemStack toPlace = heldItem.copy();
-            toPlace.setCount(1);
-            boardEntity.setPlacedItem(toPlace);
-            heldItem.shrink(1);
+            placeItemOnBoard(heldItem, boardEntity);
             return InteractionResult.CONSUME;
         } else if (heldItem.is(ModTags.Items.CHOPPER_PLACEABLE)) {
             // 放置可放置物品
-            ItemStack toPlace = heldItem.copy();
-            toPlace.setCount(1);
-            boardEntity.setPlacedItem(toPlace);
-            heldItem.shrink(1);
+            placeItemOnBoard(heldItem, boardEntity);
             return InteractionResult.CONSUME;
         }
 
@@ -142,12 +130,7 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
     @SuppressWarnings("deprecation")
     @Override
     public @NotNull VoxelShape getShape(BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
-        return switch (pState.getValue(FACING)) {
-            case SOUTH -> SHAPE_SOUTH;
-            case WEST  -> SHAPE_WEST;
-            case EAST  -> SHAPE_EAST;
-            default    -> SHAPE_NORTH;
-        };
+        return SHAPE;
     }
 
     // 注册方块状态属性（FACING：水平朝向）
@@ -161,5 +144,12 @@ public class ChoppingBoardBlock extends BaseEntityBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
         return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+    }
+
+    private static void placeItemOnBoard(ItemStack source, ChoppingBoardBlockEntity boardEntity) {
+        ItemStack toPlace = source.copy();
+        toPlace.setCount(1);
+        boardEntity.setPlacedItem(toPlace);
+        source.shrink(1);
     }
 }

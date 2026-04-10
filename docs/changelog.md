@@ -12,6 +12,22 @@
 
 ---
 
+## [0.1.3d] - 2026-04-10
+
+### 新增
+
+- **多用途碗装食物**：新增 `AbstractMultiUseBowlItem`，统一多次食用、耐久条显示与用尽后返还空碗的逻辑；新增 `ModItemFoodFactory`，集中定义蕨菜芽碗、宁静拌饭、缤纷调色盘、双尸寄生沙拉等食物的 `FoodProperties`，减少各物品类中的重复代码。
+- **腹泻效果客户端反馈**：`DiarrheaOverlayHandler` 在玩家持有腹泻效果且存在对应负面状态联动时绘制全屏暗角；当缓慢效果达到较高等级触发「腹泻结算」时追加短时镜头抖动，强化体感反馈。
+- **客户端物品扩展桥接**：`common` 包中的 `ClientItemExtensionsBridge` 与 `client` 包中的 `ClientItemExtensionRegistry` 配合，船长帽在 `initializeClient` 中按物品 ID 委托注册 `IClientItemExtensions`，避免非客户端代码直接依赖渲染实现类。
+- **沙拉盆方块实体网络同步**：`SaladBowlBlockEntity` 实现 `getUpdatePacket`、`onDataPacket` 与 `getUpdateTag`，将搅拌阶段、成品份数、结果物品栈等状态同步到客户端，便于世界内渲染与交互一致。
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3c` 调整为 `0.1.3d`。
+- **`ModEffects`**：延迟注册器字段由 `ITEMS` 重命名为 `MOB_EFFECTS`，与注册内容语义一致。
+- **`HorrorCooked9`**：客户端初始化阶段除 `ClientRuntimeBridge` 外，增加安装 `ClientItemExtensionRegistry`。
+- **船长帽、砧板、沙拉盆及相关物品与渲染器**：随上述分层与数据同步调整进行配套修改。
+
 ## [0.1.3c] - 2026-04-08
 
 项目结构与规范化改进，无玩法功能变更。

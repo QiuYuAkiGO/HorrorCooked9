@@ -1,5 +1,6 @@
 package net.qiuyu.horrorcooked9.client.renderer;
 
+import com.mojang.logging.LogUtils;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -25,14 +26,17 @@ import net.minecraft.world.level.LightLayer;
 import net.qiuyu.horrorcooked9.blocks.custom.SaladBowlBlockEntity;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
+import org.slf4j.Logger;
 
 import java.util.List;
 
 public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEntity> {
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     private static final float INGREDIENT_BASE_HEIGHT = 0.11f;
     private static final float INGREDIENT_HEIGHT_STEP = 0.0015f;
     private static final float INGREDIENT_ICON_SCALE = 0.36f;
+    private static final float COMPLETED_INGREDIENT_HEIGHT_BONUS = 0.04f;
 
     private static final float LIQUID_MAX_HEIGHT = 0.20f;
     private static final float LIQUID_MIN_HEIGHT = 0.04f;
@@ -40,6 +44,21 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
     private static final int OCTAGON_SIDES = 8;
     private static final int LIQUID_ALPHA = 180;
     private static final int DEFAULT_LIQUID_COLOR = 0x8B6914;
+    private static final float GOLDEN_ANGLE_DEGREES = 137.5f;
+    private static final float SHUFFLED_RADIUS_MIN = 0.02f;
+    private static final float SHUFFLED_RADIUS_MAX = 0.14f;
+    private static final float ORDERED_RADIUS_BASE = 0.03f;
+    private static final float ORDERED_RADIUS_STEP = 0.012f;
+    private static final float ORDERED_RADIUS_MAX = 0.16f;
+    private static final float CENTER_XZ = 0.5f;
+    private static final float CENTER_WOBBLE_AMPLITUDE = 0.003f;
+    private static final float RIM_WOBBLE_AMPLITUDE = 0.004f;
+    private static final float TIME_SPEED = 0.08f;
+    private static final float PHASE_MASK_MULTIPLIER = 0.1f;
+    private static final int BRIGHTNESS_FLOOR = 60;
+    private static final int HASH_COLOR_MIN_COMPONENT = 60;
+    private static final int PIXEL_ALPHA_THRESHOLD = 128;
+    private static final int TEXTURE_SAMPLE_DIVISOR = 4;
 
     private static final RenderType LIQUID_RENDER_TYPE = LiquidRenderHelper.SALAD_LIQUID;
 
@@ -98,21 +117,23 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
             if (shuffled) {
                 long seed = posSeed * 31L + i * 7919L;
                 float angle = pseudoRandomFloat(seed, 0, Mth.TWO_PI);
-                float radius = pseudoRandomFloat(seed + 13, 0.02f, 0.14f);
+                float radius = pseudoRandomFloat(seed + 13, SHUFFLED_RADIUS_MIN, SHUFFLED_RADIUS_MAX);
                 offsetX = Mth.cos(angle) * radius;
                 offsetZ = Mth.sin(angle) * radius;
             } else {
-                float angleRad = Mth.DEG_TO_RAD * (137.5f * i);
-                float radius = Math.min(0.16f, 0.03f + 0.012f * i);
+                float angleRad = Mth.DEG_TO_RAD * (GOLDEN_ANGLE_DEGREES * i);
+                float radius = Math.min(ORDERED_RADIUS_MAX, ORDERED_RADIUS_BASE + ORDERED_RADIUS_STEP * i);
                 offsetX = Mth.cos(angleRad) * radius;
                 offsetZ = Mth.sin(angleRad) * radius;
             }
 
             float y = INGREDIENT_BASE_HEIGHT + INGREDIENT_HEIGHT_STEP * i;
-            if (shuffled) y += 0.04f;
+            if (shuffled) {
+                y += COMPLETED_INGREDIENT_HEIGHT_BONUS;
+            }
 
             poseStack.pushPose();
-            poseStack.translate(0.5f + offsetX, y, 0.5f + offsetZ);
+            poseStack.translate(CENTER_XZ + offsetX, y, CENTER_XZ + offsetZ);
             poseStack.mulPose(Axis.ZP.rotationDegrees(180f));
             poseStack.mulPose(Axis.XP.rotationDegrees(90f));
             poseStack.scale(INGREDIENT_ICON_SCALE, INGREDIENT_ICON_SCALE, INGREDIENT_ICON_SCALE);
@@ -129,9 +150,9 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
         Level level = blockEntity.getLevel();
         if (level == null) return;
 
-        float time = (level.getGameTime() + partialTick) * 0.08f;
+        float time = (level.getGameTime() + partialTick) * TIME_SPEED;
         long posSeed = blockEntity.getBlockPos().asLong();
-        float phaseOffset = (posSeed & 0xFF) * 0.1f;
+        float phaseOffset = (posSeed & 0xFF) * PHASE_MASK_MULTIPLIER;
 
         int r = (mixedColor >> 16) & 0xFF;
         int g = (mixedColor >> 8) & 0xFF;
@@ -141,21 +162,21 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
         Matrix4f pose = poseStack.last().pose();
 
         float vertexRadius = LIQUID_APOTHEM / Mth.cos(Mth.PI / OCTAGON_SIDES);
-        float centerWobble = Mth.sin(time + phaseOffset) * 0.003f;
+        float centerWobble = Mth.sin(time + phaseOffset) * CENTER_WOBBLE_AMPLITUDE;
         float angleStep = Mth.TWO_PI / OCTAGON_SIDES;
         float angleOffset = Mth.PI / OCTAGON_SIDES;
 
         for (int i = 0; i < OCTAGON_SIDES; i++) {
             float a1 = angleStep * i + angleOffset;
             float a2 = angleStep * (i + 1) + angleOffset;
-            float w1 = Mth.sin(time * (1.0f + i * 0.05f) + phaseOffset + i) * 0.004f;
-            float w2 = Mth.sin(time * (1.0f + (i + 1) * 0.05f) + phaseOffset + i + 1) * 0.004f;
+            float w1 = Mth.sin(time * (1.0f + i * 0.05f) + phaseOffset + i) * RIM_WOBBLE_AMPLITUDE;
+            float w2 = Mth.sin(time * (1.0f + (i + 1) * 0.05f) + phaseOffset + i + 1) * RIM_WOBBLE_AMPLITUDE;
 
-            consumer.vertex(pose, 0.5f, baseHeight + centerWobble, 0.5f)
+            consumer.vertex(pose, CENTER_XZ, baseHeight + centerWobble, CENTER_XZ)
                     .color(r, g, b, LIQUID_ALPHA).uv2(light).endVertex();
-            consumer.vertex(pose, 0.5f + Mth.cos(a1) * vertexRadius, baseHeight + w1, 0.5f + Mth.sin(a1) * vertexRadius)
+            consumer.vertex(pose, CENTER_XZ + Mth.cos(a1) * vertexRadius, baseHeight + w1, CENTER_XZ + Mth.sin(a1) * vertexRadius)
                     .color(r, g, b, LIQUID_ALPHA).uv2(light).endVertex();
-            consumer.vertex(pose, 0.5f + Mth.cos(a2) * vertexRadius, baseHeight + w2, 0.5f + Mth.sin(a2) * vertexRadius)
+            consumer.vertex(pose, CENTER_XZ + Mth.cos(a2) * vertexRadius, baseHeight + w2, CENTER_XZ + Mth.sin(a2) * vertexRadius)
                     .color(r, g, b, LIQUID_ALPHA).uv2(light).endVertex();
         }
     }
@@ -180,8 +201,8 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
         int g = (rgb >> 8) & 0xFF;
         int b = rgb & 0xFF;
         int brightness = Math.max(r, Math.max(g, b));
-        if (brightness < 60) {
-            float boost = 60f / Math.max(brightness, 1);
+        if (brightness < BRIGHTNESS_FLOOR) {
+            float boost = BRIGHTNESS_FLOOR / (float) Math.max(brightness, 1);
             r = Math.min(255, (int) (r * boost));
             g = Math.min(255, (int) (g * boost));
             b = Math.min(255, (int) (b * boost));
@@ -220,7 +241,8 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
         }
         try {
             return sampleTextureColor(stack);
-        } catch (Exception ignored) {
+        } catch (Exception exception) {
+            LOGGER.debug("Failed to sample texture color for item {}", stack.getItem(), exception);
         }
         return hashBasedColor(stack);
     }
@@ -237,12 +259,12 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
         long totalR = 0, totalG = 0, totalB = 0;
         int pixelCount = 0;
 
-        int step = Math.max(1, Math.min(w, h) / 4);
+        int step = Math.max(1, Math.min(w, h) / TEXTURE_SAMPLE_DIVISOR);
         for (int x = 0; x < w; x += step) {
             for (int y = 0; y < h; y += step) {
                 int pixel = sprite.getPixelRGBA(0, x, y);
                 int a = (pixel >> 24) & 0xFF;
-                if (a < 128) continue;
+                if (a < PIXEL_ALPHA_THRESHOLD) continue;
                 totalR += pixel & 0xFF;
                 totalG += (pixel >> 8) & 0xFF;
                 totalB += (pixel >> 16) & 0xFF;
@@ -260,9 +282,9 @@ public class SaladBowlRenderer implements BlockEntityRenderer<SaladBowlBlockEnti
 
     private int hashBasedColor(ItemStack stack) {
         int hash = stack.getItem().getDescriptionId().hashCode();
-        int r = Math.max(60, (hash >> 16) & 0xFF);
-        int g = Math.max(60, (hash >> 8) & 0xFF);
-        int b = Math.max(60, hash & 0xFF);
+        int r = Math.max(HASH_COLOR_MIN_COMPONENT, (hash >> 16) & 0xFF);
+        int g = Math.max(HASH_COLOR_MIN_COMPONENT, (hash >> 8) & 0xFF);
+        int b = Math.max(HASH_COLOR_MIN_COMPONENT, hash & 0xFF);
         return (r << 16) | (g << 8) | b;
     }
 

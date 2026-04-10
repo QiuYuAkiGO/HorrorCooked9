@@ -33,6 +33,9 @@ import java.util.List;
 
 public class SaladBowlBlock extends BaseEntityBlock {
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 7, 14);
+    private static final Comparator<SaladBowlRecipe> RECIPE_PRIORITY =
+            Comparator.comparingInt((SaladBowlRecipe recipe) -> recipe.getIngredientSlots().size())
+                    .thenComparing(recipe -> recipe.getId().toString());
 
     public SaladBowlBlock(Properties pProperties) {
         super(pProperties);
@@ -237,8 +240,7 @@ public class SaladBowlBlock extends BaseEntityBlock {
         }
 
         return SaladRecipeMatcher.findPrefixMatches(currentSequence, recipes).stream()
-                .sorted(Comparator.comparingInt((SaladBowlRecipe recipe) -> recipe.getIngredientSlots().size())
-                        .thenComparing(recipe -> recipe.getId().toString()))
+                .sorted(RECIPE_PRIORITY)
                 .findFirst()
                 .orElse(null);
     }
@@ -262,8 +264,7 @@ public class SaladBowlBlock extends BaseEntityBlock {
             return exact.getId();
         }
         return candidates.stream()
-                .sorted(Comparator.comparingInt((SaladBowlRecipe recipe) -> recipe.getIngredientSlots().size())
-                        .thenComparing(recipe -> recipe.getId().toString()))
+                .sorted(RECIPE_PRIORITY)
                 .findFirst()
                 .map(SaladBowlRecipe::getId)
                 .orElse(null);
