@@ -12,6 +12,27 @@
 
 ---
 
+## [0.1.3e] - 2026-04-16
+
+### 新增
+
+- **修复范围文档**：新增 `docs/remediation_plan_v3.md`，将本轮调整范围收敛为协议硬化、切菜结算下沉与上传会话治理，避免继续扩大改动面。
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3d` 调整为 `0.1.3e`。
+- **切菜与搅拌结果包**：`ChopResultPacket` 与 `StirResultPacket` 增加服务端区块加载、交互距离、工具与结果数量校验；非法或畸形请求将被直接拒绝处理。
+- **切菜结算入口**：新增 `ChopGameService`，将掉落生成、配方匹配与菜刀耐久消耗从网络包处理器中下沉为独立服务层逻辑。
+- **沙拉配方解析**：`SaladRecipeMatcher` 增加统一的 `resolveStirRecipe(...)` 与候选优先级选择逻辑，`SaladBowlBlock` 与 `StirResultPacket` 共享同一套解析路径。
+- **数据包上传会话**：`UploadSession` 增加创建时间；`DataPackUploadManager` 增加会话 TTL、单玩家单活跃会话约束与按玩家清理能力；新增 `DataPackUploadSessionEvents` 处理在线过期检查与登出清理。
+- **服务端配置**：删除 `ModServerConfig` 中未实际生效的 `Shelter9Support` 配置项，避免与 `GameRule` 形成误导性的双源配置。
+
+### 修复
+
+- 修复玩家可空手或超距离提交切菜/搅拌小游戏结果的问题。
+- 修复 `StirResultPacket` 可通过异常结果数量触发不受控分配的风险。
+- 修复数据包上传会话在超时或玩家退出后可能长期滞留的问题。
+
 ## [0.1.3d] - 2026-04-10
 
 ### 新增

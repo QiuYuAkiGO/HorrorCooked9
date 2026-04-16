@@ -11,10 +11,12 @@ public record UploadSession(
         int totalSize,
         int totalChunks,
         String sha256,
+        long createdAtMillis,
         Map<Integer, byte[]> chunks,
         AtomicInteger receivedBytes
 ) {
     public UploadSession(UUID playerId, String packName, int totalSize, int totalChunks, String sha256) {
-        this(playerId, packName, totalSize, totalChunks, sha256, new ConcurrentHashMap<>(), new AtomicInteger(0));
+        this(playerId, packName, totalSize, totalChunks, sha256, System.currentTimeMillis(),
+                new ConcurrentHashMap<>(), new AtomicInteger(0));
     }
 }

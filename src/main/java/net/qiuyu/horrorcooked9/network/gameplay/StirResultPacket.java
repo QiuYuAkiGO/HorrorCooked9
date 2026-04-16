@@ -2,7 +2,6 @@ package net.qiuyu.horrorcooked9.network.gameplay;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,7 +18,6 @@ import net.qiuyu.horrorcooked9.register.ModItems;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -27,6 +25,9 @@ import java.util.function.Supplier;
  * 客户端 -> 服务端：发送 Stir 小游戏的多轮判定结果。
  */
 public class StirResultPacket {
+    private static final int MAX_STIR_RESULT_COUNT = 10;
+    private static final double MAX_INTERACTION_DISTANCE_SQR = 64.0D;
+
     private final BlockPos pos;
     private final List<Integer> resultOrdinals;
 
@@ -40,7 +41,10 @@ public class StirResultPacket {
 
     public StirResultPacket(FriendlyByteBuf buf) {
         this.pos = buf.readBlockPos();
-        int size = Math.max(0, buf.readVarInt());
+        int size = buf.readVarInt();
+        if (size < 0 || size > MAX_STIR_RESULT_COUNT) {
+            throw new IllegalArgumentException("Invalid stir result count: " + size);
+        }
         this.resultOrdinals = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             resultOrdinals.add(buf.readVarInt());
@@ -64,6 +68,10 @@ public class StirResultPacket {
             }
 
             Level level = player.level();
+            if (!isInteractionAllowed(player, level)) {
+                return;
+            }
+
             BlockEntity be = level.getBlockEntity(pos);
             if (!(be instanceof SaladBowlBlockEntity bowlEntity) || bowlEntity.isCompleted()) {
                 return;
@@ -71,7 +79,7 @@ public class StirResultPacket {
 
             List<SaladBowlRecipe> recipes = level.getRecipeManager().getAllRecipesFor(ModRecipes.SALAD_BOWL_TYPE.get());
             List<ItemStack> sequence = bowlEntity.getAddedIngredients();
-            SaladBowlRecipe recipe = resolveStirRecipe(bowlEntity.getCurrentRecipeId(), sequence, recipes);
+            SaladBowlRecipe recipe = SaladRecipeMatcher.resolveStirRecipe(bowlEntity.getCurrentRecipeId(), sequence, recipes);
             if (recipe == null) {
                 return;
             }
@@ -104,24 +112,11 @@ public class StirResultPacket {
         ctx.setPacketHandled(true);
     }
 
-    private SaladBowlRecipe resolveStirRecipe(ResourceLocation trackedRecipeId, List<ItemStack> sequence,
-                                              List<SaladBowlRecipe> recipes) {
-        SaladBowlRecipe exact = SaladRecipeMatcher.findExactMatch(sequence, recipes);
-        if (exact != null) {
-            return exact;
+    private boolean isInteractionAllowed(ServerPlayer player, Level level) {
+        if (!level.isLoaded(pos)) {
+            return false;
         }
-
-        if (trackedRecipeId != null) {
-            for (SaladBowlRecipe recipe : recipes) {
-                if (recipe.getId().equals(trackedRecipeId) && SaladRecipeMatcher.isPrefixMatch(sequence, recipe)) {
-                    return recipe;
-                }
-            }
-        }
-        return SaladRecipeMatcher.findPrefixMatches(sequence, recipes).stream()
-                .sorted(Comparator.comparingInt((SaladBowlRecipe candidate) -> candidate.getIngredientSlots().size())
-                        .thenComparing(candidate -> candidate.getId().toString()))
-                .findFirst()
-                .orElse(null);
+        return player.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D)
+                <= MAX_INTERACTION_DISTANCE_SQR;
     }
 }

@@ -30,6 +30,7 @@ public final class DataPackUploadManager {
     private static final int MAX_CHUNK_SIZE = 24 * 1024;
     private static final int MAX_EXTRACT_FILE_COUNT = 10_000;
     private static final long MAX_EXTRACT_TOTAL_SIZE = 256L * 1024L * 1024L;
+    private static final long SESSION_TTL_MS = 5L * 60L * 1000L;
 
     private static final Map<UUID, UploadSession> SESSIONS = new ConcurrentHashMap<>();
 
@@ -40,6 +41,7 @@ public final class DataPackUploadManager {
         if (!validateServerState(player)) {
             return;
         }
+        expireSessionsForPlayer(player);
         if (sessionId == null || packName == null || sha256 == null) {
             player.sendSystemMessage(Component.literal("上传初始化失败：参数无效。"));
             return;
@@ -64,6 +66,7 @@ public final class DataPackUploadManager {
             return;
         }
 
+        cleanupSessionsForPlayer(player.getUUID());
         SESSIONS.put(sessionId, new UploadSession(player.getUUID(), normalizedPackName, totalSize, totalChunks, sha256.toLowerCase()));
         player.sendSystemMessage(Component.literal("开始接收数据包：" + normalizedPackName));
     }
@@ -71,6 +74,9 @@ public final class DataPackUploadManager {
     public static void appendChunk(ServerPlayer player, UUID sessionId, int chunkIndex, byte[] chunkData) {
         UploadSession session = SESSIONS.get(sessionId);
         if (session == null || !session.playerId().equals(player.getUUID())) {
+            return;
+        }
+        if (expireSessionIfNeeded(player, sessionId, session)) {
             return;
         }
         if (chunkData == null || chunkData.length == 0 || chunkData.length > MAX_CHUNK_SIZE) {
@@ -88,10 +94,14 @@ public final class DataPackUploadManager {
     }
 
     public static void finishUpload(ServerPlayer player, UUID sessionId) {
-        UploadSession session = SESSIONS.remove(sessionId);
+        UploadSession session = SESSIONS.get(sessionId);
         if (session == null || !session.playerId().equals(player.getUUID())) {
             return;
         }
+        if (expireSessionIfNeeded(player, sessionId, session)) {
+            return;
+        }
+        SESSIONS.remove(sessionId);
 
         if (session.chunks().size() != session.totalChunks()) {
             player.sendSystemMessage(Component.literal("上传失败：分片不完整。"));
@@ -138,6 +148,29 @@ public final class DataPackUploadManager {
         if (session != null && session.playerId().equals(player.getUUID())) {
             String message = (reason == null || reason.isBlank()) ? "已取消上传。" : "已取消上传：" + reason;
             player.sendSystemMessage(Component.literal(message));
+        }
+    }
+
+    public static void cleanupSessionsForPlayer(UUID playerId) {
+        if (playerId == null) {
+            return;
+        }
+        SESSIONS.entrySet().removeIf(entry -> entry.getValue().playerId().equals(playerId));
+    }
+
+    public static void expireSessionsForPlayer(ServerPlayer player) {
+        boolean removedAny = false;
+        for (Map.Entry<UUID, UploadSession> entry : SESSIONS.entrySet()) {
+            UploadSession session = entry.getValue();
+            if (!session.playerId().equals(player.getUUID()) || !isExpired(session)) {
+                continue;
+            }
+            if (SESSIONS.remove(entry.getKey(), session)) {
+                removedAny = true;
+            }
+        }
+        if (removedAny) {
+            player.sendSystemMessage(Component.literal("上传会话已过期，请重新开始上传。"));
         }
     }
 
@@ -199,6 +232,18 @@ public final class DataPackUploadManager {
     private static void cancelWithMessage(ServerPlayer player, UUID sessionId, String message) {
         SESSIONS.remove(sessionId);
         player.sendSystemMessage(Component.literal(message));
+    }
+
+    private static boolean expireSessionIfNeeded(ServerPlayer player, UUID sessionId, UploadSession session) {
+        if (!isExpired(session)) {
+            return false;
+        }
+        cancelWithMessage(player, sessionId, "上传失败：上传会话已过期，请重新开始。");
+        return true;
+    }
+
+    private static boolean isExpired(UploadSession session) {
+        return System.currentTimeMillis() - session.createdAtMillis() > SESSION_TTL_MS;
     }
 
     private static Path installToDatapacks(MinecraftServer server, String packName, byte[] zipBytes) throws IOException {
