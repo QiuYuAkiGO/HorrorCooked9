@@ -1,0 +1,10 @@
+{
+  "hook_monster_bgm": {
+    "sounds": [
+      {
+        "name": "horrorcooked9:bgm/boss/hook_monster_bgm",
+        "stream": true
+      }
+    ]
+  }
+}

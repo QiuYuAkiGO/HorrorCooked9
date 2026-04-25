@@ -75,6 +75,7 @@ repositories {
     maven { url = "https://maven.blamejared.com" }
     maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
     maven { url = "https://maven.createmod.net" }
+    maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
 }
 
 dependencies {
@@ -86,6 +87,7 @@ dependencies {
     compileOnly("dev.engine-room.flywheel:flywheel-forge-api-${flywheel_minecraft_version}:${flywheel_version}")
     compileOnly(fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api"))
     runtimeOnly(fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}"))
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-${minecraft_version}:${geckolib_version}")
 }
 
 tasks.named('processResources', ProcessResources).configure {

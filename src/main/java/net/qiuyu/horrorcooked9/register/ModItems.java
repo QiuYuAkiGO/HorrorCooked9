@@ -5,6 +5,7 @@ import net.minecraft.world.food.FoodProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +22,7 @@ import net.qiuyu.horrorcooked9.items.custom.CrystalTomatoKetchupItem;
 import net.qiuyu.horrorcooked9.items.custom.CrystalTomatoSlicedItem;
 import net.qiuyu.horrorcooked9.items.custom.DriedBeanSproutsItem;
 import net.qiuyu.horrorcooked9.items.custom.FarRealmGemBowlItem;
+import net.qiuyu.horrorcooked9.items.custom.FertilizerItem;
 import net.qiuyu.horrorcooked9.items.custom.FriedPineappleFriedRiceBaseItem;
 import net.qiuyu.horrorcooked9.items.custom.FriedTranquilBaseItem;
 import net.qiuyu.horrorcooked9.items.custom.GoldenShitItem;
@@ -172,6 +174,9 @@ public class ModItems {
     public static final RegistryObject<Item> SHIT = ITEMS.register("shit",
             () -> new ShitItem(new Item.Properties()));
 
+    public static final RegistryObject<Item> FERTILIZER = ITEMS.register("fertilizer",
+            () -> new FertilizerItem(new Item.Properties()));
+
     public static final RegistryObject<Item> GOLDEN_SHIT = ITEMS.register("golden_shit",
             () -> new GoldenShitItem(new Item.Properties().stacksTo(1)));
 
@@ -180,6 +185,10 @@ public class ModItems {
 
  public static final RegistryObject<Item> FOODWORKS_TABLE = ITEMS.register("foodworks_table",
             () -> new BlockItem(ModBlocks.FOODWORKS_TABLE.get(), new Item.Properties()));
+
+    public static final RegistryObject<Item> HOOK_MONSTER_SPAWN_EGG = ITEMS.register("hook_monster_spawn_egg",
+            () -> new ForgeSpawnEggItem(ModEntities.HOOK_MONSTER, 0x3a1c0f, 0x9e2b2b,
+                    new Item.Properties()));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

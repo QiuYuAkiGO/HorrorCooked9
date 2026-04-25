@@ -14,19 +14,26 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.qiuyu.horrorcooked9.client.renderer.CaptainHatRenderer;
 import net.qiuyu.horrorcooked9.client.renderer.ChoppingBoardRenderer;
+import net.qiuyu.horrorcooked9.client.renderer.ExcrementRenderer;
+import net.qiuyu.horrorcooked9.client.renderer.HookMonsterRenderer;
+import net.qiuyu.horrorcooked9.client.renderer.HookRenderer;
 import net.qiuyu.horrorcooked9.client.renderer.SaladBowlRenderer;
 import net.qiuyu.horrorcooked9.client.ClientItemExtensionRegistry;
 import net.qiuyu.horrorcooked9.client.ClientRuntimeBridgeImpl;
 import net.qiuyu.horrorcooked9.common.ClientRuntimeBridge;
 import net.qiuyu.horrorcooked9.config.ModServerConfig;
+import net.qiuyu.horrorcooked9.entity.custom.ExcrementEntity;
+import net.qiuyu.horrorcooked9.entity.custom.HookMonsterEntity;
 import net.qiuyu.horrorcooked9.network.ModNetworking;
 import net.qiuyu.horrorcooked9.register.ModBlockEntities;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModCreativeModeTabs;
 import net.qiuyu.horrorcooked9.register.ModEffects;
+import net.qiuyu.horrorcooked9.register.ModEntities;
 import net.qiuyu.horrorcooked9.register.ModGameRules;
 import net.qiuyu.horrorcooked9.register.ModItems;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
+import net.qiuyu.horrorcooked9.register.ModSounds;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(HorrorCooked9.MODID)
@@ -46,9 +53,11 @@ public class HorrorCooked9
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModEntities.register(modEventBus);
         ModEffects.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModSounds.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -76,6 +85,9 @@ public class HorrorCooked9
         {
             event.registerBlockEntityRenderer(ModBlockEntities.CHOPPING_BOARD_BE.get(), ChoppingBoardRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.SALAD_BOWL_BE.get(), SaladBowlRenderer::new);
+            event.registerEntityRenderer(ModEntities.HOOK_MONSTER.get(), HookMonsterRenderer::new);
+            event.registerEntityRenderer(ModEntities.EXCREMENT.get(), ExcrementRenderer::new);
+            event.registerEntityRenderer(ModEntities.HOOK.get(), HookRenderer::new);
         }
 
         @SuppressWarnings({"unchecked", "rawtypes"})
@@ -104,6 +116,15 @@ public class HorrorCooked9
             if (renderer instanceof LivingEntityRenderer livingRenderer) {
                 livingRenderer.addLayer(new CaptainHatRenderer(livingRenderer));
             }
+        }
+    }
+
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ModEvents {
+        @SubscribeEvent
+        public static void entityAttributeCreation(net.minecraftforge.event.entity.EntityAttributeCreationEvent event) {
+            event.put(ModEntities.HOOK_MONSTER.get(), HookMonsterEntity.createAttributes().build());
+            event.put(ModEntities.EXCREMENT.get(), ExcrementEntity.createAttributes().build());
         }
     }
 
