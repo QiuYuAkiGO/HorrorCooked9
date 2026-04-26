@@ -13,7 +13,7 @@ base {
     archivesName = mod_id
 }
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
+// Mojang ships Java 17 to end users in 1.18+, so the mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
@@ -57,6 +57,9 @@ repositories {
     maven {
         name = 'ParchmentMC'
         url = 'https://maven.parchmentmc.org'
+        content {
+            includeGroupByRegex "org\\.parchmentmc(\\..+)?"
+        }
     }
     maven {
         url = "https://www.cursemaven.com"
@@ -67,15 +70,43 @@ repositories {
     maven {
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
+        content {
+            includeGroupByRegex "mezz(\\..+)?"
+        }
     }
     maven {
         name = "ModMaven"
         url = "https://modmaven.dev"
+        content {
+            includeGroupByRegex "vazkii(\\..+)?"
+        }
     }
-    maven { url = "https://maven.blamejared.com" }
-    maven { url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/" }
-    maven { url = "https://maven.createmod.net" }
-    maven { url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/" }
+    maven {
+        url = "https://maven.blamejared.com"
+        content {
+            includeGroupByRegex "mezz(\\..+)?"
+            includeGroupByRegex "vazkii(\\..+)?"
+        }
+    }
+    maven {
+        url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+        content {
+            includeGroupByRegex "dev\\.engine-room(\\..+)?"
+        }
+    }
+    maven {
+        url = "https://maven.createmod.net"
+        content {
+            includeGroupByRegex "dev\\.engine-room(\\..+)?"
+            includeGroupByRegex "net\\.createmod(\\..+)?"
+        }
+    }
+    maven {
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+        content {
+            includeGroupByRegex "software\\.bernie(\\..+)?"
+        }
+    }
 }
 
 dependencies {
@@ -136,4 +167,5 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+    options.release = 17 // Target Java 17 for Minecraft 1.20.1 compatibility
 }

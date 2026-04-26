@@ -27,6 +27,11 @@
 - **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3e` 调整为 `0.1.3f`。
 - **沙拉盆交互**：补充沙拉盆相关行为调整，以兼容本轮新增物品与实体流程。
 
+### 修复
+
+- **Gradle 同步**：修复 JEI 与 Flywheel API 依赖因 Maven 仓库过滤范围不足而无法解析的问题。
+- **跨架构开发环境**：移除本机 JDK 路径绑定，改为由 Gradle 自动探测或下载 Java 17 toolchain，避免 ARM64 与 AMD64 环境同步不一致。
+
 ### 开发者提示
 
 - 钩爪怪物依赖 GeckoLib 动画资源与客户端渲染注册；修改实体模型、动画或声音时需同步检查资源路径、`sounds.json` 与 `ModSounds`。
