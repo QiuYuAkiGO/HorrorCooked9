@@ -12,6 +12,21 @@
 
 ---
 
+## [0.1.3h] - 2026-05-24
+
+### 新增
+
+- **螺丝刀物品**：新增 `screwdriver` 工具，冒险模式玩家可用其切换活板门开关状态；通过 `ScrewdriverItem` 与 `ScrewdriverInteractEvents` 实现服务端校验与耐久消耗。
+- **囚服盔甲**：新增 `prisoner_chestplate` 与 `prisoner_leggings`，含皮革材质定义、盔甲贴图、物品模型与创造模式标签页条目。
+- **Create 土豆炮数据包**：新增独立资源包 `horrorcooked9_create_potato_cannon/`，为宝石番茄、菠萝、快乐米、蕨菜等 11 种模组食物注册 Create 土豆炮投射物类型。
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3g` 调整为 `0.1.3h`。
+- **钩怪 BGM 客户端逻辑**：`HookMonsterBgmHandler` 改为由 `HorrorCooked9` 客户端初始化显式注册；新增距离衰减、视线遮挡检测、玩家死亡静音与原版背景音乐抑制，BGM 改为相对听者播放。
+- **语言资源生成**：补全螺丝刀、囚服、钩怪刷怪蛋及实体名称等中英文 datagen 条目；删除手写的 `assets/horrorcooked9/lang/zh_cn.json`，统一通过 `runData` 生成语言文件。
+- **项目约定**：`.cursor/rules/project-conventions.mdc` 补充「语言文件禁止手写，须通过 datagen 生成」的维护规则。
+
 ## [0.1.3f] - 2026-04-25
 
 ### 新增
