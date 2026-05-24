@@ -12,6 +12,14 @@
 
 ---
 
+## [0.1.3i] - 2026-05-24
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3h` 调整为 `0.1.3i`。
+- **螺丝刀资源与提示**：接入专用物品贴图与手持模型（`screwdriver.png`、`models/item/screwdriver.json`）；`ModItemModelGen` 改为引用 `ScrewdriverItem.getTexture()`，不再使用原版铁锭占位贴图。
+- **螺丝刀功能描述**：`ScrewdriverItem` 增加 tooltip，说明冒险模式下右键活板门可开关；中英文 datagen 补全 `item.horrorcooked9.screwdriver.desc.1` 翻译键。
+
 ## [0.1.3h] - 2026-05-24
 
 ### 新增

@@ -72,6 +72,7 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModEntities.EXCREMENT.get(), "Excrement");
         add(ModEntities.HOOK.get(), "Hook");
 
+        add("item.horrorcooked9.screwdriver.desc.1", "Adventure Mode: Right-click a trapdoor to open or close it.");
         add("item.horrorcooked9.crystal_tomato.desc.1", "A crop from Earth that mutated on an alien world, hard as a \"Droplet\".");
         add("item.horrorcooked9.crystal_tomato.desc.2", "Witnesses say from orbit, the planet looks like a red sphere.");
         add("item.horrorcooked9.crystal_tomato.desc.3", "Handled properly, it is delicious and nourishing... if you can cut it open.");

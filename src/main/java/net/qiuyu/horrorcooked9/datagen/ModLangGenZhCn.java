@@ -76,6 +76,7 @@ public class ModLangGenZhCn extends LanguageProvider {
         add("effect.horrorcooked9.diarrhea.events.desc.1", "效果持续期间，每 10 秒有 75% 几率仅发出不适感；否则短暂获得缓慢与挖掘疲劳、极强短暂缓慢，并伴随爆炸声在身后掉落粪便。");
         add("effect.horrorcooked9.pineapple_power_i.desc.1", "持续期间：受到任何直接攻击时反击伤害来源 3 点生命值，并提高 3 点生命值上限。");
 
+        add("item.horrorcooked9.screwdriver.desc.1", "冒险模式：右键活板门即可将其打开或关闭。");
         add("item.horrorcooked9.crystal_tomato.desc.1", "原产自地球的作物，被偷到异星后就莫名其妙地变异，硬度堪比\"水滴\"。");
         add("item.horrorcooked9.crystal_tomato.desc.2", "有目击者称，在太空中看异星外围，只能看到红色的球体。");
         add("item.horrorcooked9.crystal_tomato.desc.3", "处理得当的话，是十分美味的大补之物，前提是你能找到能切开它的东西。");
