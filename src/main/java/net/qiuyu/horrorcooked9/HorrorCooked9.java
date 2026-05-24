@@ -12,6 +12,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.qiuyu.horrorcooked9.client.HookMonsterBgmHandler;
 import net.qiuyu.horrorcooked9.client.renderer.CaptainHatRenderer;
 import net.qiuyu.horrorcooked9.client.renderer.ChoppingBoardRenderer;
 import net.qiuyu.horrorcooked9.client.renderer.ExcrementRenderer;
@@ -77,6 +78,7 @@ public class HorrorCooked9
             event.enqueueWork(() -> {
                 ClientRuntimeBridge.install(new ClientRuntimeBridgeImpl());
                 ClientItemExtensionRegistry.install();
+                MinecraftForge.EVENT_BUS.addListener(HookMonsterBgmHandler::onClientTick);
             });
         }
 

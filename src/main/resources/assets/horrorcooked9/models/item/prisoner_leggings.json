@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "horrorcooked9:item/prisoner_leggings_layer_1"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "damage": 10,
+  "items": "horrorcooked9:crystal_tomato",
+  "knockback": 0.35,
+  "reload_ticks": 50,
+  "render_mode": {
+    "type": "create:tumble"
+  },
+  "sound_pitch": 1.2,
+  "velocity_multiplier": 1.5
+}

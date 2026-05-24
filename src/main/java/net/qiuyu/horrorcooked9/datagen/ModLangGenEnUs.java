@@ -4,6 +4,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
+import net.qiuyu.horrorcooked9.register.ModEntities;
 import net.qiuyu.horrorcooked9.register.ModItems;
 import net.qiuyu.horrorcooked9.register.ModEffects;
 
@@ -19,6 +20,8 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.CLEAVER.get(), "Cleaver");
         add(ModItems.SHARPENING_STONE.get(), "Sharpening Stone");
         add(ModItems.WOODEN_SALAD_SPOON.get(), "Wooden Salad Spoon");
+        add(ModItems.SALAD_TONGS.get(), "Salad Tongs");
+        add(ModItems.SCREWDRIVER.get(), "Screwdriver");
         add(ModItems.CRYSTAL_TOMATO.get(), "[Crystal Tomato]");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "[Crystal Tomato Sliced]");
         add(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get(), "Candied Crystal Tomato Slices");
@@ -30,6 +33,7 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.CRISPY_NORI.get(), "Crispy Nori");
         add(ModItems.CATFISH_SKEWER.get(), "Catfish Skewer");
         add(ModItems.FAR_REALM_GEM_BOWL.get(), "Far Realm Gem Bowl");
+        add(ModItems.BRACKEN_SPROUTS_BOWL.get(), "Bracken Sprouts Bowl");
         add(ModItems.TRANQUIL_MIXED_RICE.get(), "Tranquil Mixed Rice");
         add(ModItems.COLORFUL_PALETTE.get(), "Colorful Palette");
         add(ModItems.TRANQUIL_BASE.get(), "Tranquil Base");
@@ -51,14 +55,22 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.HAPPY_RICE.get(), "[Happy Rice]");
         add(ModItems.HAPPY_COOKED_RICE.get(), "[Happy Cooked Rice]");
         add(ModItems.SHIT.get(), "Shit");
+        add(ModItems.FERTILIZER.get(), "Fertilizer");
         add(ModItems.GOLDEN_SHIT.get(), "Golden Shit");
         add(ModItems.CAPTAIN_HAT.get(), "Captain Hat");
+        add(ModItems.PRISONER_CHESTPLATE.get(), "Prisoner Shirt");
+        add(ModItems.PRISONER_LEGGINGS.get(), "Prisoner Leggings");
+        add(ModItems.HOOK_MONSTER_SPAWN_EGG.get(), "Hook Monster Spawn Egg");
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "Captain's Inspiration");
         add(ModEffects.DIARRHEA.get(), "Diarrhea");
         add(ModEffects.PINEAPPLE_POWER_I.get(), "Pineapple Power I");
         add("effect.horrorcooked9.diarrhea.events.desc.1", "While active, every 10 seconds there is a 75% chance of only an unpleasant sound; otherwise you gain Slowness and Mining Fatigue for a short time, briefly receive extreme Slowness, hear a blast, and feces drop behind you.");
         add("effect.horrorcooked9.pineapple_power_i.desc.1", "While active: retaliates 3 health to direct attackers and increases max health by 3.");
         add(ModBlocks.FOODWORKS_TABLE.get(), "Foodworks Table");
+
+        add(ModEntities.HOOK_MONSTER.get(), "Hook Monster");
+        add(ModEntities.EXCREMENT.get(), "Excrement");
+        add(ModEntities.HOOK.get(), "Hook");
 
         add("item.horrorcooked9.crystal_tomato.desc.1", "A crop from Earth that mutated on an alien world, hard as a \"Droplet\".");
         add("item.horrorcooked9.crystal_tomato.desc.2", "Witnesses say from orbit, the planet looks like a red sphere.");
@@ -83,10 +95,9 @@ public class ModLangGenEnUs extends LanguageProvider {
 
         add("item.horrorcooked9.pickled_bracken_fern.desc.1", "Someone mixed leftover fern with seasonings; days later, a rich aroma rose from it.");
         add("item.horrorcooked9.pickled_bracken_fern.desc.2", "Its porous leaves absorb flavor deeply and hold many kinds of spices.");
-        add("item.horrorcooked9.bracken_fern.desc.1", "[Bracken Fern]");
-        add("item.horrorcooked9.bracken_fern.desc.2", "A bizarre plant crawling out of old-world corpse mounds: delicious, yet extremely rare.");
-        add("item.horrorcooked9.bracken_fern.desc.3", "If you grow it, guard it with your life; once mature, nothing else will live in that soil again.");
-        add("item.horrorcooked9.bracken_fern.desc.4", "The Alliance lists it as both an endangered species and an invasive species.");
+        add("item.horrorcooked9.bracken_fern.desc.1", "A bizarre plant crawling out of old-world corpse mounds: delicious, yet extremely rare.");
+        add("item.horrorcooked9.bracken_fern.desc.2", "If you grow it, guard it with your life; once mature, nothing else will live in that soil again.");
+        add("item.horrorcooked9.bracken_fern.desc.3", "The Alliance lists it as both an endangered species and an invasive species.");
 
         add("item.horrorcooked9.kale.desc.1", "Crisp and thin, it glints faintly when sliced, like cold crystals in space.");
         add("item.horrorcooked9.kale.desc.2", "Its taste is extremely light, almost scentless, ideal for salads and sides.");

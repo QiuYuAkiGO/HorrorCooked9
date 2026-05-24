@@ -6,6 +6,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModEffects;
+import net.qiuyu.horrorcooked9.register.ModEntities;
 import net.qiuyu.horrorcooked9.register.ModItems;
 
 public class ModLangGenZhCn extends LanguageProvider {
@@ -22,6 +23,8 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.CLEAVER.get(), "切肉刀");
         add(ModItems.SHARPENING_STONE.get(), "磨刀石");
         add(ModItems.WOODEN_SALAD_SPOON.get(), "木制沙拉勺");
+        add(ModItems.SALAD_TONGS.get(), "沙拉夹");
+        add(ModItems.SCREWDRIVER.get(), "螺丝刀");
         add(ModItems.CRYSTAL_TOMATO.get(), "【宝石番茄】");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "【宝石番茄切片】");
         add(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get(), "糖渍宝石番茄片");
@@ -33,6 +36,7 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.CRISPY_NORI.get(), "香脆海苔");
         add(ModItems.CATFISH_SKEWER.get(), "鲶鱼烤串");
         add(ModItems.FAR_REALM_GEM_BOWL.get(), "远境宝石碗");
+        add(ModItems.BRACKEN_SPROUTS_BOWL.get(), "尸苔豆芽碗");
         add(ModItems.TRANQUIL_MIXED_RICE.get(), "静谧拌饭");
         add(ModItems.COLORFUL_PALETTE.get(), "缤纷色彩");
         add(ModItems.TRANQUIL_BASE.get(), "宁静半成品");
@@ -54,9 +58,17 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.HAPPY_RICE.get(), "【快乐米】");
         add(ModItems.HAPPY_COOKED_RICE.get(), "【快乐米饭】");
         add(ModItems.SHIT.get(), "粪便");
+        add(ModItems.FERTILIZER.get(), "肥料");
         add(ModItems.GOLDEN_SHIT.get(), "黄金粪便");
         add(ModItems.CAPTAIN_HAT.get(), "船长帽");
+        add(ModItems.PRISONER_CHESTPLATE.get(), "囚服上衣");
+        add(ModItems.PRISONER_LEGGINGS.get(), "囚服护腿");
+        add(ModItems.HOOK_MONSTER_SPAWN_EGG.get(), "钩怪刷怪蛋");
         add(ModBlocks.FOODWORKS_TABLE.get(), "手工料理台");
+
+        add(ModEntities.HOOK_MONSTER.get(), "钩怪");
+        add(ModEntities.EXCREMENT.get(), "粪便");
+        add(ModEntities.HOOK.get(), "钩子");
 
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "船长的激励");
         add(ModEffects.DIARRHEA.get(), "腹泻");

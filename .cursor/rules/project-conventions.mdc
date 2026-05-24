@@ -30,6 +30,11 @@ alwaysApply: true
 - 新增或修改 Gameplay JSON 时，检查 `docs/developer-gameplay.md` 中对应条目的「当前状态」是否需要更新
 - 发布新版本时，确保 `gradle.properties` 中 `mod_version` 与 `docs/changelog.md` 一致
 
+# 语言资源
+
+- 不允许直接手写或生成 `assets/*/lang/*.json` 语言文件；语言文件只能通过 Gradle 的 `runData` 命令生成
+- 修改翻译时，应更新对应的 Java 语言数据生成器，然后运行 `gradlew runData`
+
 # 参考文档
 
 - 包与目录速查: `docs/developer-onboarding.md`

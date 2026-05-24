@@ -1,0 +1,11 @@
+{
+  "damage": 3,
+  "items": "horrorcooked9:bracken_fern",
+  "knockback": 0.12,
+  "reload_ticks": 10,
+  "render_mode": {
+    "type": "create:tumble"
+  },
+  "sound_pitch": 1.15,
+  "velocity_multiplier": 1.15
+}

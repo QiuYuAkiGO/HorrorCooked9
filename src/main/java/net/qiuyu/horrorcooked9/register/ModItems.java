@@ -13,6 +13,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraftforge.registries.RegistryObject;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.armor.custom.CaptainHat;
+import net.qiuyu.horrorcooked9.armor.custom.PrisonerArmor;
 import net.qiuyu.horrorcooked9.items.custom.BrackenFernItem;
 import net.qiuyu.horrorcooked9.items.custom.BrackenSproutsBowlItem;
 import net.qiuyu.horrorcooked9.items.custom.CandiedCrystalTomatoSlicesItem;
@@ -41,6 +42,7 @@ import net.qiuyu.horrorcooked9.items.custom.PineappleItem;
 import net.qiuyu.horrorcooked9.items.custom.SaladBowlItem;
 import net.qiuyu.horrorcooked9.items.custom.RoastedPineappleChunksItem;
 import net.qiuyu.horrorcooked9.items.custom.ShitItem;
+import net.qiuyu.horrorcooked9.items.custom.ScrewdriverItem;
 import net.qiuyu.horrorcooked9.gameplay.food.FoodRuntimeConfigs;
 import net.qiuyu.horrorcooked9.gameplay.food.ModItemFoodFactory;
 import net.qiuyu.horrorcooked9.items.custom.TranquilMixedRiceItem;
@@ -68,6 +70,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> SALAD_TONGS = ITEMS.register("salad_tongs",
             () -> new Item(new Item.Properties().stacksTo(1).durability(384)));
+
+    public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",
+            () -> new ScrewdriverItem(new Item.Properties().stacksTo(1).durability(100)));
 
     public static final RegistryObject<Item> CRYSTAL_TOMATO = ITEMS.register("crystal_tomato",
             () -> new CrystalTomato(new Item.Properties().food(jsonFood("horrorcooked9:crystal_tomato", 3, 0.5f))));
@@ -183,7 +188,13 @@ public class ModItems {
     public static final RegistryObject<Item> CAPTAIN_HAT = ITEMS.register("captain_hat",
             () -> new CaptainHat(CaptainHat.MATERIAL, ArmorItem.Type.HELMET, new Item.Properties()));
 
- public static final RegistryObject<Item> FOODWORKS_TABLE = ITEMS.register("foodworks_table",
+    public static final RegistryObject<Item> PRISONER_CHESTPLATE = ITEMS.register("prisoner_chestplate",
+            () -> new PrisonerArmor(PrisonerArmor.MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+
+    public static final RegistryObject<Item> PRISONER_LEGGINGS = ITEMS.register("prisoner_leggings",
+            () -> new PrisonerArmor(PrisonerArmor.MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+
+    public static final RegistryObject<Item> FOODWORKS_TABLE = ITEMS.register("foodworks_table",
             () -> new BlockItem(ModBlocks.FOODWORKS_TABLE.get(), new Item.Properties()));
 
     public static final RegistryObject<Item> HOOK_MONSTER_SPAWN_EGG = ITEMS.register("hook_monster_spawn_egg",

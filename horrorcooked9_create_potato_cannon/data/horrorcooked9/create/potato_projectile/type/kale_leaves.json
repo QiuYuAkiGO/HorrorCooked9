@@ -1,0 +1,13 @@
+{
+  "damage": 2,
+  "items": "horrorcooked9:kale_leaves",
+  "knockback": 0.15,
+  "reload_ticks": 8,
+  "render_mode": {
+    "type": "create:toward_motion",
+    "spin": 1.5,
+    "sprite_angle_offset": 140
+  },
+  "sound_pitch": 1.5,
+  "velocity_multiplier": 1.5
+}
