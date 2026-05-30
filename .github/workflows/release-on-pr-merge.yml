@@ -28,6 +28,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Generate data resources
+        run: ./gradlew --no-daemon runData
+
       - name: Build mod jar
         run: ./gradlew --no-daemon clean build
 
