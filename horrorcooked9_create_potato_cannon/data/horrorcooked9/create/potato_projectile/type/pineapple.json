@@ -1,0 +1,11 @@
+{
+  "damage": 4,
+  "items": "horrorcooked9:pineapple",
+  "knockback": 0.35,
+  "reload_ticks": 14,
+  "render_mode": {
+    "type": "create:tumble"
+  },
+  "sound_pitch": 0.95,
+  "velocity_multiplier": 1.05
+}

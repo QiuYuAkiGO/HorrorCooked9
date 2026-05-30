@@ -24,6 +24,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.SHARPENING_STONE.get());
                         output.accept(ModItems.WOODEN_SALAD_SPOON.get());
                         output.accept(ModItems.SALAD_TONGS.get());
+                        output.accept(ModItems.SCREWDRIVER.get());
                         output.accept(ModItems.CRYSTAL_TOMATO.get());
                         output.accept(ModItems.CRYSTAL_TOMATO_SLICED.get());
                         output.accept(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get());
@@ -57,9 +58,13 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.HAPPY_RICE.get());
                         output.accept(ModItems.HAPPY_COOKED_RICE.get());
                         output.accept(ModItems.SHIT.get());
+                        output.accept(ModItems.FERTILIZER.get());
                         output.accept(ModItems.GOLDEN_SHIT.get());
                         output.accept(ModItems.CAPTAIN_HAT.get());
+                        output.accept(ModItems.PRISONER_CHESTPLATE.get());
+                        output.accept(ModItems.PRISONER_LEGGINGS.get());
                         output.accept(ModItems.FOODWORKS_TABLE.get());
+                        output.accept(ModItems.HOOK_MONSTER_SPAWN_EGG.get());
                     })
                     .build());
 

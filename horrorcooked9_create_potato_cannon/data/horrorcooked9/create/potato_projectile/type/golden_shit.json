@@ -1,0 +1,40 @@
+{
+  "damage": 7,
+  "items": "horrorcooked9:golden_shit",
+  "knockback": 0.15,
+  "on_entity_hit": {
+    "type": "create:food_effects",
+    "food_property": {
+      "nutrition": 4,
+      "saturation_modifier": 1.2,
+      "can_always_eat": true,
+      "is_fast_food": true,
+      "effects": [
+        {
+          "effect": {
+            "effect": "minecraft:regeneration",
+            "duration": 100,
+            "amplifier": 1
+          },
+          "probability": 1.0
+        },
+        {
+          "effect": {
+            "effect": "minecraft:absorption",
+            "duration": 100,
+            "amplifier": 0
+          },
+          "probability": 1.0
+        }
+      ]
+    },
+    "recoverable": true
+  },
+  "reload_ticks": 16,
+  "render_mode": {
+    "type": "create:tumble"
+  },
+  "sound_pitch": 0.9,
+  "sticky": true,
+  "velocity_multiplier": 1.0
+}

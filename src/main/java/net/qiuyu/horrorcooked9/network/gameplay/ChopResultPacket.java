@@ -3,17 +3,12 @@ package net.qiuyu.horrorcooked9.network.gameplay;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
-import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoardBlockEntity;
+import net.qiuyu.horrorcooked9.gameplay.chopping.ChopGameService;
 import net.qiuyu.horrorcooked9.gameplay.chopping.ChopResult;
-import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperMinigameRecipe;
-import net.qiuyu.horrorcooked9.gameplay.chopping.ChopperRecipeMatcher;
-import net.qiuyu.horrorcooked9.register.ModItems;
+import net.qiuyu.horrorcooked9.items.custom.Cleaver;
 
 import java.util.function.Supplier;
 
@@ -21,6 +16,7 @@ import java.util.function.Supplier;
  * 客户端 -> 服务端：发送切割小游戏结果
  */
 public class ChopResultPacket {
+    private static final double MAX_INTERACTION_DISTANCE_SQR = 64.0D;
 
     private final BlockPos pos;
     private final int resultOrdinal;
@@ -44,42 +40,30 @@ public class ChopResultPacket {
         NetworkEvent.Context ctx = contextSupplier.get();
         ctx.enqueueWork(() -> {
             ServerPlayer player = ctx.getSender();
-            if (player == null) return;
-
-            Level level = player.level();
-            BlockEntity be = level.getBlockEntity(pos);
-            if (!(be instanceof ChoppingBoardBlockEntity boardEntity)) return;
-
-            if (!boardEntity.hasPlacedItem()) return;
-
-            ItemStack placedItem = boardEntity.getPlacedItem();
-            ChopResult result = ChopResult.fromOrdinal(resultOrdinal);
-            ChopperMinigameRecipe recipe = ChopperRecipeMatcher.findByInput(placedItem, level);
-            if (recipe == null) {
+            if (player == null) {
                 return;
             }
 
-            ItemStack output = recipe.getResultFor(result);
-            if (!output.isEmpty()) {
-                ItemEntity itemEntity = new ItemEntity(level,
-                        pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, output);
-                level.addFreshEntity(itemEntity);
+            Level level = player.level();
+            if (!isInteractionAllowed(player, level)) {
+                return;
             }
-            boardEntity.removePlacedItem();
 
-            // 消耗菜刀耐久
             ItemStack mainHand = player.getMainHandItem();
-            if (mainHand.getItem() instanceof net.qiuyu.horrorcooked9.items.custom.Cleaver && mainHand.isDamageableItem()) {
-                if (placedItem.is(ModItems.CRYSTAL_TOMATO.get())) {
-                    int remainingDurability = mainHand.getMaxDamage() - mainHand.getDamageValue();
-                    if (remainingDurability > 0) {
-                        mainHand.hurtAndBreak(remainingDurability, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
-                    }
-                } else {
-                    mainHand.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
-                }
+            if (!(mainHand.getItem() instanceof Cleaver)) {
+                return;
             }
+
+            ChopGameService.handleChopResult(player, pos, ChopResult.fromOrdinal(resultOrdinal));
         });
         ctx.setPacketHandled(true);
+    }
+
+    private boolean isInteractionAllowed(ServerPlayer player, Level level) {
+        if (!level.isLoaded(pos)) {
+            return false;
+        }
+        return player.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D)
+                <= MAX_INTERACTION_DISTANCE_SQR;
     }
 }

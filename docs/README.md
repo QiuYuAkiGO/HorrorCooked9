@@ -29,6 +29,7 @@
 | [release-process.md](release-process.md) | PR 合并后的构建发布流程与版本约束 |
 | [automation-overview.md](automation-overview.md) | 当前自动化能力、缺口与 Phase 1 建议 |
 | [architecture-baseline-audit.md](architecture-baseline-audit.md) | 当前跨层依赖、目录异味与资源漂移审计 |
+| [hook-monster-design.md](hook-monster-design.md) | 钩爪怪物实体、配置、渲染、已知缺口与验证清单 |
 | [changelog.md](changelog.md) | 版本变更记录 |
 | [developer-onboarding.md](developer-onboarding.md) | Java 包与资源目录一页速查地图 |
 | [phase1-boundary-guard.md](phase1-boundary-guard.md) | Phase 1 边界约束与文档补齐执行方案 |

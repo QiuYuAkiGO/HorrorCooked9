@@ -1,17 +1,10 @@
 package net.qiuyu.horrorcooked9;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.util.Mth;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.client.event.RenderGuiEvent;
-import net.minecraftforge.client.event.ViewportEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,20 +12,29 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.qiuyu.horrorcooked9.client.HookMonsterBgmHandler;
 import net.qiuyu.horrorcooked9.client.renderer.CaptainHatRenderer;
 import net.qiuyu.horrorcooked9.client.renderer.ChoppingBoardRenderer;
+import net.qiuyu.horrorcooked9.client.renderer.ExcrementRenderer;
+import net.qiuyu.horrorcooked9.client.renderer.HookMonsterRenderer;
+import net.qiuyu.horrorcooked9.client.renderer.HookRenderer;
 import net.qiuyu.horrorcooked9.client.renderer.SaladBowlRenderer;
+import net.qiuyu.horrorcooked9.client.ClientItemExtensionRegistry;
 import net.qiuyu.horrorcooked9.client.ClientRuntimeBridgeImpl;
 import net.qiuyu.horrorcooked9.common.ClientRuntimeBridge;
 import net.qiuyu.horrorcooked9.config.ModServerConfig;
+import net.qiuyu.horrorcooked9.entity.custom.ExcrementEntity;
+import net.qiuyu.horrorcooked9.entity.custom.HookMonsterEntity;
 import net.qiuyu.horrorcooked9.network.ModNetworking;
 import net.qiuyu.horrorcooked9.register.ModBlockEntities;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModCreativeModeTabs;
 import net.qiuyu.horrorcooked9.register.ModEffects;
+import net.qiuyu.horrorcooked9.register.ModEntities;
 import net.qiuyu.horrorcooked9.register.ModGameRules;
 import net.qiuyu.horrorcooked9.register.ModItems;
 import net.qiuyu.horrorcooked9.register.ModRecipes;
+import net.qiuyu.horrorcooked9.register.ModSounds;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(HorrorCooked9.MODID)
@@ -52,9 +54,11 @@ public class HorrorCooked9
         ModBlocks.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModEntities.register(modEventBus);
         ModEffects.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         ModRecipes.register(modEventBus);
+        ModSounds.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -71,7 +75,11 @@ public class HorrorCooked9
     {
         @SubscribeEvent
         public static void onClientSetup(final FMLClientSetupEvent event) {
-            event.enqueueWork(() -> ClientRuntimeBridge.install(new ClientRuntimeBridgeImpl()));
+            event.enqueueWork(() -> {
+                ClientRuntimeBridge.install(new ClientRuntimeBridgeImpl());
+                ClientItemExtensionRegistry.install();
+                MinecraftForge.EVENT_BUS.addListener(HookMonsterBgmHandler::onClientTick);
+            });
         }
 
         @SubscribeEvent
@@ -79,6 +87,9 @@ public class HorrorCooked9
         {
             event.registerBlockEntityRenderer(ModBlockEntities.CHOPPING_BOARD_BE.get(), ChoppingBoardRenderer::new);
             event.registerBlockEntityRenderer(ModBlockEntities.SALAD_BOWL_BE.get(), SaladBowlRenderer::new);
+            event.registerEntityRenderer(ModEntities.HOOK_MONSTER.get(), HookMonsterRenderer::new);
+            event.registerEntityRenderer(ModEntities.EXCREMENT.get(), ExcrementRenderer::new);
+            event.registerEntityRenderer(ModEntities.HOOK.get(), HookRenderer::new);
         }
 
         @SuppressWarnings({"unchecked", "rawtypes"})
@@ -110,56 +121,13 @@ public class HorrorCooked9
         }
     }
 
-    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.FORGE, value = Dist.CLIENT)
-    public static class ClientForgeEvents {
-        private static int shakeTicks = 0;
-        private static boolean wasDiarrheaProcActive = false;
-
+    @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ModEvents {
         @SubscribeEvent
-        public static void onRenderGuiPost(RenderGuiEvent.Post event) {
-            Minecraft minecraft = Minecraft.getInstance();
-            if (minecraft.player == null || minecraft.level == null) {
-                return;
-            }
-            if (!minecraft.player.hasEffect(ModEffects.DIARRHEA.get())) {
-                return;
-            }
-            MobEffectInstance slowness = minecraft.player.getEffect(MobEffects.MOVEMENT_SLOWDOWN);
-            MobEffectInstance fatigue = minecraft.player.getEffect(MobEffects.DIG_SLOWDOWN);
-            boolean diarrheaProcActive = slowness != null && slowness.getAmplifier() >= 6;
-            if (diarrheaProcActive && !wasDiarrheaProcActive) {
-                shakeTicks = 20;
-            }
-            wasDiarrheaProcActive = diarrheaProcActive;
-            if (slowness == null && fatigue == null) {
-                return;
-            }
-
-            int amplifier = minecraft.player.getEffect(ModEffects.DIARRHEA.get()).getAmplifier();
-            int alpha = Math.min(180, 90 + amplifier * 20);
-            int color = (alpha << 24);
-
-            GuiGraphics guiGraphics = event.getGuiGraphics();
-            int width = minecraft.getWindow().getGuiScaledWidth();
-            int height = minecraft.getWindow().getGuiScaledHeight();
-            guiGraphics.fill(0, 0, width, height, color);
-        }
-
-        @SubscribeEvent
-        public static void onComputeCameraAngles(ViewportEvent.ComputeCameraAngles event) {
-            if (shakeTicks <= 0) {
-                return;
-            }
-
-            float progress = shakeTicks / 20.0F;
-            float tickTime = (float) (20 - shakeTicks + event.getPartialTick());
-            float wave = Mth.sin(tickTime * 1.8F);
-            float yawOffset = wave * 2.5F * progress;
-            float pitchOffset = Mth.cos(tickTime * 2.2F) * 1.6F * progress;
-
-            event.setYaw(event.getYaw() + yawOffset);
-            event.setPitch(event.getPitch() + pitchOffset);
-            shakeTicks--;
+        public static void entityAttributeCreation(net.minecraftforge.event.entity.EntityAttributeCreationEvent event) {
+            event.put(ModEntities.HOOK_MONSTER.get(), HookMonsterEntity.createAttributes().build());
+            event.put(ModEntities.EXCREMENT.get(), ExcrementEntity.createAttributes().build());
         }
     }
+
 }

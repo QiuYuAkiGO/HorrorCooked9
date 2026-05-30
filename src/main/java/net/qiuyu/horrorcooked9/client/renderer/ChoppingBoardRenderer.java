@@ -20,6 +20,15 @@ import net.qiuyu.horrorcooked9.blocks.custom.ChoppingBoardBlockEntity;
 import org.jetbrains.annotations.NotNull;
 
 public class ChoppingBoardRenderer implements BlockEntityRenderer<ChoppingBoardBlockEntity> {
+    private static final float ITEM_TRANSLATE_XZ = 0.5F;
+    private static final float ITEM_TRANSLATE_Y = 0.2F;
+    private static final float ITEM_ROTATE_Z = 180.0F;
+    private static final float ITEM_ROTATE_X = 90.0F;
+    private static final float ITEM_SCALE = 0.6F;
+
+    private static final float FACING_ROTATE_SOUTH = 180.0F;
+    private static final float FACING_ROTATE_WEST = 90.0F;
+    private static final float FACING_ROTATE_EAST = -90.0F;
 
     public ChoppingBoardRenderer(BlockEntityRendererProvider.Context context) {
     }
@@ -38,21 +47,21 @@ public class ChoppingBoardRenderer implements BlockEntityRenderer<ChoppingBoardB
 
         pPoseStack.pushPose();
 
-        pPoseStack.translate(0.5, 0.2, 0.5);
+        pPoseStack.translate(ITEM_TRANSLATE_XZ, ITEM_TRANSLATE_Y, ITEM_TRANSLATE_XZ);
 
         float yRot = switch (facing) {
-            case SOUTH -> 180f;
-            case WEST -> 90f;
-            case EAST -> -90f;
-            default -> 0f; // NORTH
+            case SOUTH -> FACING_ROTATE_SOUTH;
+            case WEST -> FACING_ROTATE_WEST;
+            case EAST -> FACING_ROTATE_EAST;
+            default -> 0F; // NORTH
         };
         pPoseStack.mulPose(Axis.YP.rotationDegrees(yRot));
 
-        pPoseStack.mulPose(Axis.ZP.rotationDegrees(180f));
+        pPoseStack.mulPose(Axis.ZP.rotationDegrees(ITEM_ROTATE_Z));
 
-        pPoseStack.mulPose(Axis.XP.rotationDegrees(90f));
+        pPoseStack.mulPose(Axis.XP.rotationDegrees(ITEM_ROTATE_X));
 
-        pPoseStack.scale(0.6f, 0.6f, 0.6f);
+        pPoseStack.scale(ITEM_SCALE, ITEM_SCALE, ITEM_SCALE);
 
         BlockPos pos = pBlockEntity.getBlockPos().above();
         int blockLight = level.getBrightness(LightLayer.BLOCK, pos);

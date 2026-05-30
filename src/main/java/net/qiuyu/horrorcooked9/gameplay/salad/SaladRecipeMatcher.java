@@ -1,6 +1,8 @@
 package net.qiuyu.horrorcooked9.gameplay.salad;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,6 +13,10 @@ import java.util.List;
  * 提供按当前投料序列进行前缀匹配和完整匹配的静态方法。
  */
 public final class SaladRecipeMatcher {
+    private static final Comparator<SaladBowlRecipe> RECIPE_PRIORITY =
+            Comparator.comparingInt((SaladBowlRecipe recipe) -> recipe.getIngredientSlots().size())
+                    .thenComparing(recipe -> recipe.getId().toString());
+
     private SaladRecipeMatcher() {
     }
 
@@ -36,6 +42,34 @@ public final class SaladRecipeMatcher {
                 .sorted(Comparator.comparing(recipe -> recipe.getId().toString()))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Nullable
+    public static SaladBowlRecipe findPreferredRecipe(List<SaladBowlRecipe> recipes) {
+        return recipes.stream()
+                .sorted(RECIPE_PRIORITY)
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Nullable
+    public static SaladBowlRecipe resolveStirRecipe(@Nullable ResourceLocation trackedRecipeId,
+                                                    List<ItemStack> sequence,
+                                                    List<SaladBowlRecipe> recipes) {
+        SaladBowlRecipe exact = findExactMatch(sequence, recipes);
+        if (exact != null) {
+            return exact;
+        }
+
+        if (trackedRecipeId != null) {
+            for (SaladBowlRecipe recipe : recipes) {
+                if (recipe.getId().equals(trackedRecipeId) && isPrefixMatch(sequence, recipe)) {
+                    return recipe;
+                }
+            }
+        }
+
+        return findPreferredRecipe(findPrefixMatches(sequence, recipes));
     }
 
     /**

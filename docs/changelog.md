@@ -12,6 +12,91 @@
 
 ---
 
+## [0.1.3i] - 2026-05-24
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3h` 调整为 `0.1.3i`。
+- **螺丝刀资源与提示**：接入专用物品贴图与手持模型（`screwdriver.png`、`models/item/screwdriver.json`）；`ModItemModelGen` 改为引用 `ScrewdriverItem.getTexture()`，不再使用原版铁锭占位贴图。
+- **螺丝刀功能描述**：`ScrewdriverItem` 增加 tooltip，说明冒险模式下右键活板门可开关；中英文 datagen 补全 `item.horrorcooked9.screwdriver.desc.1` 翻译键。
+
+## [0.1.3h] - 2026-05-24
+
+### 新增
+
+- **螺丝刀物品**：新增 `screwdriver` 工具，冒险模式玩家可用其切换活板门开关状态；通过 `ScrewdriverItem` 与 `ScrewdriverInteractEvents` 实现服务端校验与耐久消耗。
+- **囚服盔甲**：新增 `prisoner_chestplate` 与 `prisoner_leggings`，含皮革材质定义、盔甲贴图、物品模型与创造模式标签页条目。
+- **Create 土豆炮数据包**：新增独立资源包 `horrorcooked9_create_potato_cannon/`，为宝石番茄、菠萝、快乐米、蕨菜等 11 种模组食物注册 Create 土豆炮投射物类型。
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3g` 调整为 `0.1.3h`。
+- **钩怪 BGM 客户端逻辑**：`HookMonsterBgmHandler` 改为由 `HorrorCooked9` 客户端初始化显式注册；新增距离衰减、视线遮挡检测、玩家死亡静音与原版背景音乐抑制，BGM 改为相对听者播放。
+- **语言资源生成**：补全螺丝刀、囚服、钩怪刷怪蛋及实体名称等中英文 datagen 条目；删除手写的 `assets/horrorcooked9/lang/zh_cn.json`，统一通过 `runData` 生成语言文件。
+- **项目约定**：`.cursor/rules/project-conventions.mdc` 补充「语言文件禁止手写，须通过 datagen 生成」的维护规则。
+
+## [0.1.3f] - 2026-04-25
+
+### 新增
+
+- **钩爪怪物实体**：新增 `hook_monster`、`hook` 与 `excrement` 三类实体，接入刷怪蛋、属性注册、客户端渲染与专用伤害类型；钩爪怪物支持排泄物抛射、钩爪拉拽、自身排泄物反制晕厥等战斗行为。
+- **钩爪怪物运行时配置**：新增 `HookMonsterRuntimeConfig` 与 `/horrorCooked monster config` 指令，可查询、临时覆盖与重置生命、护甲、排泄间隔、钩爪冷却、伤害比例、排泄物爆炸等服务端参数。
+- **GeckoLib 与资源接入**：新增 GeckoLib 依赖、钩爪怪物 geo/animation/texture 资源、钩爪贴图、BGM 音频与声音注册。
+- **肥料物品**：新增 `fertilizer` 物品注册、创造模式标签页条目、模型与中文本地化。
+- **实现说明文档**：新增 `docs/hook-monster-design.md`，记录钩爪怪物目标、实现入口、配置项、已知缺口与验证清单，并加入文档索引。
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3e` 调整为 `0.1.3f`。
+- **沙拉盆交互**：补充沙拉盆相关行为调整，以兼容本轮新增物品与实体流程。
+
+### 修复
+
+- **Gradle 同步**：修复 JEI 与 Flywheel API 依赖因 Maven 仓库过滤范围不足而无法解析的问题。
+- **跨架构开发环境**：移除本机 JDK 路径绑定，改为由 Gradle 自动探测或下载 Java 17 toolchain，避免 ARM64 与 AMD64 环境同步不一致。
+
+### 开发者提示
+
+- 钩爪怪物依赖 GeckoLib 动画资源与客户端渲染注册；修改实体模型、动画或声音时需同步检查资源路径、`sounds.json` 与 `ModSounds`。
+- 运行时配置覆盖仅在当前服务器进程内生效，正式默认值仍以 Forge Server Config 为准。
+
+## [0.1.3e] - 2026-04-16
+
+### 新增
+
+- **修复范围文档**：新增 `docs/remediation_plan_v3.md`，将本轮调整范围收敛为协议硬化、切菜结算下沉与上传会话治理，避免继续扩大改动面。
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3d` 调整为 `0.1.3e`。
+- **切菜与搅拌结果包**：`ChopResultPacket` 与 `StirResultPacket` 增加服务端区块加载、交互距离、工具与结果数量校验；非法或畸形请求将被直接拒绝处理。
+- **切菜结算入口**：新增 `ChopGameService`，将掉落生成、配方匹配与菜刀耐久消耗从网络包处理器中下沉为独立服务层逻辑。
+- **沙拉配方解析**：`SaladRecipeMatcher` 增加统一的 `resolveStirRecipe(...)` 与候选优先级选择逻辑，`SaladBowlBlock` 与 `StirResultPacket` 共享同一套解析路径。
+- **数据包上传会话**：`UploadSession` 增加创建时间；`DataPackUploadManager` 增加会话 TTL、单玩家单活跃会话约束与按玩家清理能力；新增 `DataPackUploadSessionEvents` 处理在线过期检查与登出清理。
+- **服务端配置**：删除 `ModServerConfig` 中未实际生效的 `Shelter9Support` 配置项，避免与 `GameRule` 形成误导性的双源配置。
+
+### 修复
+
+- 修复玩家可空手或超距离提交切菜/搅拌小游戏结果的问题。
+- 修复 `StirResultPacket` 可通过异常结果数量触发不受控分配的风险。
+- 修复数据包上传会话在超时或玩家退出后可能长期滞留的问题。
+
+## [0.1.3d] - 2026-04-10
+
+### 新增
+
+- **多用途碗装食物**：新增 `AbstractMultiUseBowlItem`，统一多次食用、耐久条显示与用尽后返还空碗的逻辑；新增 `ModItemFoodFactory`，集中定义蕨菜芽碗、宁静拌饭、缤纷调色盘、双尸寄生沙拉等食物的 `FoodProperties`，减少各物品类中的重复代码。
+- **腹泻效果客户端反馈**：`DiarrheaOverlayHandler` 在玩家持有腹泻效果且存在对应负面状态联动时绘制全屏暗角；当缓慢效果达到较高等级触发「腹泻结算」时追加短时镜头抖动，强化体感反馈。
+- **客户端物品扩展桥接**：`common` 包中的 `ClientItemExtensionsBridge` 与 `client` 包中的 `ClientItemExtensionRegistry` 配合，船长帽在 `initializeClient` 中按物品 ID 委托注册 `IClientItemExtensions`，避免非客户端代码直接依赖渲染实现类。
+- **沙拉盆方块实体网络同步**：`SaladBowlBlockEntity` 实现 `getUpdatePacket`、`onDataPacket` 与 `getUpdateTag`，将搅拌阶段、成品份数、结果物品栈等状态同步到客户端，便于世界内渲染与交互一致。
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.3c` 调整为 `0.1.3d`。
+- **`ModEffects`**：延迟注册器字段由 `ITEMS` 重命名为 `MOB_EFFECTS`，与注册内容语义一致。
+- **`HorrorCooked9`**：客户端初始化阶段除 `ClientRuntimeBridge` 外，增加安装 `ClientItemExtensionRegistry`。
+- **船长帽、砧板、沙拉盆及相关物品与渲染器**：随上述分层与数据同步调整进行配套修改。
+
 ## [0.1.3c] - 2026-04-08
 
 项目结构与规范化改进，无玩法功能变更。

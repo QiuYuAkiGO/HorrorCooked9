@@ -28,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class SaladBowlBlock extends BaseEntityBlock {
@@ -83,7 +82,7 @@ public class SaladBowlBlock extends BaseEntityBlock {
         }
 
         List<ItemStack> currentSequence = new ArrayList<>(bowlEntity.getAddedIngredients());
-        SaladBowlRecipe stirRecipe = resolveStirRecipe(bowlEntity, currentSequence, recipes);
+        SaladBowlRecipe stirRecipe = SaladRecipeMatcher.resolveStirRecipe(bowlEntity.getCurrentRecipeId(), currentSequence, recipes);
         boolean exactNow = stirRecipe != null && SaladRecipeMatcher.isExactMatch(currentSequence, stirRecipe);
         if (stirRecipe != null
                 && stirRecipe.requiresStirNow(currentSequence.size(), bowlEntity.getCompletedStirPhases(), exactNow)
@@ -219,32 +218,8 @@ public class SaladBowlBlock extends BaseEntityBlock {
         }
     }
 
-    @Nullable
-    private SaladBowlRecipe resolveStirRecipe(SaladBowlBlockEntity bowlEntity, List<ItemStack> currentSequence,
-                                              List<SaladBowlRecipe> recipes) {
-        SaladBowlRecipe exact = SaladRecipeMatcher.findExactMatch(currentSequence, recipes);
-        if (exact != null) {
-            return exact;
-        }
-
-        if (bowlEntity.getCurrentRecipeId() != null) {
-            for (SaladBowlRecipe recipe : recipes) {
-                if (recipe.getId().equals(bowlEntity.getCurrentRecipeId())
-                        && SaladRecipeMatcher.isPrefixMatch(currentSequence, recipe)) {
-                    return recipe;
-                }
-            }
-        }
-
-        return SaladRecipeMatcher.findPrefixMatches(currentSequence, recipes).stream()
-                .sorted(Comparator.comparingInt((SaladBowlRecipe recipe) -> recipe.getIngredientSlots().size())
-                        .thenComparing(recipe -> recipe.getId().toString()))
-                .findFirst()
-                .orElse(null);
-    }
-
     private boolean isLockedByPendingStir(SaladBowlBlockEntity bowlEntity, List<ItemStack> currentSequence, List<SaladBowlRecipe> recipes) {
-        SaladBowlRecipe tracked = resolveStirRecipe(bowlEntity, currentSequence, recipes);
+        SaladBowlRecipe tracked = SaladRecipeMatcher.resolveStirRecipe(bowlEntity.getCurrentRecipeId(), currentSequence, recipes);
         if (tracked == null || !tracked.hasCustomStirCheckpoints()) {
             return false;
         }
@@ -261,12 +236,8 @@ public class SaladBowlBlock extends BaseEntityBlock {
         if (exact != null) {
             return exact.getId();
         }
-        return candidates.stream()
-                .sorted(Comparator.comparingInt((SaladBowlRecipe recipe) -> recipe.getIngredientSlots().size())
-                        .thenComparing(recipe -> recipe.getId().toString()))
-                .findFirst()
-                .map(SaladBowlRecipe::getId)
-                .orElse(null);
+        SaladBowlRecipe preferred = SaladRecipeMatcher.findPreferredRecipe(candidates);
+        return preferred != null ? preferred.getId() : null;
     }
 
     @SuppressWarnings("deprecation")

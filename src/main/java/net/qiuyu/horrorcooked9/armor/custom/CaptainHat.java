@@ -19,6 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.qiuyu.horrorcooked9.common.ClientItemExtensionsBridge;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
@@ -27,7 +28,6 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.function.Consumer;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
-import net.qiuyu.horrorcooked9.client.renderer.CaptainHatRenderer;
 
 public class CaptainHat extends ArmorItem {
     private static final String ARMOR_TEXTURE_PATH = "horrorcooked9:textures/item/captain_hat_layer_1.png";
@@ -81,7 +81,7 @@ public class CaptainHat extends ArmorItem {
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(CaptainHatRenderer.CLIENT_EXTENSIONS);
+        ClientItemExtensionsBridge.initialize("horrorcooked9:captain_hat", consumer);
     }
 
     @Override

@@ -1,0 +1,19 @@
+{
+  "damage": 5,
+  "items": "horrorcooked9:shit",
+  "knockback": 0.1,
+  "on_entity_hit": {
+    "type": "create:potion_effect",
+    "effect": "minecraft:nausea",
+    "level": 1,
+    "recoverable": true,
+    "ticks": 120
+  },
+  "reload_ticks": 14,
+  "render_mode": {
+    "type": "create:tumble"
+  },
+  "sound_pitch": 0.85,
+  "sticky": true,
+  "velocity_multiplier": 0.95
+}

@@ -6,6 +6,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.register.ModBlocks;
 import net.qiuyu.horrorcooked9.register.ModEffects;
+import net.qiuyu.horrorcooked9.register.ModEntities;
 import net.qiuyu.horrorcooked9.register.ModItems;
 
 public class ModLangGenZhCn extends LanguageProvider {
@@ -22,6 +23,8 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.CLEAVER.get(), "切肉刀");
         add(ModItems.SHARPENING_STONE.get(), "磨刀石");
         add(ModItems.WOODEN_SALAD_SPOON.get(), "木制沙拉勺");
+        add(ModItems.SALAD_TONGS.get(), "沙拉夹");
+        add(ModItems.SCREWDRIVER.get(), "螺丝刀");
         add(ModItems.CRYSTAL_TOMATO.get(), "【宝石番茄】");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "【宝石番茄切片】");
         add(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get(), "糖渍宝石番茄片");
@@ -33,6 +36,7 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.CRISPY_NORI.get(), "香脆海苔");
         add(ModItems.CATFISH_SKEWER.get(), "鲶鱼烤串");
         add(ModItems.FAR_REALM_GEM_BOWL.get(), "远境宝石碗");
+        add(ModItems.BRACKEN_SPROUTS_BOWL.get(), "尸苔豆芽碗");
         add(ModItems.TRANQUIL_MIXED_RICE.get(), "静谧拌饭");
         add(ModItems.COLORFUL_PALETTE.get(), "缤纷色彩");
         add(ModItems.TRANQUIL_BASE.get(), "宁静半成品");
@@ -54,9 +58,17 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.HAPPY_RICE.get(), "【快乐米】");
         add(ModItems.HAPPY_COOKED_RICE.get(), "【快乐米饭】");
         add(ModItems.SHIT.get(), "粪便");
+        add(ModItems.FERTILIZER.get(), "肥料");
         add(ModItems.GOLDEN_SHIT.get(), "黄金粪便");
         add(ModItems.CAPTAIN_HAT.get(), "船长帽");
+        add(ModItems.PRISONER_CHESTPLATE.get(), "囚服上衣");
+        add(ModItems.PRISONER_LEGGINGS.get(), "囚服护腿");
+        add(ModItems.HOOK_MONSTER_SPAWN_EGG.get(), "钩怪刷怪蛋");
         add(ModBlocks.FOODWORKS_TABLE.get(), "手工料理台");
+
+        add(ModEntities.HOOK_MONSTER.get(), "钩怪");
+        add(ModEntities.EXCREMENT.get(), "粪便");
+        add(ModEntities.HOOK.get(), "钩子");
 
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "船长的激励");
         add(ModEffects.DIARRHEA.get(), "腹泻");
@@ -64,6 +76,7 @@ public class ModLangGenZhCn extends LanguageProvider {
         add("effect.horrorcooked9.diarrhea.events.desc.1", "效果持续期间，每 10 秒有 75% 几率仅发出不适感；否则短暂获得缓慢与挖掘疲劳、极强短暂缓慢，并伴随爆炸声在身后掉落粪便。");
         add("effect.horrorcooked9.pineapple_power_i.desc.1", "持续期间：受到任何直接攻击时反击伤害来源 3 点生命值，并提高 3 点生命值上限。");
 
+        add("item.horrorcooked9.screwdriver.desc.1", "冒险模式：右键活板门即可将其打开或关闭。");
         add("item.horrorcooked9.crystal_tomato.desc.1", "原产自地球的作物，被偷到异星后就莫名其妙地变异，硬度堪比\"水滴\"。");
         add("item.horrorcooked9.crystal_tomato.desc.2", "有目击者称，在太空中看异星外围，只能看到红色的球体。");
         add("item.horrorcooked9.crystal_tomato.desc.3", "处理得当的话，是十分美味的大补之物，前提是你能找到能切开它的东西。");
