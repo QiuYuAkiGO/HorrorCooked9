@@ -30,6 +30,30 @@
 - 副手右键攻击由 `PummelerCombatEvents` 处理 `EntityInteract` 与 `RightClickItem` 两种情形，并做视线遮挡与 `AttackEntityEvent` 取消检查；暴击倍率由效果 amplifier 表示已连续暴击次数，勿在 `persistentData` 中重复存储层数。
 - 发布前请运行 `gradlew runData` 生成语言文件；PR 合并发布工作流会在构建前自动执行 `runData`。
 
+## [0.1.4a] - 2026-06-04
+
+对应提交：`6ec23e7`、`740fdab`。
+
+### 新增
+
+- **切肉刀战斗属性**：`Cleaver` 主手注册 `+3` 攻击伤害属性修饰（`ATTACK_DAMAGE`），可在生存战斗中作为近战武器使用。
+- **黄金粪便贴图**：新增 `textures/item/golden_shit.png`；`ModItemModelGen` 中黄金粪便模型改为引用 `golden_shit` 贴图，不再复用普通粪便贴图。
+
+### 变更
+
+- **版本号**：`gradle.properties` 中 `mod_version` 自 `0.1.4` 调整为 `0.1.4a`。
+- **食物数值注册**：移除 `FoodRuntimeConfigs.resolveRegistrationFoodProperties`、`resolveProfile` 与 `ModItems.jsonFood(...)`；普通食物在 `ModItems` 中通过固定 `food(nutrition, saturation)` 注册，数值与先前 `item_foods.json` 默认值一致。
+- **`item_foods.json` 精简**：删除全部 `nutrition` / `saturation_mod` 条目，仅保留多次食用次数（`uses`）、进度条颜色（`bar_color`）、背包触发型效果（`inventory_consume_effect`）与腹泻事件全局参数。
+- **进食事件**：删除 `FoodConsumeRuntimeEvents`，不再在 `LivingEntityUseItemEvent.Finish` 后二次覆盖玩家饱食度与饱和系数。
+- **船长帽客户端扩展**：删除 `ClientItemExtensionsBridge` 与 `ClientItemExtensionRegistry`；`CaptainHat` 在 `initializeClient` 中直接注册 `CaptainHatRenderer.CLIENT_EXTENSIONS`；`HorrorCooked9` 客户端初始化移除 `ClientItemExtensionRegistry.install()`。
+- **快乐米食用效果**：`ModItemFoodFactory.happyRice()` 将饱和效果时长由 `10` 秒改为 `2` 秒，并新增 `5` 秒黑暗与 `5` 秒缓慢 III。
+- **开发依赖**：`build.gradle` 新增 AppleSkin 为 `runtimeOnly`（`curse.maven:appleskin-248787:4770828`），仅用于本地开发测试食物 HUD，不随模组发布。
+
+### 开发者提示
+
+- 数据包仍可覆盖 `item_foods.json` 中的 `uses`、`bar_color`、`inventory_consume_effect` 与 `diarrhea_events`；**不可**再通过 JSON 修改物品注册时的饱食度与饱和系数。
+- 若需调整普通食物营养值，应修改 `ModItems` 中的 `food(...)` 或 `ModItemFoodFactory` 工厂方法，并同步更新 `docs/config-index.md` / `docs/developer-gameplay.md` / `docs/player-guide.md` 中的说明。
+
 ## [0.1.4] - 2026-05-30
 
 ### 修复
