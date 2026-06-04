@@ -25,6 +25,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.WOODEN_SALAD_SPOON.get());
                         output.accept(ModItems.SALAD_TONGS.get());
                         output.accept(ModItems.SCREWDRIVER.get());
+                        output.accept(ModItems.PUMMELER.get());
                         output.accept(ModItems.CRYSTAL_TOMATO.get());
                         output.accept(ModItems.CRYSTAL_TOMATO_SLICED.get());
                         output.accept(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get());

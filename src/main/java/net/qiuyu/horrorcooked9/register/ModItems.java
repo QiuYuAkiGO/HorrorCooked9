@@ -38,6 +38,7 @@ import net.qiuyu.horrorcooked9.items.custom.HappyRiceItem;
 import net.qiuyu.horrorcooked9.items.custom.HappyCookedRiceItem;
 import net.qiuyu.horrorcooked9.items.custom.PineappleChunksItem;
 import net.qiuyu.horrorcooked9.items.custom.PineappleItem;
+import net.qiuyu.horrorcooked9.items.custom.PummelerItem;
 import net.qiuyu.horrorcooked9.items.custom.SaladBowlItem;
 import net.qiuyu.horrorcooked9.items.custom.RoastedPineappleChunksItem;
 import net.qiuyu.horrorcooked9.items.custom.ShitItem;
@@ -71,6 +72,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> SCREWDRIVER = ITEMS.register("screwdriver",
             () -> new ScrewdriverItem(new Item.Properties().stacksTo(1).durability(100)));
+
+    public static final RegistryObject<Item> PUMMELER = ITEMS.register("pummeler",
+            () -> new PummelerItem(new Item.Properties().stacksTo(1).durability(388)));
 
     public static final RegistryObject<Item> CRYSTAL_TOMATO = ITEMS.register("crystal_tomato",
             () -> new CrystalTomato(new Item.Properties().food(food(3, 0.5f))));

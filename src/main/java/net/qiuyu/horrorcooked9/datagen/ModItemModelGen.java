@@ -8,6 +8,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.qiuyu.horrorcooked9.HorrorCooked9;
 import net.qiuyu.horrorcooked9.items.custom.Cleaver;
+import net.qiuyu.horrorcooked9.items.custom.PummelerItem;
 import net.qiuyu.horrorcooked9.items.custom.ScrewdriverItem;
 import net.qiuyu.horrorcooked9.register.ModItems;
 
@@ -26,6 +27,7 @@ public class ModItemModelGen extends ItemModelProvider {
         itemHandheldModel(ModItems.CLEAVER.get(), Cleaver.getTexture());
         withExistingParent(itemName(ModItems.SHARPENING_STONE.get()), GENERATED).texture("layer0", mcLoc("item/flint"));
         itemHandheldModel(ModItems.SCREWDRIVER.get(), ScrewdriverItem.getTexture());
+        itemHandheldModel(ModItems.PUMMELER.get(), PummelerItem.getTexture());
         itemGeneratedModel(ModItems.CRYSTAL_TOMATO.get(), resourceItem("crystal_tomato"));
         itemGeneratedModel(ModItems.CRYSTAL_TOMATO_SLICED.get(), resourceItem("crystal_tomato_sliced"));
         itemGeneratedModel(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get(), resourceItem("candied_crystal_tomato_slices"));

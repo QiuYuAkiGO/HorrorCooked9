@@ -25,6 +25,7 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModItems.WOODEN_SALAD_SPOON.get(), "木制沙拉勺");
         add(ModItems.SALAD_TONGS.get(), "沙拉夹");
         add(ModItems.SCREWDRIVER.get(), "螺丝刀");
+        add(ModItems.PUMMELER.get(), "痛殴者");
         add(ModItems.CRYSTAL_TOMATO.get(), "【宝石番茄】");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "【宝石番茄切片】");
         add(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get(), "糖渍宝石番茄片");
@@ -73,10 +74,15 @@ public class ModLangGenZhCn extends LanguageProvider {
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "船长的激励");
         add(ModEffects.DIARRHEA.get(), "腹泻");
         add(ModEffects.PINEAPPLE_POWER_I.get(), "菠萝力量1");
+        add(ModEffects.PUMMELER_CRIT_BOOST.get(), "痛殴者暴击强化");
         add("effect.horrorcooked9.diarrhea.events.desc.1", "效果持续期间，每 10 秒有 75% 几率仅发出不适感；否则短暂获得缓慢与挖掘疲劳、极强短暂缓慢，并伴随爆炸声在身后掉落粪便。");
         add("effect.horrorcooked9.pineapple_power_i.desc.1", "持续期间：受到任何直接攻击时反击伤害来源 3 点生命值，并提高 3 点生命值上限。");
+        add("effect.horrorcooked9.pummeler_crit_boost.desc.1", "双持痛殴者时，连续暴击会逐层提高暴击倍率。受到伤害或解除双持会移除该效果。");
 
         add("item.horrorcooked9.screwdriver.desc.1", "冒险模式：右键活板门即可将其打开或关闭。");
+        add("item.horrorcooked9.pummeler.desc.1", "主手左键或副手右键进行单体攻击。");
+        add("item.horrorcooked9.pummeler.desc.2", "双持时连续暴击倍率为 1.5 / 2.0 / 2.5 / 3.0。");
+        add("item.horrorcooked9.pummeler.desc.3", "受到伤害、解除双持或 5 秒未命中会重置强化。");
         add("item.horrorcooked9.crystal_tomato.desc.1", "原产自地球的作物，被偷到异星后就莫名其妙地变异，硬度堪比\"水滴\"。");
         add("item.horrorcooked9.crystal_tomato.desc.2", "有目击者称，在太空中看异星外围，只能看到红色的球体。");
         add("item.horrorcooked9.crystal_tomato.desc.3", "处理得当的话，是十分美味的大补之物，前提是你能找到能切开它的东西。");
