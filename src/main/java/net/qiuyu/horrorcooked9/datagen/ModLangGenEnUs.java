@@ -22,6 +22,7 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModItems.WOODEN_SALAD_SPOON.get(), "Wooden Salad Spoon");
         add(ModItems.SALAD_TONGS.get(), "Salad Tongs");
         add(ModItems.SCREWDRIVER.get(), "Screwdriver");
+        add(ModItems.PUMMELER.get(), "Pummeler");
         add(ModItems.CRYSTAL_TOMATO.get(), "[Crystal Tomato]");
         add(ModItems.CRYSTAL_TOMATO_SLICED.get(), "[Crystal Tomato Sliced]");
         add(ModItems.CANDIED_CRYSTAL_TOMATO_SLICES.get(), "Candied Crystal Tomato Slices");
@@ -64,8 +65,10 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModEffects.CAPTAIN_INSPIRATION.get(), "Captain's Inspiration");
         add(ModEffects.DIARRHEA.get(), "Diarrhea");
         add(ModEffects.PINEAPPLE_POWER_I.get(), "Pineapple Power I");
+        add(ModEffects.PUMMELER_CRIT_BOOST.get(), "Pummeler Critical Boost");
         add("effect.horrorcooked9.diarrhea.events.desc.1", "While active, every 10 seconds there is a 75% chance of only an unpleasant sound; otherwise you gain Slowness and Mining Fatigue for a short time, briefly receive extreme Slowness, hear a blast, and feces drop behind you.");
         add("effect.horrorcooked9.pineapple_power_i.desc.1", "While active: retaliates 3 health to direct attackers and increases max health by 3.");
+        add("effect.horrorcooked9.pummeler_crit_boost.desc.1", "While dual-wielding Pummelers, consecutive critical hits increase critical damage. Taking damage or breaking dual wielding removes this effect.");
         add(ModBlocks.FOODWORKS_TABLE.get(), "Foodworks Table");
 
         add(ModEntities.HOOK_MONSTER.get(), "Hook Monster");
@@ -73,6 +76,9 @@ public class ModLangGenEnUs extends LanguageProvider {
         add(ModEntities.HOOK.get(), "Hook");
 
         add("item.horrorcooked9.screwdriver.desc.1", "Adventure Mode: Right-click a trapdoor to open or close it.");
+        add("item.horrorcooked9.pummeler.desc.1", "Attack one target with main-hand left click or off-hand right click.");
+        add("item.horrorcooked9.pummeler.desc.2", "When dual-wielded, consecutive critical multipliers are 1.5 / 2.0 / 2.5 / 3.0.");
+        add("item.horrorcooked9.pummeler.desc.3", "Taking damage, breaking dual wielding, or missing hits for 5 seconds resets the boost.");
         add("item.horrorcooked9.crystal_tomato.desc.1", "A crop from Earth that mutated on an alien world, hard as a \"Droplet\".");
         add("item.horrorcooked9.crystal_tomato.desc.2", "Witnesses say from orbit, the planet looks like a red sphere.");
         add("item.horrorcooked9.crystal_tomato.desc.3", "Handled properly, it is delicious and nourishing... if you can cut it open.");
