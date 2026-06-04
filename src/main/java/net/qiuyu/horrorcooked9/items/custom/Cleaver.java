@@ -1,12 +1,18 @@
 package net.qiuyu.horrorcooked9.items.custom;
 
+import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.Multimap;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,9 +27,15 @@ import org.jetbrains.annotations.Nullable;
 
 public class Cleaver extends Item {
     private static final String SHARPEN_DURATION_TAG = "HC9SharpenUseDuration";
+    private static final double ATTACK_DAMAGE_BONUS = 3.0D;
+    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
     public Cleaver(Properties pProperties) {
         super(pProperties);
+        ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID,
+                "Weapon modifier", ATTACK_DAMAGE_BONUS, AttributeModifier.Operation.ADDITION));
+        this.defaultModifiers = builder.build();
     }
 
     @Override
@@ -101,6 +113,11 @@ public class Cleaver extends Item {
     public void releaseUsing(@NotNull ItemStack pStack, Level pLevel, @NotNull LivingEntity pLivingEntity, int pTimeCharged) {
         clearSharpenDuration(pStack);
         super.releaseUsing(pStack, pLevel, pLivingEntity, pTimeCharged);
+    }
+
+    @Override
+    public @NotNull Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(@NotNull EquipmentSlot pEquipmentSlot) {
+        return pEquipmentSlot == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(pEquipmentSlot);
     }
 
     private static boolean canSharpen(Level level, ItemStack cleaverStack, ItemStack stoneStack) {

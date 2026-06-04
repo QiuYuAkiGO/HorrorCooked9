@@ -8,7 +8,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.GsonHelper;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -32,8 +31,6 @@ public final class FoodRuntimeConfigs {
     private static final ResourceLocation CONFIG_ID = ResourceLocation.parse("horrorcooked9:gameplay/item_foods.json");
     private static final String CLASSPATH_CONFIG_PATH = "data/horrorcooked9/gameplay/item_foods.json";
 
-    private static final int DEFAULT_MAX_FOOD_LEVEL = 20;
-
     private static final DiarrheaEventProfile DEFAULT_DIARRHEA_EVENTS = new DiarrheaEventProfile(
             200,
             40,
@@ -46,8 +43,6 @@ public final class FoodRuntimeConfigs {
     );
 
     private static final FoodRuntimeProfile EMPTY_ITEM_PROFILE = new FoodRuntimeProfile(
-            null,
-            null,
             null,
             null,
             InventoryConsumeEffectProfile.disabled()
@@ -85,13 +80,6 @@ public final class FoodRuntimeConfigs {
         return snapshot;
     }
 
-    public static FoodProperties resolveRegistrationFoodProperties(ResourceLocation itemId, int fallbackNutrition, float fallbackSaturation) {
-        FoodRuntimeProfile profile = current().itemsById().get(itemId);
-        int nutrition = profile != null && profile.nutrition() != null ? sanitizeNutrition(profile.nutrition()) : sanitizeNutrition(fallbackNutrition);
-        float saturation = profile != null && profile.saturationModifier() != null ? sanitizeSaturation(profile.saturationModifier()) : sanitizeSaturation(fallbackSaturation);
-        return new FoodProperties.Builder().nutrition(nutrition).saturationMod(saturation).build();
-    }
-
     public static int resolveUses(ResourceLocation itemId, int fallbackUses) {
         FoodRuntimeProfile profile = current().itemsById().get(itemId);
         if (profile == null || profile.uses() == null) {
@@ -118,10 +106,6 @@ public final class FoodRuntimeConfigs {
 
     public static DiarrheaEventProfile resolveDiarrheaEvents() {
         return current().diarrheaEvents();
-    }
-
-    public static Optional<FoodRuntimeProfile> resolveProfile(ResourceLocation itemId) {
-        return Optional.ofNullable(current().itemsById().get(itemId));
     }
 
     private static Optional<Snapshot> loadFromResourceManager(ResourceManager resourceManager) {
@@ -202,8 +186,6 @@ public final class FoodRuntimeConfigs {
     }
 
     private static FoodRuntimeProfile parseItemProfile(ResourceLocation itemId, JsonObject object) {
-        Integer nutrition = object.has("nutrition") ? sanitizeNutrition(GsonHelper.getAsInt(object, "nutrition")) : null;
-        Float saturationModifier = object.has("saturation_mod") ? sanitizeSaturation(GsonHelper.getAsFloat(object, "saturation_mod")) : null;
         Integer uses = object.has("uses") ? Math.max(1, GsonHelper.getAsInt(object, "uses")) : null;
         Integer barColor = parseOptionalColor(object.get("bar_color"));
 
@@ -212,7 +194,7 @@ public final class FoodRuntimeConfigs {
             inventoryConsumeEffect = parseInventoryConsumeEffect(itemId, object.getAsJsonObject("inventory_consume_effect"));
         }
 
-        return new FoodRuntimeProfile(nutrition, saturationModifier, uses, barColor, inventoryConsumeEffect);
+        return new FoodRuntimeProfile(uses, barColor, inventoryConsumeEffect);
     }
 
     private static InventoryConsumeEffectProfile parseInventoryConsumeEffect(ResourceLocation itemId, JsonObject object) {
@@ -293,14 +275,6 @@ public final class FoodRuntimeConfigs {
         }
     }
 
-    private static int sanitizeNutrition(int nutrition) {
-        return Math.max(0, Math.min(DEFAULT_MAX_FOOD_LEVEL, nutrition));
-    }
-
-    private static float sanitizeSaturation(float saturation) {
-        return Math.max(0.0F, Math.min(2.0F, saturation));
-    }
-
     private static float clamp01(float value) {
         return Math.max(0.0F, Math.min(1.0F, value));
     }
@@ -309,8 +283,6 @@ public final class FoodRuntimeConfigs {
     }
 
     public record FoodRuntimeProfile(
-            @Nullable Integer nutrition,
-            @Nullable Float saturationModifier,
             @Nullable Integer uses,
             @Nullable Integer barColor,
             InventoryConsumeEffectProfile inventoryConsumeEffect

@@ -43,7 +43,9 @@ public final class ModItemFoodFactory {
         return new FoodProperties.Builder()
                 .nutrition(2)
                 .saturationMod(0.1f)
-                .effect(() -> new MobEffectInstance(MobEffects.SATURATION, 10 * 20, 0), 1.0f)
+                .effect(() -> new MobEffectInstance(MobEffects.SATURATION, 2 * 20, 0), 1.0f)
+                .effect(() -> new MobEffectInstance(MobEffects.DARKNESS, 5 * 20, 0), 1.0f)
+                .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 5 * 20, 2), 1.0f)
                 .build();
     }
 

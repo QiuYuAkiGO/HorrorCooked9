@@ -19,7 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
-import net.qiuyu.horrorcooked9.common.ClientItemExtensionsBridge;
+import net.qiuyu.horrorcooked9.client.renderer.CaptainHatRenderer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.EnumMap;
@@ -81,7 +81,7 @@ public class CaptainHat extends ArmorItem {
 
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        ClientItemExtensionsBridge.initialize("horrorcooked9:captain_hat", consumer);
+        consumer.accept(CaptainHatRenderer.CLIENT_EXTENSIONS);
     }
 
     @Override

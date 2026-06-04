@@ -19,7 +19,7 @@
 | --- | --- | --- |
 | `stir_tool_balance.json` | 沙拉搅拌小游戏与工具平衡 | 已存在 |
 | `sharpening_stones.json` | 磨刀石与菜刀修理规则 | 已存在 |
-| `item_foods.json` | 物品饱食/饱和/食用次数/事件参数（含腹泻事件全局参数） | 已落地 |
+| `item_foods.json` | 物品多次食用/事件参数（含腹泻事件全局参数） | 已落地 |
 | `juicing.json` | 榨汁机容量、水果条目、副产物等 | 暂未落地（文档预留） |
 | `butchery.json` | 屠宰武器、实体→尸体、尸体收割掉落表 | 暂未落地（文档预留） |
 | `clear_water_boiling.json` | 过滤水在各类加热容器中的煮沸规则 | 暂未落地（文档预留） |
@@ -28,8 +28,6 @@
 
 路径：`data/horrorcooked9/gameplay/item_foods.json`
 
-- `items.<item_id>.nutrition`：目标饱食度（0-20）。
-- `items.<item_id>.saturation_mod`：目标饱和系数（0.0-2.0）。
 - `items.<item_id>.uses`：多次食用物品总可食用次数（当前接入 `far_realm_gem_bowl`）。
 - `items.<item_id>.bar_color`：多次食用条颜色，支持十六进制字符串（如 `#4CD3FF`）或整数。
 - `items.<item_id>.inventory_consume_effect`：背包内触发型效果参数（当前接入 `parasitic_bean_sprouts`）。

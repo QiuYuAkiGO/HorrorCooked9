@@ -12,7 +12,7 @@
 | `sharpening_stones.json` | 磨刀石与菜刀交互 | `SharpeningStoneConfig` | 已落地 |
 | `juicing.json` | 榨汁机默认参数与水果条目 | `JuicingConfig` | 规划中（未落地） |
 | `butchery.json` | 屠宰武器、实体掉落、尸体收割 | `ButcheryConfig` | 规划中（未落地） |
-| `item_foods.json` | 物品饱食度、饱和系数、多次食用、背包效果、腹泻参数 | `FoodRuntimeConfigs` | 已落地 |
+| `item_foods.json` | 物品多次食用、背包效果、腹泻参数 | `FoodRuntimeConfigs` | 已落地 |
 | `clear_water_boiling.json` | 过滤水煮沸与炼药锅加热等规则 | `ClearWaterBoilingConfig` | 规划中（未落地） |
 
 实现上多在 `HorrorCooked9` 模组初始化阶段注册到游戏内，具体静态字段见各类中 `CLASSPATH_CONFIG_PATH`。

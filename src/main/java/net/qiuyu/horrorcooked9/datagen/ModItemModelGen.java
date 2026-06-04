@@ -41,9 +41,9 @@ public class ModItemModelGen extends ItemModelProvider {
         itemGeneratedModel(ModItems.PARASITIC_BEAN_SPROUTS.get(), resourceItem("parasitic_bean_sprouts"));
         itemGeneratedModel(ModItems.DRIED_BEAN_SPROUTS.get(), resourceItem("dried_bean_sprouts"));
         itemGeneratedModel(ModItems.HAPPY_RICE.get(), resourceItem("happy_rice"));
-        itemGeneratedModel(ModItems.HAPPY_COOKED_RICE.get(), resourceItem("happy_cooked_rice"));
+        itemGeneratedModel(ModItems.HAPPY_COOKED_RICE.get(), resourceItem("happy_cooked_rice")) ;
         itemGeneratedModel(ModItems.SHIT.get(), resourceItem("shit"));
-        itemGeneratedModel(ModItems.GOLDEN_SHIT.get(), resourceItem("shit"));
+        itemGeneratedModel(ModItems.GOLDEN_SHIT.get(), resourceItem("golden_shit"));
     }
 
     private void eggItem(Item item) {

@@ -19,7 +19,6 @@ import net.qiuyu.horrorcooked9.client.renderer.ExcrementRenderer;
 import net.qiuyu.horrorcooked9.client.renderer.HookMonsterRenderer;
 import net.qiuyu.horrorcooked9.client.renderer.HookRenderer;
 import net.qiuyu.horrorcooked9.client.renderer.SaladBowlRenderer;
-import net.qiuyu.horrorcooked9.client.ClientItemExtensionRegistry;
 import net.qiuyu.horrorcooked9.client.ClientRuntimeBridgeImpl;
 import net.qiuyu.horrorcooked9.common.ClientRuntimeBridge;
 import net.qiuyu.horrorcooked9.config.ModServerConfig;
@@ -77,7 +76,6 @@ public class HorrorCooked9
         public static void onClientSetup(final FMLClientSetupEvent event) {
             event.enqueueWork(() -> {
                 ClientRuntimeBridge.install(new ClientRuntimeBridgeImpl());
-                ClientItemExtensionRegistry.install();
                 MinecraftForge.EVENT_BUS.addListener(HookMonsterBgmHandler::onClientTick);
             });
         }
